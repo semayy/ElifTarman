@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elif Tarman Studio | Master Brand Identity & Architecture Guidelines</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- JSZip & FileSaver for InDesign & Font Package Download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    
+    <!-- Google Fonts: Inter & Space Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['"Space Mono"', 'monospace'],
+                    },
+                    colors: {
+                        et: {
+                            ink: '#0A0A0A',       // Monolithic Charcoal / Vantablack
+                            paper: '#F7F6F2',     // Raw cotton paper
+                            concrete: '#737373',  // Structural gray
+                            stone: '#D9D9D9',     // Light stone gray
+                            crimson: '#FF0A0A',   // Signature Artisan Red
+                        }
+                    },
+                    letterSpacing: {
+                        tightest: '-.06em',
+                        widest: '.25em',
+                        superwide: '.45em',
+                        megawide: '.85em',
+                        ultra: '1.2em'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * { box-sizing: border-box; }
+        html, body {
+            background-color: #F7F6F2;
+            color: #0A0A0A;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection { background-color: #FF0A0A; color: #F7F6F2; }
+
+        /* Architectural Noise Texture */
+        .noise-overlay {
+            position: fixed; inset: 0; pointer-events: none; z-index: 9999; mix-blend-mode: multiply;
+            background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.85%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noise)%22 opacity=%220.035%22/%3E%3C/svg%3E');
+        }
+
+        /* Crosshair Drafting Markers */
+        .crosshair { position: relative; width: 16px; height: 16px; pointer-events: none; }
+        .crosshair::before, .crosshair::after { content: ''; position: absolute; background-color: currentColor; }
+        .crosshair::before { top: 7.5px; left: 0; width: 16px; height: 1px; }
+        .crosshair::after { top: 0; left: 7.5px; width: 1px; height: 16px; }
+        
+        /* 48 Field Grid Matrix Overlay */
+        .grid-matrix-bg {
+            background-image: 
+                linear-gradient(to right, rgba(10, 10, 10, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(10, 10, 10, 0.05) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        .dark-grid-matrix {
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        /* Chiaroscuro Architectural Filter */
+        .et-photo-effect {
+            filter: grayscale(100%) contrast(145%) brightness(92%);
+            position: relative;
+        }
+        .et-photo-effect::after {
+            content: ''; position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(10,10,10,0.3) 0%, rgba(255,255,255,0.05) 100%);
+            mix-blend-mode: overlay; pointer-events: none;
+        }
+
+        /* Structural Logo Stack */
+        .logo-stack { 
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            font-family: 'Inter', sans-serif; font-weight: 200; text-transform: uppercase; 
+            letter-spacing: 0.9em; line-height: 1.35; margin-right: -0.9em; 
+            white-space: nowrap; user-select: none;
+        }
+    </style>
+</head>
+<body class="bg-et-paper text-et-ink relative overflow-x-hidden">
+
+    <div class="noise-overlay"></div>
+
+    <!-- STICKY RESPONSIVE NAVIGATION BAR -->
+    <header class="sticky top-0 z-50 bg-[#0A0A0A]/95 backdrop-blur-md border-b border-white/10 text-white font-mono text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Brand Mark & Name -->
+            <a href="#hero" class="flex items-center gap-3 group">
+                <div class="w-8 h-8 flex items-center justify-center">
+                    <img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" alt="Emblem" class="w-full h-full object-contain filter brightness-0 invert group-hover:scale-105 transition-transform">
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-bold tracking-widest text-sm uppercase leading-none font-sans">ELIF TARMAN</span>
+                    <span class="text-[9px] text-et-concrete uppercase tracking-widest mt-0.5">Interior Architecture Studio</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden lg:flex items-center gap-6 uppercase tracking-wider text-[11px] text-neutral-300">
+                <a href="#manifesto" class="hover:text-et-crimson transition-colors">Manifesto</a>
+                <a href="#pillars" class="hover:text-et-crimson transition-colors">Pillars</a>
+                <a href="#grid-system" class="hover:text-et-crimson transition-colors">Grid</a>
+                <a href="#identity" class="hover:text-et-crimson transition-colors">Identity</a>
+                <a href="#color" class="hover:text-et-crimson transition-colors">Color</a>
+                <a href="#typography" class="hover:text-et-crimson transition-colors">Type</a>
+                <a href="#collateral" class="hover:text-et-crimson transition-colors">Collateral</a>
+                <a href="#social" class="hover:text-et-crimson transition-colors">Social UI</a>
+                <a href="#environmental" class="hover:text-et-crimson transition-colors">Signage</a>
+                <a href="#contact" class="hover:text-et-crimson transition-colors">Contact</a>
+            </nav>
+
+            <!-- Actions Desktop -->
+            <div class="hidden sm:flex items-center gap-3">
+                <button onclick="downloadInDesignPackage()" class="border border-white/30 hover:border-et-crimson bg-black/50 text-white hover:text-et-crimson px-3 py-1.5 rounded-full text-[10px] tracking-wider uppercase transition-colors flex items-center gap-1.5">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    <span>InDesign Kit (.ZIP)</span>
+                </button>
+                <a href="https://drive.google.com/file/d/1ncjTZjeks78rq82wv7neO5SkbCYCyYjF/view?usp=drivesdk" target="_blank" class="bg-et-crimson hover:bg-red-600 text-white px-4 py-1.5 rounded-full font-bold text-[10px] tracking-wider uppercase transition-colors flex items-center gap-1">
+                    <span>PDF Guidelines</span>
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Toggle -->
+            <div class="flex lg:hidden items-center gap-2">
+                <button onclick="toggleMobileMenu()" class="p-2 text-white hover:text-et-crimson focus:outline-none" aria-label="Toggle Navigation">
+                    <svg id="hamburger-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                    <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-white/10 bg-[#0A0A0A] px-6 py-5 space-y-4">
+            <div class="flex flex-col space-y-3 uppercase tracking-wider text-xs text-neutral-300">
+                <a href="#manifesto" onclick="toggleMobileMenu()" class="hover:text-et-crimson">01. Manifesto & Philosophy</a>
+                <a href="#pillars" onclick="toggleMobileMenu()" class="hover:text-et-crimson">02. 4 Foundational Pillars</a>
+                <a href="#grid-system" onclick="toggleMobileMenu()" class="hover:text-et-crimson">03. 48-Field Universal Grid</a>
+                <a href="#identity" onclick="toggleMobileMenu()" class="hover:text-et-crimson">04. Master Identity & Logo</a>
+                <a href="#color" onclick="toggleMobileMenu()" class="hover:text-et-crimson">05. Chromatic Spectrum</a>
+                <a href="#typography" onclick="toggleMobileMenu()" class="hover:text-et-crimson">06. Typographic System</a>
+                <a href="#collateral" onclick="toggleMobileMenu()" class="hover:text-et-crimson">07. Corporate Collateral</a>
+                <a href="#social" onclick="toggleMobileMenu()" class="hover:text-et-crimson">08. Instagram 9-Grid & LinkedIn</a>
+                <a href="#environmental" onclick="toggleMobileMenu()" class="hover:text-et-crimson">09. 3D Environmental Signage</a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="hover:text-et-crimson">10. Inquiries & Colophon</a>
+            </div>
+            <div class="pt-4 border-t border-white/10 flex flex-col gap-2">
+                <button onclick="downloadInDesignPackage()" class="w-full text-center border border-white/30 text-white py-2 rounded-lg text-xs uppercase tracking-wider">
+                    Download InDesign Package (.ZIP)
+                </button>
+                <a href="https://drive.google.com/file/d/1ncjTZjeks78rq82wv7neO5SkbCYCyYjF/view?usp=drivesdk" target="_blank" class="w-full text-center bg-et-crimson text-white py-2 rounded-lg text-xs uppercase tracking-wider font-bold">
+                    View Vector PDF (24 Plates)
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative min-h-[90vh] flex flex-col justify-between py-12 sm:py-20 px-4 sm:px-6 lg:px-8 border-b border-neutral-300 grid-matrix-bg">
+        <div class="absolute top-6 left-6 crosshair text-et-concrete"></div>
+        <div class="absolute top-6 right-6 crosshair text-et-concrete"></div>
+        <div class="absolute bottom-6 left-6 crosshair text-et-concrete"></div>
+        <div class="absolute bottom-6 right-6 crosshair text-et-concrete"></div>
+
+        <!-- Meta Header -->
+        <div class="max-w-7xl mx-auto w-full flex flex-wrap justify-between items-center font-mono text-xs text-et-concrete uppercase tracking-widest border-b border-neutral-200 pb-4 gap-2">
+            <span>Volume 03.0 // Master Guidelines</span>
+            <span>Interior Architectural Standards</span>
+            <span>Istanbul • London • Ankara</span>
+        </div>
+
+        <!-- Central Hero Content -->
+        <div class="max-w-5xl mx-auto w-full text-center my-auto py-12 space-y-8">
+            <span class="inline-block font-mono text-xs uppercase tracking-superwide text-et-crimson font-bold bg-et-crimson/5 px-4 py-1.5 border border-et-crimson/20">
+                Spatial Monolithic Engineering
+            </span>
+
+            <!-- Prominent Responsive Master Emblem -->
+            <div class="w-32 h-32 sm:w-44 sm:h-44 mx-auto flex items-center justify-center p-2">
+                <img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" alt="Elif Tarman Master Emblem" class="w-full h-full object-contain filter drop-shadow-xl hover:scale-105 transition-transform duration-500">
+            </div>
+
+            <!-- Typography Lockup -->
+            <div class="logo-stack text-4xl sm:text-6xl md:text-7xl font-sans font-extralight text-et-ink">
+                <span class="mb-2 sm:mb-4">E L I F</span>
+                <span>T A R M A N</span>
+            </div>
+
+            <div class="w-20 h-1 bg-et-crimson mx-auto"></div>
+
+            <h1 class="font-sans font-black text-2xl sm:text-4xl md:text-5xl uppercase tracking-tighter text-et-ink max-w-4xl mx-auto leading-tight">
+                We do not decorate.<br>
+                We engineer <span class="text-et-crimson">void, light,</span> and mass.
+            </h1>
+
+            <p class="font-sans text-sm sm:text-base text-neutral-600 max-w-2xl mx-auto font-light leading-relaxed">
+                An interior architecture practice defined by monolithic discipline, brutal material honesty, and the timeless sculptural manipulation of volume.
+            </p>
+
+            <!-- Call to Actions -->
+            <div class="flex flex-wrap items-center justify-center gap-4 pt-4 font-mono text-xs uppercase">
+                <a href="#identity" class="bg-et-ink text-white hover:bg-et-crimson transition-colors px-6 py-3 rounded-full font-bold tracking-widest shadow-lg">
+                    Explore Guidelines &rarr;
+                </a>
+                <a href="https://drive.google.com/file/d/1ncjTZjeks78rq82wv7neO5SkbCYCyYjF/view?usp=drivesdk" target="_blank" class="border border-et-ink text-et-ink hover:bg-et-ink hover:text-white transition-colors px-6 py-3 rounded-full font-bold tracking-widest">
+                    Download 24-Plate Vector PDF
+                </a>
+            </div>
+        </div>
+
+        <!-- Footer Meta -->
+        <div class="max-w-7xl mx-auto w-full flex flex-wrap justify-between items-center font-mono text-xs text-et-concrete uppercase tracking-widest border-t border-neutral-200 pt-4 gap-2">
+            <span>Principal: Elif Tarman</span>
+            <span>48-Field Universal Grid Calibration</span>
+            <span>All Systems Active</span>
+        </div>
+    </section>
+
+    <!-- SECTION 01: STUDIO MANIFESTO & PHILOSOPHY -->
+    <section id="manifesto" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-neutral-300">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <div class="lg:col-span-5 space-y-6">
+                <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Section 01 // Creed</span>
+                <h2 class="font-sans font-black text-3xl sm:text-5xl uppercase tracking-tighter leading-tight text-et-ink">
+                    The Monolithic Philosophy.
+                </h2>
+                <div class="w-16 h-1 bg-et-crimson"></div>
+                <p class="font-sans text-base sm:text-lg text-neutral-800 leading-relaxed font-normal">
+                    Space is not absence; it is an active physical substance. We view interior architecture as the extraction of ornamental noise until only the elemental forces of nature remain.
+                </p>
+            </div>
+
+            <div class="lg:col-span-7 space-y-6 font-sans text-sm sm:text-base text-neutral-600 leading-relaxed font-light">
+                <p>
+                    Every surface in an Elif Tarman commission serves a structural and emotional purpose. By anchoring volumes to raw board-formed concrete, porous travertine, and natural directionality of solar light, we construct spaces that age gracefully with decadal permanence.
+                </p>
+                <div class="bg-white p-6 sm:p-8 border-l-4 border-et-ink shadow-sm">
+                    <p class="font-mono text-xs font-bold uppercase tracking-widest text-et-concrete mb-2">Core Architectural Proposition</p>
+                    <p class="text-base sm:text-lg text-et-ink font-medium">
+                        "Strip away the superfluous until only spatial truth, architectural gravity, and emotional permanence remain."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 02: 4 FOUNDATIONAL PILLARS -->
+    <section id="pillars" class="py-20 sm:py-28 bg-[#0A0A0A] text-white px-4 sm:px-6 lg:px-8 dark-grid-matrix border-b border-[#222]">
+        <div class="max-w-7xl mx-auto space-y-12">
+            <div class="max-w-3xl space-y-4">
+                <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Section 02 // Values</span>
+                <h2 class="font-sans font-black text-3xl sm:text-5xl uppercase tracking-tighter">
+                    4 Foundational Pillars.
+                </h2>
+                <p class="font-sans text-sm sm:text-base text-et-concrete font-light">
+                    The non-negotiable ethical framework governing all design decisions, material selections, and visual identities.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+                <!-- Pillar 01 -->
+                <div class="border-l-4 border-et-crimson bg-[#141414] p-6 sm:p-8 border border-[#262626] rounded-r-lg space-y-3">
+                    <span class="font-mono text-xs text-et-crimson uppercase tracking-widest block font-bold">Pillar 01</span>
+                    <h3 class="font-sans font-bold text-xl uppercase tracking-wider text-white">The Inherent Worth of Void</h3>
+                    <p class="font-sans text-sm text-et-concrete leading-relaxed font-light">
+                        Emptiness is not absence; it is active presence. True spatial luxury is discovered in silence, strict reduction, and the deliberate exclusion of ornamental noise.
+                    </p>
+                </div>
+
+                <!-- Pillar 02 -->
+                <div class="border-l-4 border-et-crimson bg-[#141414] p-6 sm:p-8 border border-[#262626] rounded-r-lg space-y-3">
+                    <span class="font-mono text-xs text-et-crimson uppercase tracking-widest block font-bold">Pillar 02</span>
+                    <h3 class="font-sans font-bold text-xl uppercase tracking-wider text-white">Material Authenticity</h3>
+                    <p class="font-sans text-sm text-et-concrete leading-relaxed font-light">
+                        Materials must remain raw and honest. Board-formed concrete must feel cold; porous travertine must breathe; unlacquered steel must patinate gracefully over time.
+                    </p>
+                </div>
+
+                <!-- Pillar 03 -->
+                <div class="border-l-4 border-et-crimson bg-[#141414] p-6 sm:p-8 border border-[#262626] rounded-r-lg space-y-3">
+                    <span class="font-mono text-xs text-et-crimson uppercase tracking-widest block font-bold">Pillar 03</span>
+                    <h3 class="font-sans font-bold text-xl uppercase tracking-wider text-white">Decadal Permanence</h3>
+                    <p class="font-sans text-sm text-et-concrete leading-relaxed font-light">
+                        We oppose disposable, transient trends. We engineer architectural volumes and graphic systems built to age with dignity over decades of sunlight exposure.
+                    </p>
+                </div>
+
+                <!-- Pillar 04 -->
+                <div class="border-l-4 border-et-crimson bg-[#141414] p-6 sm:p-8 border border-[#262626] rounded-r-lg space-y-3">
+                    <span class="font-mono text-xs text-et-crimson uppercase tracking-widest block font-bold">Pillar 04</span>
+                    <h3 class="font-sans font-bold text-xl uppercase tracking-wider text-white">Architectural Chiaroscuro</h3>
+                    <p class="font-sans text-sm text-et-concrete leading-relaxed font-light">
+                        Light is a physical sculpting tool. We balance directional solar beams with cavernous shadow to carve out monumental volumes in stone and concrete.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 03: 48-FIELD GRID MATRIX -->
+    <section id="grid-system" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-neutral-300">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-5 space-y-6">
+                <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Section 03 // Spatial Math</span>
+                <h2 class="font-sans font-black text-3xl sm:text-5xl uppercase tracking-tighter text-et-ink">
+                    48-Field Universal Grid.
+                </h2>
+                <p class="font-sans text-sm sm:text-base text-neutral-600 leading-relaxed font-light">
+                    Every touchpoint—from business cards and web interfaces to site hoardings—is mapped onto an immutable 48-field matrix (6 columns × 8 baselines).
+                </p>
+
+                <div class="font-mono text-xs space-y-3 bg-white p-6 border border-neutral-300 shadow-sm">
+                    <p class="text-et-crimson font-bold uppercase">• 6 Vertical Spatial Columns (16.66% each)</p>
+                    <p class="text-et-ink uppercase">• 8 Horizontal Structural Baselines (12.5% each)</p>
+                    <p class="text-neutral-600 uppercase">• 8pt Vertical Baseline Harmonic Rhythm</p>
+                    <p class="text-et-crimson font-bold uppercase">• Minimum 25% Contiguous Negative Void Rule</p>
+                </div>
+            </div>
+
+            <div class="lg:col-span-7 bg-white p-6 sm:p-8 border border-neutral-300 shadow-xl rounded-lg space-y-4">
+                <div class="aspect-[16/9] w-full bg-et-paper relative border border-neutral-300 overflow-hidden flex items-center justify-center">
+                    <div class="absolute inset-0 grid-matrix-bg opacity-70"></div>
+                    
+                    <div class="w-3/4 h-3/5 border-2 border-et-ink bg-white/95 p-4 sm:p-6 flex flex-col justify-between relative z-10 shadow-md">
+                        <div class="flex justify-between font-mono text-[9px] text-et-concrete">
+                            <span>COORD: [X1:Y1]</span>
+                            <span>VOID MARGIN: 2-FIELD (16.6%)</span>
+                        </div>
+                        <div class="text-center font-mono text-xs sm:text-sm uppercase font-bold tracking-widest text-et-ink">
+                            Content Module Snapped to Coordinates
+                        </div>
+                        <div class="flex justify-between font-mono text-[9px] text-et-crimson font-bold">
+                            <span>BASELINE: SNAPPED (8PT)</span>
+                            <span>STATUS: LOCKED</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="font-mono text-[10px] uppercase tracking-widest text-et-concrete text-center">Fig 3.1 — 48-Field Structural Coordinate Schematic (16:9 Landscape)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 04: MASTER LOGO & EMBLEM BLUEPRINT -->
+    <section id="identity" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-neutral-300">
+        <div class="space-y-12">
+            <div class="max-w-3xl space-y-4">
+                <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Section 04 // Identity</span>
+                <h2 class="font-sans font-black text-3xl sm:text-5xl uppercase tracking-tighter text-et-ink">
+                    Master Logo & Emblem Blueprint.
+                </h2>
+                <p class="font-sans text-sm sm:text-base text-neutral-600 font-light">
+                    The structural core of the studio's visual identity: precision-drafted lines, clearspace protection margins, and prohibited violations.
+                </p>
+            </div>
+
+            <!-- Emblem Big Showcase & Specs Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- Large Emblem Display -->
+                <div class="lg:col-span-6 bg-white border border-neutral-300 p-8 sm:p-14 flex flex-col items-center justify-center relative shadow-sm rounded-lg">
+                    <div class="w-48 h-48 sm:w-60 sm:h-60 mb-6 flex items-center justify-center">
+                        <img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" alt="Master Emblem" class="w-full h-full object-contain filter drop-shadow-lg">
+                    </div>
+                    <div class="logo-stack text-3xl sm:text-4xl font-sans font-extralight text-et-ink">
+                        <span class="mb-2">E L I F</span>
+                        <span>T A R M A N</span>
+                    </div>
+                    <span class="font-mono text-[10px] uppercase tracking-widest text-et-concrete mt-6">Primary Lockup Ratio</span>
+                </div>
+
+                <!-- Geometry Specifications & Sizing -->
+                <div class="lg:col-span-6 space-y-6">
+                    <div class="bg-white p-6 sm:p-8 border border-neutral-300 rounded-lg space-y-4 shadow-sm">
+                        <h3 class="font-sans font-bold text-xl uppercase tracking-wider text-et-ink">Geometric Anatomy</h3>
+                        <p class="font-sans text-sm text-neutral-600 font-light leading-relaxed">
+                            The studio emblem represents structural equilibrium and architectural void framing. It is permanently locked with the ultra-tracked grotesk wordmark.
+                        </p>
+                        <div class="font-mono text-xs space-y-2 border-t border-neutral-200 pt-4 text-neutral-700">
+                            <p>• Aspect Ratio: 1:1 Strict Square Matrix</p>
+                            <p>• Stroke Weight: Constant 2.5pt Vector Drafting Ratio</p>
+                            <p>• Axis Symmetry: Cardinal and Diagonal 45° Intersections</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white p-6 border border-neutral-300 rounded-lg">
+                            <span class="font-mono text-xs text-et-crimson uppercase block font-bold">Min Print Size</span>
+                            <span class="font-sans font-black text-2xl text-et-ink block mt-1">15 mm</span>
+                            <span class="font-mono text-[9px] text-et-concrete uppercase">Offset & Screen Print</span>
+                        </div>
+                        <div class="bg-white p-6 border border-neutral-300 rounded-lg">
+                            <span class="font-mono text-xs text-et-crimson uppercase block font-bold">Min Digital Size</span>
+                            <span class="font-sans font-black text-2xl text-et-ink block mt-1">48 px</span>
+                            <span class="font-mono text-[9px] text-et-concrete uppercase">Web & Mobile Displays</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Clearspace & Prohibitions -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-6">
+                <!-- Clearspace -->
+                <div class="lg:col-span-5 bg-white border border-neutral-300 p-8 rounded-lg flex flex-col items-center justify-center relative shadow-sm">
+                    <span class="font-mono text-xs font-bold uppercase text-et-crimson mb-6 tracking-widest">Clearspace 1X [E] Boundary</span>
+                    
+                    <div class="relative p-8 border-2 border-dashed border-et-crimson bg-et-crimson/5 rounded flex flex-col items-center">
+                        <div class="absolute -top-5 left-1/2 -translate-x-1/2 text-et-crimson font-mono font-bold text-[10px]">1X [E] CLEARANCE</div>
+                        <div class="absolute top-1/2 -left-8 -translate-y-1/2 text-et-crimson font-mono font-bold text-[10px]">1X [E]</div>
+                        <div class="absolute top-1/2 -right-8 -translate-y-1/2 text-et-crimson font-mono font-bold text-[10px]">1X [E]</div>
+                        <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 text-et-crimson font-mono font-bold text-[10px]">1X [E] CLEARANCE</div>
+                        
+                        <div class="w-16 h-16 mb-2">
+                            <img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" alt="Clearspace Emblem" class="w-full h-full object-contain">
+                        </div>
+                        <div class="logo-stack text-sm font-sans font-extralight text-et-ink">
+                            <span>ELIF TARMAN</span>
+                        </div>
+                    </div>
+                    <p class="font-mono text-[10px] text-et-concrete uppercase mt-6 text-center">Safety margin = Full cap height of letter 'E' on all sides</p>
+                </div>
+
+                <!-- Prohibitions Grid -->
+                <div class="lg:col-span-7 grid grid-cols-2 gap-4">
+                    <div class="bg-white border border-neutral-300 p-5 rounded-lg text-center space-y-2">
+                        <span class="font-mono text-xs font-bold text-et-crimson">✕ 01</span>
+                        <p class="font-bold text-xs uppercase text-et-ink">No Weight Change</p>
+                        <p class="font-mono text-[9px] text-et-concrete">Never bolden or alter standard stroke weights.</p>
+                    </div>
+                    <div class="bg-white border border-neutral-300 p-5 rounded-lg text-center space-y-2">
+                        <span class="font-mono text-xs font-bold text-et-crimson">✕ 02</span>
+                        <p class="font-bold text-xs uppercase text-et-ink">No Unauthorized Hues</p>
+                        <p class="font-mono text-[9px] text-et-concrete">Never use colors outside the 5-swatch palette.</p>
+                    </div>
+                    <div class="bg-white border border-neutral-300 p-5 rounded-lg text-center space-y-2">
+                        <span class="font-mono text-xs font-bold text-et-crimson">✕ 03</span>
+                        <p class="font-bold text-xs uppercase text-et-ink">No Collapsed Tracking</p>
+                        <p class="font-mono text-[9px] text-et-concrete">Never compress letter spacing below 0.9em.</p>
+                    </div>
+                    <div class="bg-white border border-neutral-300 p-5 rounded-lg text-center space-y-2">
+                        <span class="font-mono text-xs font-bold text-et-crimson">✕ 04</span>
+                        <p class="font-bold text-xs uppercase text-et-ink">No Rotation or Skew</p>
+                        <p class="font-mono text-[9px] text-et-concrete">Never tilt, shear, or perspective-skew marks.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 05: CHROMATIC SPECTRUM & 5% CRIMSON RULE -->
+    <section id="color" class="py-20 sm:py-28 bg-[#0A0A0A] text-white px-4 sm:px-6 lg:px-8 dark-grid-matrix border-b border-[#222]">
+        <div class="max-w-7xl mx-auto space-y-12">
+            <div class="max-w-3xl space-y-4">
+                <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Section 05 // Color Architecture</span>
+                <h2 class="font-sans font-black text-3xl sm:text-5xl uppercase tracking-tighter">
+                    Architectural Spectrum.
+                </h2>
+                <p class="font-sans text-sm sm:text-base text-et-concrete font-light">
+                    Calibrated according to ISO 12647 offset print standards. Click any swatch code to copy directly to clipboard.
+                </p>
+            </div>
+
+            <!-- Swatches Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                <!-- ET Crimson -->
+                <div class="bg-[#141414] border border-[#262626] rounded-lg p-5 flex flex-col justify-between space-y-4 hover:border-et-crimson transition-colors">
+                    <div class="w-full h-32 bg-[#FF0A0A] rounded border-b-2 border-white/20"></div>
+                    <div>
+                        <p class="font-sans font-bold text-lg text-et-crimson uppercase">ET Crimson</p>
+                        <span class="font-mono text-[9px] text-white/50 uppercase block mb-3">5% Accent Focus Spark</span>
+                        <div class="font-mono text-xs text-et-concrete space-y-1.5 border-t border-[#262626] pt-3">
+                            <button onclick="copyToClipboard('#FF0A0A', 'HEX #FF0A0A')" class="hover:text-white flex justify-between w-full"><span>HEX:</span><span class="text-white font-bold">#FF0A0A</span></button>
+                            <p class="flex justify-between"><span>RGB:</span><span>255/10/10</span></p>
+                            <p class="flex justify-between"><span>CMYK:</span><span>0/96/96/0</span></p>
+                            <p class="flex justify-between"><span>PANTONE:</span><span>Warm Red C</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ET Ink -->
+                <div class="bg-[#141414] border border-[#262626] rounded-lg p-5 flex flex-col justify-between space-y-4 hover:border-white transition-colors">
+                    <div class="w-full h-32 bg-[#0A0A0A] rounded border border-[#333]"></div>
+                    <div>
+                        <p class="font-sans font-bold text-lg text-white uppercase">ET Ink</p>
+                        <span class="font-mono text-[9px] text-white/50 uppercase block mb-3">Monolithic Mass & Shadow</span>
+                        <div class="font-mono text-xs text-et-concrete space-y-1.5 border-t border-[#262626] pt-3">
+                            <button onclick="copyToClipboard('#0A0A0A', 'HEX #0A0A0A')" class="hover:text-white flex justify-between w-full"><span>HEX:</span><span class="text-white font-bold">#0A0A0A</span></button>
+                            <p class="flex justify-between"><span>RGB:</span><span>10/10/10</span></p>
+                            <p class="flex justify-between"><span>CMYK:</span><span>75/68/67/90</span></p>
+                            <p class="flex justify-between"><span>PANTONE:</span><span>Black 6 C</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ET Paper -->
+                <div class="bg-[#141414] border border-[#262626] rounded-lg p-5 flex flex-col justify-between space-y-4 hover:border-white transition-colors">
+                    <div class="w-full h-32 bg-[#F7F6F2] rounded"></div>
+                    <div>
+                        <p class="font-sans font-bold text-lg text-white uppercase">ET Paper</p>
+                        <span class="font-mono text-[9px] text-white/50 uppercase block mb-3">Tactile Void Ground</span>
+                        <div class="font-mono text-xs text-et-concrete space-y-1.5 border-t border-[#262626] pt-3">
+                            <button onclick="copyToClipboard('#F7F6F2', 'HEX #F7F6F2')" class="hover:text-white flex justify-between w-full"><span>HEX:</span><span class="text-white font-bold">#F7F6F2</span></button>
+                            <p class="flex justify-between"><span>RGB:</span><span>247/246/242</span></p>
+                            <p class="flex justify-between"><span>CMYK:</span><span>2/2/4/0</span></p>
+                            <p class="flex justify-between"><span>STOCK:</span><span>Raw Cotton</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ET Concrete -->
+                <div class="bg-[#141414] border border-[#262626] rounded-lg p-5 flex flex-col justify-between space-y-4 hover:border-white transition-colors">
+                    <div class="w-full h-32 bg-[#737373] rounded"></div>
+                    <div>
+                        <p class="font-sans font-bold text-lg text-white uppercase">ET Concrete</p>
+                        <span class="font-mono text-[9px] text-white/50 uppercase block mb-3">Structural Mid-Tone</span>
+                        <div class="font-mono text-xs text-et-concrete space-y-1.5 border-t border-[#262626] pt-3">
+                            <button onclick="copyToClipboard('#737373', 'HEX #737373')" class="hover:text-white flex justify-between w-full"><span>HEX:</span><span class="text-white font-bold">#737373</span></button>
+                            <p class="flex justify-between"><span>RGB:</span><span>115/115/115</span></p>
+                            <p class="flex justify-between"><span>CMYK:</span><span>0/0/0/55</span></p>
+                            <p class="flex justify-between"><span>PANTONE:</span><span>Cool Gray 8 C</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ET Stone -->
+                <div class="bg-[#141414] border border-[#262626] rounded-lg p-5 flex flex-col justify-between space-y-4 hover:border-white transition-colors">
+                    <div class="w-full h-32 bg-[#D9D9D9] rounded"></div>
+                    <div>
+                        <p class="font-sans font-bold text-lg text-white uppercase">ET Stone</p>
+                        <span class="font-mono text-[9px] text-white/50 uppercase block mb-3">Travertine Accent Border</span>
+                        <div class="font-mono text-xs text-et-concrete space-y-1.5 border-t border-[#262626] pt-3">
+                            <button onclick="copyToClipboard('#D9D9D9', 'HEX #D9D9D9')" class="hover:text-white flex justify-between w-full"><span>HEX:</span><span class="text-white font-bold">#D9D9D9</span></button>
+                            <p class="flex justify-between"><span>RGB:</span><span>217/217/217</span></p>
+                            <p class="flex justify-between"><span>CMYK:</span><span>0/0/0/15</span></p>
+                            <p class="flex justify-between"><span>PANTONE:</span><span>Cool Gray 2 C</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 06: TYPOGRAPHIC ENGINE -->
+    <section id="typography" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-neutral-300">
+        <div class="space-y-12">
+            <div class="max-w-3xl space-y-4">
+                <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Section 06 // Type</span>
+                <h2 class="font-sans font-black text-3xl sm:text-5xl uppercase tracking-tighter text-et-ink">
+                    Inter & Space Mono Pairing.
+                </h2>
+                <p class="font-sans text-sm sm:text-base text-neutral-600 font-light">
+                    Inter provides clean architectural foundation; Space Mono provides technical drafting precision.
+                </p>
+            </div>
+
+            <div class="bg-white border border-neutral-300 rounded-lg divide-y divide-neutral-200 shadow-sm font-mono text-xs">
+                <div class="p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <p class="font-bold text-et-crimson uppercase">H1 Monument</p>
+                        <p class="text-et-concrete text-[10px]">Inter Black / 64–120pt / Tight Tracking</p>
+                    </div>
+                    <h3 class="font-sans font-black text-3xl sm:text-4xl uppercase tracking-tighter text-et-ink">ARCHITECTURAL VOID</h3>
+                </div>
+
+                <div class="p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <p class="font-bold text-et-ink uppercase">H2 Section</p>
+                        <p class="text-et-concrete text-[10px]">Inter ExtraLight / 32–48pt / Wide Tracking</p>
+                    </div>
+                    <h4 class="font-sans font-extralight text-xl sm:text-2xl uppercase tracking-superwide text-et-ink">MASTERY OF MASS</h4>
+                </div>
+
+                <div class="p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div>
+                        <p class="font-bold text-et-ink uppercase">Body Text (Max 65ch)</p>
+                        <p class="text-et-concrete text-[10px]">Inter Regular / 14–16pt / Leading 1.6</p>
+                    </div>
+                    <p class="font-sans text-sm sm:text-base text-neutral-700 max-w-xl font-light">
+                        We manipulate volume and light to form spaces of deep serenity, stripping away the superfluous until only spatial truth remains.
+                    </p>
+                </div>
+
+                <div class="p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-et-ink text-white rounded-b-lg">
+                    <div>
+                        <p class="font-bold text-et-crimson uppercase">Metadata / Blueprint Mono</p>
+                        <p class="text-et-concrete text-[10px]">Space Mono Bold / 10–12pt</p>
+                    </div>
+                    <span class="font-mono text-xs uppercase tracking-widest text-et-crimson font-bold">COORD: 41°00'N 28°58'E // SPEC-08 &rarr;</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 07: CORPORATE COLLATERAL & STATIONERY -->
+    <section id="collateral" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-neutral-300">
+        <div class="space-y-12">
+            <div class="max-w-3xl space-y-4">
+                <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Section 07 // Stationery</span>
+                <h2 class="font-sans font-black text-3xl sm:text-5xl uppercase tracking-tighter text-et-ink">
+                    Corporate Collateral Suite.
+                </h2>
+                <p class="font-sans text-sm sm:text-base text-neutral-600 font-light">
+                    Physical brand tactile interactions: Gmund 300gsm cotton letterheads, 600gsm duplexed cards, and archival monograph book.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <!-- A4 Letterhead -->
+                <div class="lg:col-span-5 flex flex-col items-center">
+                    <div class="w-full max-w-xs aspect-[1/1.414] bg-white shadow-2xl border border-neutral-300 p-6 flex flex-col justify-between rounded">
+                        <div>
+                            <div class="flex justify-between items-start mb-6 pb-2 border-b border-et-ink">
+                                <div class="w-6 h-6"><img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" class="w-full h-full object-contain"></div>
+                                <div class="logo-stack text-[6px] font-sans font-extralight text-et-ink"><span class="mb-0.5">E L I F</span><span>T A R M A N</span></div>
+                            </div>
+                            <div class="font-mono text-[7px] text-et-concrete mb-4">TO: PRIVATE CLIENT // PROJECT: TRAVERTINE SANCTUARY</div>
+                            <div class="space-y-2 opacity-25">
+                                <div class="w-full h-[1px] bg-et-ink"></div>
+                                <div class="w-full h-[1px] bg-et-ink"></div>
+                                <div class="w-4/5 h-[1px] bg-et-ink"></div>
+                            </div>
+                        </div>
+                        <div class="border-t border-neutral-200 pt-2 flex justify-between font-mono text-[6px] text-et-concrete">
+                            <span>Elif Tarman Studio</span><span>contact@eliftarman.com</span>
+                        </div>
+                    </div>
+                    <p class="font-mono text-xs uppercase tracking-widest text-et-concrete mt-4">A4 Letterhead (300gsm Cotton Stock)</p>
+                </div>
+
+                <!-- Duplex Business Cards & Monograph -->
+                <div class="lg:col-span-7 space-y-8">
+                    <!-- Cards -->
+                    <div class="bg-white p-6 sm:p-8 border border-neutral-300 rounded-lg shadow-sm space-y-6">
+                        <span class="font-mono text-xs text-et-crimson font-bold uppercase tracking-widest">600gsm Duplex Business Cards</span>
+                        <div class="flex flex-wrap gap-6 items-center justify-center sm:justify-start">
+                            <div class="w-60 aspect-[1.75/1] bg-white border border-neutral-300 p-6 flex flex-col justify-center items-center relative shadow-md rounded">
+                                <div class="w-10 h-10 mb-2"><img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" class="w-full h-full object-contain"></div>
+                                <div class="absolute bottom-0 left-0 w-full h-1.5 bg-et-crimson"></div>
+                            </div>
+                            <div class="w-60 aspect-[1.75/1] bg-et-ink text-white p-5 flex flex-col justify-between relative shadow-xl border-l-4 border-et-crimson rounded">
+                                <div>
+                                    <p class="font-sans font-bold text-xs tracking-widest uppercase">Elif Tarman</p>
+                                    <p class="font-mono text-[8px] text-et-concrete uppercase">Principal Architect</p>
+                                </div>
+                                <div class="font-mono text-[7px] text-neutral-400 space-y-0.5">
+                                    <p>T: +90 312 000 0000</p>
+                                    <p>E: elif@eliftarman.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Monograph Book -->
+                    <div class="bg-et-ink text-white p-6 sm:p-8 border border-neutral-800 rounded-lg shadow-xl flex items-center justify-between gap-6">
+                        <div class="space-y-2">
+                            <span class="font-mono text-xs text-et-crimson uppercase">Archival Lookbook</span>
+                            <h4 class="font-sans font-bold text-xl uppercase">Hardcover Monograph Vol. 04</h4>
+                            <p class="font-sans text-xs text-neutral-400 font-light">Custom clothbound buckram with blind debossed emblem and red bookmark ribbon.</p>
+                        </div>
+                        <div class="w-16 h-16 flex-shrink-0"><img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" class="w-full h-full object-contain filter brightness-0 invert"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 08: INSTAGRAM 9-GRID & LINKEDIN SOCIAL ARCHITECTURE -->
+    <section id="social" class="py-20 sm:py-28 bg-[#0A0A0A] text-white px-4 sm:px-6 lg:px-8 dark-grid-matrix border-b border-[#222]">
+        <div class="max-w-7xl mx-auto space-y-16">
+            <div class="max-w-3xl space-y-4">
+                <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Section 08 // Social Media Ecosystem</span>
+                <h2 class="font-sans font-black text-3xl sm:text-5xl uppercase tracking-tighter">
+                    Instagram 9-Grid & LinkedIn.
+                </h2>
+                <p class="font-sans text-sm sm:text-base text-et-concrete font-light">
+                    Mobile-responsive social curation maintaining spatial void and photographic chiaroscuro rhythm across digital channels.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Smartphone Mockup with 9-Grid (Responsive) -->
+                <div class="lg:col-span-6 flex justify-center">
+                    <div class="w-full max-w-[360px] bg-black rounded-[44px] p-2.5 shadow-2xl border-4 border-neutral-800">
+                        <div class="w-full bg-white rounded-[34px] overflow-hidden flex flex-col p-4 font-sans text-et-ink">
+                            <!-- Status Bar -->
+                            <div class="flex justify-between items-center font-mono text-[8px] text-neutral-400 mb-2 px-1">
+                                <span>9:41</span>
+                                <div class="w-16 h-3 bg-black rounded-full"></div>
+                                <span>5G 100%</span>
+                            </div>
+
+                            <!-- Header -->
+                            <div class="flex items-center gap-3 mb-3">
+                                <div class="w-12 h-12 rounded-full border-2 border-et-crimson p-0.5 flex-shrink-0">
+                                    <div class="w-full h-full rounded-full bg-et-ink p-1 flex items-center justify-center">
+                                        <img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" class="w-full h-full object-contain filter brightness-0 invert">
+                                    </div>
+                                </div>
+                                <div class="flex-1 flex justify-around text-center font-mono">
+                                    <div><span class="font-bold text-xs block font-sans">148</span><span class="text-[7px] text-neutral-400 uppercase">Posts</span></div>
+                                    <div><span class="font-bold text-xs block font-sans">42.5K</span><span class="text-[7px] text-neutral-400 uppercase">Followers</span></div>
+                                    <div><span class="font-bold text-xs block font-sans">120</span><span class="text-[7px] text-neutral-400 uppercase">Following</span></div>
+                                </div>
+                            </div>
+
+                            <!-- Bio -->
+                            <div class="mb-3 space-y-0.5">
+                                <p class="font-bold text-[10px]">Elif Tarman Studio</p>
+                                <p class="font-mono text-[7px] text-et-concrete uppercase">Interior Architecture Practice</p>
+                                <p class="text-[8px] text-neutral-700 leading-tight">Monolithic Spatial Engineering & Chiaroscuro.<br>Void • Light • Mass.<br>📍 Istanbul • London • Ankara</p>
+                                <p class="text-[8px] text-et-crimson font-mono font-bold">eliftarman.com</p>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="grid grid-cols-3 gap-1.5 mb-3 font-mono text-[7px] uppercase font-bold text-center">
+                                <span class="bg-et-ink text-white py-1 rounded">Follow</span>
+                                <span class="border border-neutral-300 py-1 rounded">Message</span>
+                                <span class="border border-neutral-300 py-1 rounded">Contact</span>
+                            </div>
+
+                            <!-- Story Highlights -->
+                            <div class="flex gap-2 mb-3 pb-2 border-b border-neutral-100">
+                                <div class="flex flex-col items-center gap-0.5"><div class="w-8 h-8 rounded-full bg-et-paper border border-neutral-300 flex items-center justify-center font-mono text-[6px]">01</div><span class="text-[6px] text-neutral-500">Sanctuary</span></div>
+                                <div class="flex flex-col items-center gap-0.5"><div class="w-8 h-8 rounded-full bg-et-paper border border-neutral-300 flex items-center justify-center font-mono text-[6px]">02</div><span class="text-[6px] text-neutral-500">Void</span></div>
+                                <div class="flex flex-col items-center gap-0.5"><div class="w-8 h-8 rounded-full bg-et-paper border border-neutral-300 flex items-center justify-center font-mono text-[6px]">03</div><span class="text-[6px] text-neutral-500">Materials</span></div>
+                                <div class="flex flex-col items-center gap-0.5"><div class="w-8 h-8 rounded-full bg-et-paper border border-neutral-300 flex items-center justify-center font-mono text-[6px]">04</div><span class="text-[6px] text-neutral-500">Press</span></div>
+                            </div>
+
+                            <!-- 9-Grid (3x3 True Squares) -->
+                            <div class="grid grid-cols-3 gap-1 w-full">
+                                <div class="aspect-square bg-et-ink text-white p-1.5 flex flex-col justify-between">
+                                    <span class="text-[5px] text-et-crimson font-mono">01</span>
+                                    <p class="font-black text-[7px] uppercase leading-none">Space Is<br>Active<br>Presence</p>
+                                    <span class="text-[5px] text-neutral-500 font-mono">ET</span>
+                                </div>
+                                <div class="aspect-square overflow-hidden et-photo-effect bg-neutral-200">
+                                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=300&q=80" class="w-full h-full object-cover">
+                                </div>
+                                <div class="aspect-square overflow-hidden et-photo-effect bg-neutral-200">
+                                    <img src="https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?w=300&q=80" class="w-full h-full object-cover">
+                                </div>
+                                <div class="aspect-square overflow-hidden et-photo-effect bg-neutral-200">
+                                    <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=300&q=80" class="w-full h-full object-cover">
+                                </div>
+                                <div class="aspect-square bg-white border border-neutral-300 p-1 flex flex-col items-center justify-center text-center">
+                                    <img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" class="w-5 h-5 object-contain mb-0.5">
+                                    <span class="font-mono text-[5px] text-et-ink uppercase font-bold">MONOLITH</span>
+                                </div>
+                                <div class="aspect-square overflow-hidden et-photo-effect bg-neutral-200">
+                                    <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?w=300&q=80" class="w-full h-full object-cover">
+                                </div>
+                                <div class="aspect-square bg-et-paper border border-neutral-300 p-1 flex flex-col justify-between">
+                                    <span class="text-[5px] font-mono text-et-concrete">07</span>
+                                    <p class="font-mono text-[6px] uppercase leading-none font-bold text-et-ink">TRAVERTINE<br>SANCTUARY</p>
+                                    <span class="text-[5px] font-mono text-et-crimson">41°N 28°E</span>
+                                </div>
+                                <div class="aspect-square overflow-hidden et-photo-effect bg-neutral-200">
+                                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&q=80" class="w-full h-full object-cover">
+                                </div>
+                                <div class="aspect-square bg-et-ink text-white p-1.5 flex flex-col justify-between">
+                                    <span class="text-[5px] text-neutral-500 font-mono">09</span>
+                                    <p class="font-sans font-black text-[7px] uppercase leading-none text-et-crimson">VOL. 03<br>EDITION</p>
+                                    <span class="text-[5px] font-mono text-white/50">2026</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LinkedIn Mockup -->
+                <div class="lg:col-span-6 space-y-6">
+                    <div class="w-full bg-[#141414] p-5 border-b-4 border-et-crimson rounded-lg shadow-xl relative overflow-hidden flex items-center justify-between">
+                        <div class="space-y-1 relative z-10">
+                            <span class="font-mono text-[8px] text-et-crimson uppercase tracking-widest font-bold">LinkedIn Company Banner (1584 × 396 px)</span>
+                            <h3 class="font-sans font-bold text-lg uppercase tracking-wider">Elif Tarman Interior Architecture</h3>
+                            <p class="font-mono text-[9px] text-et-concrete">Monolithic Spatial Engineering // Istanbul • London</p>
+                        </div>
+                        <div class="w-14 h-14 relative z-10">
+                            <img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" class="w-full h-full object-contain filter brightness-0 invert">
+                        </div>
+                    </div>
+
+                    <!-- LinkedIn Feed Post -->
+                    <div class="bg-white text-et-ink p-5 rounded-lg shadow-xl space-y-3 font-sans border border-neutral-200">
+                        <div class="flex items-center gap-3 border-b pb-2.5">
+                            <div class="w-9 h-9 rounded-full bg-et-ink p-1 flex items-center justify-center">
+                                <img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" class="w-full h-full object-contain filter brightness-0 invert">
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-xs uppercase">Elif Tarman Studio</h4>
+                                <p class="font-mono text-[8px] text-neutral-400">42,850 followers • 2d • Public</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-neutral-800 font-light leading-relaxed">
+                            "The relationship between void and mass is the foundational premise of human spatial consciousness. In our latest sanctuary project, raw travertine meets solar incisions."
+                        </p>
+                        <div class="aspect-[21/9] w-full bg-et-ink rounded overflow-hidden et-photo-effect">
+                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80" class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 09: ENVIRONMENTAL SIGNAGE & ARCHITECTURAL FACADE -->
+    <section id="environmental" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-neutral-300">
+        <div class="space-y-12">
+            <div class="max-w-3xl space-y-4">
+                <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Section 09 // Environmental</span>
+                <h2 class="font-sans font-black text-3xl sm:text-5xl uppercase tracking-tighter text-et-ink">
+                    3D Facade & Travertine Totems.
+                </h2>
+                <p class="font-sans text-sm sm:text-base text-neutral-600 font-light">
+                    Physical architectural signage mounted with 25mm standoffs on raw concrete and monolithic laser-engraved travertine blocks.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Facade Signage -->
+                <div class="bg-[#111] text-white p-6 sm:p-8 rounded-lg shadow-xl space-y-4">
+                    <span class="font-mono text-xs text-et-concrete uppercase">3D Brushed Steel Facade Lettering</span>
+                    <div class="aspect-[2/1] bg-[#1a1a1a] rounded flex items-center justify-center p-6 border border-[#262626]">
+                        <div class="flex items-center gap-6">
+                            <div class="w-14 h-14"><img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" class="w-full h-full object-contain filter brightness-0 invert"></div>
+                            <div class="logo-stack text-xl sm:text-2xl font-sans font-extralight text-neutral-200 tracking-ultra">
+                                <span class="mb-1">E L I F</span><span>T A R M A N</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="font-mono text-[9px] uppercase text-et-concrete">Mounting: 25mm Standoffs on Raw Board-Formed Concrete Wall</p>
+                </div>
+
+                <!-- Travertine Totem -->
+                <div class="bg-[#111] text-white p-6 sm:p-8 rounded-lg shadow-xl space-y-4">
+                    <span class="font-mono text-xs text-et-concrete uppercase">Monolithic Entrance Totem</span>
+                    <div class="aspect-[2/1] bg-[#1e1e1e] rounded flex flex-col justify-between p-5 border-t-2 border-et-crimson">
+                        <span class="font-mono text-[8px] text-et-concrete uppercase">HEADQUARTERS // ENTRANCE</span>
+                        <div class="flex items-center justify-center gap-4">
+                            <div class="w-10 h-10"><img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" class="w-full h-full object-contain filter brightness-0 invert"></div>
+                            <div class="logo-stack text-base sm:text-lg font-sans font-extralight text-white">
+                                <span>ELIF TARMAN</span>
+                            </div>
+                        </div>
+                        <span class="font-mono text-[8px] text-et-crimson uppercase text-center font-bold">SANCTUARY 01</span>
+                    </div>
+                    <p class="font-mono text-[9px] uppercase text-et-concrete">Material: Solid Unfilled Travertine Block with Laser Engraving</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 10: INQUIRIES & CONTACT -->
+    <section id="contact" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-b border-neutral-300">
+        <div class="space-y-8 text-center">
+            <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Section 10 // Commission</span>
+            <h2 class="font-sans font-black text-3xl sm:text-5xl uppercase tracking-tighter text-et-ink">
+                Initiate a Commission.
+            </h2>
+            <p class="font-sans text-sm sm:text-base text-neutral-600 font-light max-w-xl mx-auto">
+                We accept a strictly limited number of private and institutional architectural commissions per year.
+            </p>
+
+            <form class="space-y-4 max-w-xl mx-auto text-left font-mono text-xs" onsubmit="event.preventDefault(); showToast('Inquiry Dispatched to Studio Archive');">
+                <div>
+                    <label class="block uppercase text-et-concrete text-[10px] mb-1">Full Name</label>
+                    <input type="text" required placeholder="CLIENT NAME..." class="w-full border border-neutral-300 p-3 bg-white focus:outline-none focus:border-et-crimson">
+                </div>
+                <div>
+                    <label class="block uppercase text-et-concrete text-[10px] mb-1">Corporate Email</label>
+                    <input type="email" required placeholder="CLIENT@COMPANY.COM..." class="w-full border border-neutral-300 p-3 bg-white focus:outline-none focus:border-et-crimson">
+                </div>
+                <div>
+                    <label class="block uppercase text-et-concrete text-[10px] mb-1">Project Scope & Location</label>
+                    <textarea rows="3" required placeholder="SPECIFICATION & TIMELINE..." class="w-full border border-neutral-300 p-3 bg-white focus:outline-none focus:border-et-crimson"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-et-ink text-white hover:bg-et-crimson transition-colors py-3 uppercase font-bold tracking-widest">
+                    Submit Commission Brief &rarr;
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FOOTER / COLOPHON WITH 30% OPACITY EMBLEM BEHIND MOTTO -->
+    <footer class="relative bg-[#050505] text-white py-24 sm:py-36 px-4 sm:px-6 lg:px-8 border-t-[16px] border-[#181818] overflow-hidden">
+        <!-- 30% Opacity Emblem Watermark Directly Behind the Motto -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[520px] md:w-[620px] h-[340px] sm:h-[520px] md:h-[620px] opacity-30 pointer-events-none z-0 flex items-center justify-center">
+            <img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" alt="Emblem Backdrop" class="w-full h-full object-contain filter brightness-0 invert drop-shadow-[0_0_60px_rgba(255,255,255,0.15)]">
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto text-center space-y-8">
+            <p class="font-mono text-xs tracking-widest text-et-crimson uppercase font-bold">Architectural Epilogue</p>
+
+            <!-- Monumental Motto in Foreground -->
+            <h2 class="font-sans font-black text-4xl sm:text-6xl md:text-7xl uppercase tracking-tighter leading-tight drop-shadow-2xl">
+                Forming the spaces<br>that form you.
+            </h2>
+
+            <div class="logo-stack text-2xl sm:text-3xl font-sans font-extralight text-white/70">
+                <span class="mb-1">E L I F</span>
+                <span>T A R M A N</span>
+            </div>
+
+            <div class="w-16 h-0.5 bg-et-crimson mx-auto"></div>
+
+            <div class="flex flex-wrap items-center justify-center gap-6 font-mono text-xs text-et-concrete uppercase tracking-widest pt-4">
+                <span>© 2026 Elif Tarman Studio</span>
+                <span>All Rights Reserved</span>
+                <a href="#hero" class="hover:text-white transition-colors">Back to Top ↑</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-white text-black font-mono text-xs uppercase tracking-widest px-6 py-3 border-2 border-et-crimson shadow-2xl z-50 transition-all duration-300 opacity-0 pointer-events-none">
+        Notification
+    </div>
+
+    <!-- SCRIPT ENGINE -->
+    <script>
+        // Mobile Drawer Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const hamburger = document.getElementById('hamburger-icon');
+            const close = document.getElementById('close-icon');
+            const isOpen = !menu.classList.contains('hidden');
+
+            if (isOpen) {
+                menu.classList.add('hidden');
+                hamburger.classList.remove('hidden');
+                close.classList.add('hidden');
+            } else {
+                menu.classList.remove('hidden');
+                hamburger.classList.add('hidden');
+                close.classList.remove('hidden');
+            }
+        }
+
+        // Toast Messenger
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.innerText = msg;
+            t.classList.remove('opacity-0', 'pointer-events-none');
+            t.classList.add('opacity-100');
+            setTimeout(() => {
+                t.classList.remove('opacity-100');
+                t.classList.add('opacity-0', 'pointer-events-none');
+            }, 2400);
+        }
+
+        // Copy to Clipboard
+        function copyToClipboard(text, label) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast(`Copied ${label} to Clipboard ✓`);
+            }).catch(() => {
+                showToast(`Selected ${label}`);
+            });
+        }
+
+        // InDesign Package (.ZIP) Generator
+        function downloadInDesignPackage() {
+            const zip = new JSZip();
+            
+            const indesignReadme = `================================================================================
+ELIF TARMAN INTERIOR ARCHITECTURE STUDIO - 24-PLATE INDESIGN SPECIFICATION GUIDE
+================================================================================
+
+1. DOCUMENT SETUP:
+   - Total Plates: 24 Landscape Pages
+   - Document Width: 1920 px (or A3 Landscape 420 x 236.25 mm)
+   - Document Height: 1080 px (16:9 Landscape)
+   - Margins: Top/Bottom: 56 px, Left/Right: 80 px
+   - Bleed: 5 mm (for offset print) or 0 px (for screen presentation)
+   - Color Space: CMYK (FOGRA39 Coated) / RGB (sRGB IEC61966-2.1)
+
+2. MULTI-PAGE VECTOR PDF IMPORT:
+   - Open Adobe InDesign: File > Place (Cmd/Ctrl + D)
+   - Select the PDF generated via the "Vector PDF (Print)" command.
+   - Check "Show Import Options".
+   - Under Pages select "All" and set Crop to "Media Box".
+   - All 24 plates will place seamlessly into your 1920x1080 document without shift.
+
+3. COLOR SWATCHES & COLOR PROFILES:
+   - ET Crimson : #FF0A0A | CMYK: 0 / 96 / 96 / 0   | PANTONE Warm Red C
+   - ET Ink     : #0A0A0A | CMYK: 75 / 68 / 67 / 90 | PANTONE Black 6 C
+   - ET Paper   : #F7F6F2 | CMYK: 2 / 2 / 4 / 0     | Uncoated Cotton Stock
+   - ET Concrete: #737373 | CMYK: 0 / 0 / 0 / 55    | PANTONE Cool Gray 8 C
+   - ET Stone   : #D9D9D9 | CMYK: 0 / 0 / 0 / 15    | PANTONE Cool Gray 2 C
+`;
+
+            const fontReadme = `================================================================================
+FONT FAMILY INSTALLATION & LICENSING GUIDE
+================================================================================
+
+1. INTER FONT FAMILY (Headings & Body Copy):
+   - Designer: Rasmus Andersson
+   - License: SIL Open Font License 1.1
+   - Weights: ExtraLight (200), Regular (400), Black (900)
+   - Direct Download: https://fonts.google.com/specimen/Inter
+
+2. SPACE MONO FONT FAMILY (Technical Data, Codes & Tables):
+   - Designer: Colophon Foundry
+   - License: SIL Open Font License 1.1
+   - Weights: Regular (400), Bold (700)
+   - Direct Download: https://fonts.google.com/specimen/Space+Mono
+`;
+
+            const emblemInfo = `================================================================================
+MASTER CORPORATE EMBLEM ASSET SPECIFICATION
+================================================================================
+URL: https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png
+
+USAGE RULES & SPECIFICATIONS:
+- Minimum Print Size: 15 mm (Width)
+- Minimum Digital Size: 48 px (Height)
+- Authorized Ground Variations:
+  * Light Grounds: 100% Solid Ink (#0A0A0A)
+  * Dark Grounds: 100% White Inverted (#FFFFFF)
+  * Signature Seal: ET Crimson (#FF0A0A)
+  * Colophon Plate: 30% Opacity Monolithic Watermark Backdrop
+- Clearspace: Minimum 1X [E] cap-height margin on all cardinal sides.
+`;
+
+            zip.file("INDESIGN_24_PLATES_SETUP_GUIDE.txt", indesignReadme);
+            zip.file("FONT_FAMILY_INSTALLATION_LINKS.txt", fontReadme);
+            zip.file("MASTER_EMBLEM_SPECIFICATIONS.txt", emblemInfo);
+
+            zip.generateAsync({ type: "blob" }).then(function(content) {
+                saveAs(content, "Elif_Tarman_Studio_InDesign_Package.zip");
+                showToast("InDesign & Font Package (.ZIP) Downloaded ✓");
+            });
+        }
+    </script>
+</body>
+</html>
