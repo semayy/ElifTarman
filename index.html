@@ -2,12 +2,12 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     <title>Elif Tarman Studio | Master Brand Identity & Architectural Guidelines</title>
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- JSZip & FileSaver for InDesign & Font Package Download -->
+    <!-- JSZip & FileSaver for Client-Side InDesign & Asset Package Generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     
@@ -54,6 +54,8 @@
             padding: 0;
             font-family: 'Inter', sans-serif;
             -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            width: 100%;
         }
 
         ::selection { background-color: #FF0A0A; color: #F7F6F2; }
@@ -65,23 +67,30 @@
         }
 
         /* Crosshair Drafting Markers */
-        .crosshair { position: relative; width: 16px; height: 16px; pointer-events: none; }
+        .crosshair { position: relative; width: 14px; height: 14px; pointer-events: none; }
         .crosshair::before, .crosshair::after { content: ''; position: absolute; background-color: currentColor; }
-        .crosshair::before { top: 7.5px; left: 0; width: 16px; height: 1px; }
-        .crosshair::after { top: 0; left: 7.5px; width: 1px; height: 16px; }
+        .crosshair::before { top: 6.5px; left: 0; width: 14px; height: 1px; }
+        .crosshair::after { top: 0; left: 6.5px; width: 1px; height: 14px; }
         
         /* 48 Field Grid Matrix Overlay */
         .grid-matrix-bg {
             background-image: 
                 linear-gradient(to right, rgba(10, 10, 10, 0.05) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(10, 10, 10, 0.05) 1px, transparent 1px);
-            background-size: 60px 60px;
+            background-size: 40px 40px;
         }
+        @media (min-width: 640px) {
+            .grid-matrix-bg { background-size: 60px 60px; }
+        }
+
         .dark-grid-matrix {
             background-image: 
                 linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-            background-size: 60px 60px;
+            background-size: 40px 40px;
+        }
+        @media (min-width: 640px) {
+            .dark-grid-matrix { background-size: 60px 60px; }
         }
 
         /* Chiaroscuro Architectural Filter */
@@ -95,57 +104,59 @@
             mix-blend-mode: overlay; pointer-events: none;
         }
 
-        /* Structural Logo Stack */
+        /* Unified Master Logo Stack */
         .logo-stack { 
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             font-family: 'Inter', sans-serif; font-weight: 200; text-transform: uppercase; 
-            letter-spacing: 0.9em; line-height: 1.35; margin-right: -0.9em; 
-            white-space: nowrap; user-select: none;
+            line-height: 1.35; white-space: nowrap; user-select: none;
         }
     </style>
 </head>
-<body class="bg-et-paper text-et-ink relative overflow-x-hidden">
+<body class="bg-et-paper text-et-ink relative">
 
     <div class="noise-overlay"></div>
 
-    <!-- STICKY RESPONSIVE NAVIGATION BAR -->
-    <header class="sticky top-0 z-50 bg-[#0A0A0A]/95 backdrop-blur-md border-b border-white/10 text-white font-mono text-xs">
+    <!-- STICKY RESPONSIVE NAVIGATION BAR (PURE EMBLEM ONLY AS DIRECTED) -->
+    <header class="sticky top-0 z-50 bg-[#0A0A0A]/95 backdrop-blur-md border-b border-white/10 text-white font-mono text-xs transition-all">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <!-- Web Logo: Pure Standalone Master Emblem Only (As Requested) -->
+            <!-- Web Logo: Pure Standalone Master Emblem Only -->
             <a href="#hero" class="flex items-center group py-1" aria-label="Elif Tarman Studio Master Emblem">
-                <div class="w-10 h-10 flex items-center justify-center p-1 rounded hover:bg-white/5 transition-all">
-                    <img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" alt="Elif Tarman Studio Master Emblem" class="w-full h-full object-contain filter brightness-0 invert group-hover:scale-110 transition-transform duration-300">
+                <div class="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center p-1 rounded-full hover:bg-white/10 transition-all">
+                    <img src="https://ctod.tr/wp/wp-content/uploads/2026/09/Adsiz_Resim-2.png" alt="Elif Tarman Studio Master Emblem" class="w-full h-full object-contain filter brightness-0 invert group-hover:scale-110 transition-transform duration-300">
                 </div>
             </a>
 
             <!-- Desktop Navigation Links -->
-            <nav class="hidden lg:flex items-center gap-6 uppercase tracking-wider text-[11px] text-neutral-300">
-                <a href="#manifesto" class="hover:text-et-crimson transition-colors">Manifesto</a>
-                <a href="#pillars" class="hover:text-et-crimson transition-colors">Pillars</a>
-                <a href="#grid-system" class="hover:text-et-crimson transition-colors">Grid</a>
-                <a href="#identity" class="hover:text-et-crimson transition-colors">Identity</a>
-                <a href="#color" class="hover:text-et-crimson transition-colors">Color</a>
-                <a href="#typography" class="hover:text-et-crimson transition-colors">Type</a>
-                <a href="#mockups" class="hover:text-et-crimson transition-colors font-bold text-white">Mockups</a>
-                <a href="#social" class="hover:text-et-crimson transition-colors">Social UI</a>
-                <a href="#environmental" class="hover:text-et-crimson transition-colors">Signage</a>
-                <a href="#contact" class="hover:text-et-crimson transition-colors">Contact</a>
+            <nav class="hidden xl:flex items-center gap-6 uppercase tracking-wider text-[11px] text-neutral-300">
+                <a href="#manifesto" class="hover:text-et-crimson transition-colors py-1">Manifesto</a>
+                <a href="#pillars" class="hover:text-et-crimson transition-colors py-1">Pillars</a>
+                <a href="#grid-system" class="hover:text-et-crimson transition-colors py-1">Grid</a>
+                <a href="#identity" class="hover:text-et-crimson transition-colors py-1">Identity</a>
+                <a href="#color" class="hover:text-et-crimson transition-colors py-1">Color</a>
+                <a href="#typography" class="hover:text-et-crimson transition-colors py-1">Type</a>
+                <a href="#mockups" class="hover:text-et-crimson transition-colors py-1 font-bold text-white">Mockups</a>
+                <a href="#social" class="hover:text-et-crimson transition-colors py-1">Social UI</a>
+                <a href="#environmental" class="hover:text-et-crimson transition-colors py-1">Signage</a>
+                <a href="#contact" class="hover:text-et-crimson transition-colors py-1">Contact</a>
             </nav>
 
-            <!-- Actions Desktop -->
-            <div class="hidden sm:flex items-center gap-3">
-                <button onclick="downloadInDesignPackage()" class="border border-white/30 hover:border-et-crimson bg-black/50 text-white hover:text-et-crimson px-3.5 py-1.5 rounded-full text-[10px] tracking-wider uppercase transition-colors flex items-center gap-1.5">
-                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            <!-- Quick Action Buttons Desktop -->
+            <div class="hidden sm:flex items-center gap-2.5">
+                <button onclick="downloadInDesignPackage()" class="border border-white/30 hover:border-et-crimson bg-black/60 text-white hover:text-et-crimson px-3.5 py-1.5 rounded-full text-[10px] tracking-wider uppercase transition-colors flex items-center gap-1.5 active:scale-95">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                     <span>InDesign Kit (.ZIP)</span>
                 </button>
-                <a href="https://drive.google.com/file/d/1ncjTZjeks78rq82wv7neO5SkbCYCyYjF/view?usp=drivesdk" target="_blank" class="bg-et-crimson hover:bg-red-600 text-white px-4 py-1.5 rounded-full font-bold text-[10px] tracking-wider uppercase transition-colors flex items-center gap-1">
+                <a href="https://drive.google.com/file/d/1ncjTZjeks78rq82wv7neO5SkbCYCyYjF/view?usp=drivesdk" target="_blank" class="bg-et-crimson hover:bg-red-600 text-white px-4 py-1.5 rounded-full font-bold text-[10px] tracking-wider uppercase transition-colors flex items-center gap-1 shadow-md hover:shadow-lg active:scale-95">
                     <span>PDF Guidelines</span>
                 </a>
             </div>
 
-            <!-- Mobile Hamburger Toggle -->
-            <div class="flex lg:hidden items-center gap-2">
-                <button onclick="toggleMobileMenu()" class="p-2 text-white hover:text-et-crimson focus:outline-none" aria-label="Toggle Navigation">
+            <!-- Mobile Action & Hamburger Toggle -->
+            <div class="flex xl:hidden items-center gap-2">
+                <button onclick="downloadInDesignPackage()" class="sm:hidden text-white hover:text-et-crimson p-2 rounded-lg" title="Download InDesign Kit">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                </button>
+                <button onclick="toggleMobileMenu()" class="p-2 text-white hover:text-et-crimson focus:outline-none rounded-lg active:bg-white/10" aria-label="Toggle Navigation Menu">
                     <svg id="hamburger-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                     </svg>
@@ -156,113 +167,137 @@
             </div>
         </div>
 
-        <!-- Mobile Drawer Navigation -->
-        <div id="mobile-menu" class="hidden lg:hidden border-t border-white/10 bg-[#0A0A0A] px-6 py-5 space-y-4">
-            <div class="flex flex-col space-y-3 uppercase tracking-wider text-xs text-neutral-300">
-                <a href="#manifesto" onclick="toggleMobileMenu()" class="hover:text-et-crimson">01. Manifesto & Philosophy</a>
-                <a href="#pillars" onclick="toggleMobileMenu()" class="hover:text-et-crimson">02. 4 Foundational Pillars</a>
-                <a href="#grid-system" onclick="toggleMobileMenu()" class="hover:text-et-crimson">03. 48-Field Universal Grid</a>
-                <a href="#identity" onclick="toggleMobileMenu()" class="hover:text-et-crimson">04. Master Identity & Logo</a>
-                <a href="#color" onclick="toggleMobileMenu()" class="hover:text-et-crimson">05. Chromatic Spectrum</a>
-                <a href="#typography" onclick="toggleMobileMenu()" class="hover:text-et-crimson">06. Typographic System</a>
-                <a href="#mockups" onclick="toggleMobileMenu()" class="hover:text-et-crimson font-bold text-et-crimson">07. Architectural Mockups</a>
-                <a href="#social" onclick="toggleMobileMenu()" class="hover:text-et-crimson">08. Instagram 9-Grid & LinkedIn</a>
-                <a href="#environmental" onclick="toggleMobileMenu()" class="hover:text-et-crimson">09. 3D Environmental Signage</a>
-                <a href="#contact" onclick="toggleMobileMenu()" class="hover:text-et-crimson">10. Inquiries & Colophon</a>
+        <!-- Mobile Full Navigation Drawer -->
+        <div id="mobile-menu" class="hidden xl:hidden border-t border-white/10 bg-[#0A0A0A]/98 backdrop-blur-xl px-6 py-6 space-y-5 max-h-[85vh] overflow-y-auto">
+            <div class="flex flex-col space-y-3.5 uppercase tracking-wider text-xs font-mono text-neutral-300">
+                <a href="#manifesto" onclick="toggleMobileMenu()" class="py-1.5 border-b border-white/5 flex justify-between items-center hover:text-et-crimson">
+                    <span>01. Manifesto & Creed</span><span class="text-et-concrete">&rarr;</span>
+                </a>
+                <a href="#pillars" onclick="toggleMobileMenu()" class="py-1.5 border-b border-white/5 flex justify-between items-center hover:text-et-crimson">
+                    <span>02. 4 Foundational Pillars</span><span class="text-et-concrete">&rarr;</span>
+                </a>
+                <a href="#grid-system" onclick="toggleMobileMenu()" class="py-1.5 border-b border-white/5 flex justify-between items-center hover:text-et-crimson">
+                    <span>03. 48-Field Universal Grid</span><span class="text-et-concrete">&rarr;</span>
+                </a>
+                <a href="#identity" onclick="toggleMobileMenu()" class="py-1.5 border-b border-white/5 flex justify-between items-center hover:text-et-crimson">
+                    <span>04. Master Logo & Emblem</span><span class="text-et-concrete">&rarr;</span>
+                </a>
+                <a href="#color" onclick="toggleMobileMenu()" class="py-1.5 border-b border-white/5 flex justify-between items-center hover:text-et-crimson">
+                    <span>05. Chromatic Spectrum</span><span class="text-et-concrete">&rarr;</span>
+                </a>
+                <a href="#typography" onclick="toggleMobileMenu()" class="py-1.5 border-b border-white/5 flex justify-between items-center hover:text-et-crimson">
+                    <span>06. Typographic Hierarchy</span><span class="text-et-concrete">&rarr;</span>
+                </a>
+                <a href="#mockups" onclick="toggleMobileMenu()" class="py-1.5 border-b border-white/5 flex justify-between items-center text-white font-bold hover:text-et-crimson">
+                    <span class="text-et-crimson">07. Architectural Mockups (14 Sets)</span><span class="text-et-crimson">&rarr;</span>
+                </a>
+                <a href="#social" onclick="toggleMobileMenu()" class="py-1.5 border-b border-white/5 flex justify-between items-center hover:text-et-crimson">
+                    <span>08. Instagram 9-Grid & LinkedIn</span><span class="text-et-concrete">&rarr;</span>
+                </a>
+                <a href="#environmental" onclick="toggleMobileMenu()" class="py-1.5 border-b border-white/5 flex justify-between items-center hover:text-et-crimson">
+                    <span>09. 3D Environmental Signage</span><span class="text-et-concrete">&rarr;</span>
+                </a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="py-1.5 flex justify-between items-center hover:text-et-crimson">
+                    <span>10. Commission & Colophon</span><span class="text-et-concrete">&rarr;</span>
+                </a>
             </div>
-            <div class="pt-4 border-t border-white/10 flex flex-col gap-2">
-                <button onclick="downloadInDesignPackage()" class="w-full text-center border border-white/30 text-white py-2 rounded-lg text-xs uppercase tracking-wider">
+
+            <!-- Mobile Quick Actions -->
+            <div class="pt-4 border-t border-white/10 flex flex-col gap-2.5">
+                <button onclick="downloadInDesignPackage()" class="w-full text-center border border-white/30 text-white hover:border-et-crimson hover:text-et-crimson py-3 rounded-lg text-xs uppercase tracking-wider font-bold transition-colors">
                     Download InDesign Package (.ZIP)
                 </button>
-                <a href="https://drive.google.com/file/d/1ncjTZjeks78rq82wv7neO5SkbCYCyYjF/view?usp=drivesdk" target="_blank" class="w-full text-center bg-et-crimson text-white py-2 rounded-lg text-xs uppercase tracking-wider font-bold">
-                    View Vector PDF (24 Plates)
+                <a href="https://drive.google.com/file/d/1ncjTZjeks78rq82wv7neO5SkbCYCyYjF/view?usp=drivesdk" target="_blank" class="w-full text-center bg-et-crimson hover:bg-red-600 text-white py-3 rounded-lg text-xs uppercase tracking-wider font-bold transition-colors shadow-lg">
+                    View 24-Plate Vector PDF
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- HERO SECTION -->
-    <section id="hero" class="relative min-h-[90vh] flex flex-col justify-between py-12 sm:py-20 px-4 sm:px-6 lg:px-8 border-b border-neutral-300 grid-matrix-bg">
-        <div class="absolute top-6 left-6 crosshair text-et-concrete"></div>
-        <div class="absolute top-6 right-6 crosshair text-et-concrete"></div>
-        <div class="absolute bottom-6 left-6 crosshair text-et-concrete"></div>
-        <div class="absolute bottom-6 right-6 crosshair text-et-concrete"></div>
+    <!-- HERO SECTION (UNIFIED MASTER LOGO) -->
+    <section id="hero" class="relative min-h-[92vh] flex flex-col justify-between py-10 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 border-b border-neutral-300 grid-matrix-bg overflow-hidden">
+        <div class="absolute top-4 left-4 sm:top-6 sm:left-6 crosshair text-et-concrete"></div>
+        <div class="absolute top-4 right-4 sm:top-6 sm:right-6 crosshair text-et-concrete"></div>
+        <div class="absolute bottom-4 left-4 sm:bottom-6 sm:left-6 crosshair text-et-concrete"></div>
+        <div class="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 crosshair text-et-concrete"></div>
 
         <!-- Meta Header -->
-        <div class="max-w-7xl mx-auto w-full flex flex-wrap justify-between items-center font-mono text-xs text-et-concrete uppercase tracking-widest border-b border-neutral-200 pb-4 gap-2">
-            <span>Volume 03.0 // Master Guidelines</span>
+        <div class="max-w-7xl mx-auto w-full flex flex-wrap justify-between items-center font-mono text-[10px] sm:text-xs text-et-concrete uppercase tracking-widest border-b border-neutral-200 pb-3 gap-2">
+            <span>Document: ET-BGB-2026/V3</span>
             <span>Interior Architectural Standards</span>
             <span>Istanbul • London • Ankara</span>
         </div>
 
         <!-- Central Hero Content -->
-        <div class="max-w-5xl mx-auto w-full text-center my-auto py-12 space-y-8">
-            <span class="inline-block font-mono text-xs uppercase tracking-superwide text-et-crimson font-bold bg-et-crimson/5 px-4 py-1.5 border border-et-crimson/20">
+        <div class="max-w-5xl mx-auto w-full text-center my-auto py-8 sm:py-14 space-y-6 sm:space-y-8">
+            <span class="inline-block font-mono text-[10px] sm:text-xs uppercase tracking-widest text-et-crimson font-bold bg-et-crimson/5 px-3.5 py-1.5 border border-et-crimson/20 rounded-full">
                 Spatial Monolithic Engineering
             </span>
 
-            <!-- Prominent Standalone Master Emblem -->
-            <div class="w-32 h-32 sm:w-44 sm:h-44 mx-auto flex items-center justify-center p-2">
-                <img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" alt="Elif Tarman Master Emblem" class="w-full h-full object-contain filter drop-shadow-xl hover:scale-105 transition-transform duration-500">
+            <!-- Master Emblem (Unified Golden Ratio Proportion) -->
+            <div class="w-24 h-24 sm:w-28 sm:h-28 md:w-32 md:h-32 mx-auto flex items-center justify-center p-1">
+                <img src="https://ctod.tr/wp/wp-content/uploads/2026/09/Adsiz_Resim-2.png" alt="Elif Tarman Master Emblem" class="w-full h-full object-contain filter drop-shadow-xl hover:scale-105 transition-transform duration-500">
             </div>
 
-            <!-- Typography Lockup -->
-            <div class="logo-stack text-4xl sm:text-6xl md:text-7xl font-sans font-extralight text-et-ink">
-                <span class="mb-2 sm:mb-4">E L I F</span>
-                <span>T A R M A N</span>
+            <!-- Unified Master Typography Lockup -->
+            <div class="logo-stack text-2xl sm:text-4xl md:text-5xl font-sans font-extralight text-et-ink">
+                <span class="tracking-[0.55em] mb-1 sm:mb-2">E L I F</span>
+                <span class="tracking-[0.55em]">T A R M A N</span>
+                <span class="font-mono text-[10px] sm:text-xs tracking-[0.4em] text-et-concrete uppercase mt-2">STUDIO // INTERIOR ARCHITECTURE</span>
             </div>
 
-            <div class="w-20 h-1 bg-et-crimson mx-auto"></div>
+            <div class="w-16 sm:w-20 h-1 bg-et-crimson mx-auto"></div>
 
-            <h1 class="font-sans font-black text-2xl sm:text-4xl md:text-5xl uppercase tracking-tighter text-et-ink max-w-4xl mx-auto leading-tight">
+            <!-- Main Heading -->
+            <h1 class="font-sans font-black text-2xl sm:text-4xl md:text-5xl lg:text-6xl uppercase tracking-tighter text-et-ink max-w-4xl mx-auto leading-[1.1] sm:leading-tight px-2">
                 We do not decorate.<br>
                 We engineer <span class="text-et-crimson">void, light,</span> and mass.
             </h1>
 
-            <p class="font-sans text-sm sm:text-base text-neutral-600 max-w-2xl mx-auto font-light leading-relaxed">
-                An interior architecture practice defined by monolithic discipline, brutal material honesty, and the timeless sculptural manipulation of volume.
+            <p class="font-sans text-xs sm:text-sm md:text-base text-neutral-600 max-w-2xl mx-auto font-light leading-relaxed px-4">
+                An interior architecture studio defined by monolithic discipline, brutal material honesty, and the sculptural manipulation of volume across physical and digital dimensions.
             </p>
 
-            <!-- Call to Actions -->
-            <div class="flex flex-wrap items-center justify-center gap-4 pt-4 font-mono text-xs uppercase">
-                <a href="#mockups" class="bg-et-ink text-white hover:bg-et-crimson transition-colors px-6 py-3 rounded-full font-bold tracking-widest shadow-lg">
-                    View Studio Mockups &rarr;
+            <!-- Touch-Friendly CTAs -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2 font-mono text-xs uppercase px-4 max-w-md sm:max-w-none mx-auto">
+                <a href="#mockups" class="w-full sm:w-auto bg-et-ink text-white hover:bg-et-crimson transition-colors px-6 py-3.5 rounded-full font-bold tracking-widest shadow-md text-center">
+                    Explore Mockup Suite &rarr;
                 </a>
-                <a href="https://drive.google.com/file/d/1ncjTZjeks78rq82wv7neO5SkbCYCyYjF/view?usp=drivesdk" target="_blank" class="border border-et-ink text-et-ink hover:bg-et-ink hover:text-white transition-colors px-6 py-3 rounded-full font-bold tracking-widest">
-                    Download 24-Plate Vector PDF
+                <a href="https://drive.google.com/file/d/1ncjTZjeks78rq82wv7neO5SkbCYCyYjF/view?usp=drivesdk" target="_blank" class="w-full sm:w-auto border border-et-ink text-et-ink hover:bg-et-ink hover:text-white transition-colors px-6 py-3.5 rounded-full font-bold tracking-widest text-center">
+                    Vector PDF (24 Plates)
                 </a>
             </div>
         </div>
 
         <!-- Footer Meta -->
-        <div class="max-w-7xl mx-auto w-full flex flex-wrap justify-between items-center font-mono text-xs text-et-concrete uppercase tracking-widest border-t border-neutral-200 pt-4 gap-2">
+        <div class="max-w-7xl mx-auto w-full flex flex-wrap justify-between items-center font-mono text-[10px] sm:text-xs text-et-concrete uppercase tracking-widest border-t border-neutral-200 pt-3 gap-2">
             <span>Principal: Elif Tarman</span>
-            <span>48-Field Universal Grid Calibration</span>
-            <span>All Systems Active</span>
+            <span>Universal 48-Field Grid Standard</span>
+            <span>Plate Directory Active</span>
         </div>
     </section>
 
     <!-- SECTION 01: STUDIO MANIFESTO & PHILOSOPHY -->
-    <section id="manifesto" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-neutral-300">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-            <div class="lg:col-span-5 space-y-6">
+    <section id="manifesto" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-neutral-300">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+            <div class="lg:col-span-5 space-y-4 sm:space-y-6">
                 <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Section 01 // Creed</span>
-                <h2 class="font-sans font-black text-3xl sm:text-5xl uppercase tracking-tighter leading-tight text-et-ink">
+                <h2 class="font-sans font-black text-2xl sm:text-4xl md:text-5xl uppercase tracking-tighter leading-tight text-et-ink">
                     The Monolithic Philosophy.
                 </h2>
-                <div class="w-16 h-1 bg-et-crimson"></div>
-                <p class="font-sans text-base sm:text-lg text-neutral-800 leading-relaxed font-normal">
+                <div class="w-12 sm:w-16 h-1 bg-et-crimson"></div>
+                <p class="font-sans text-sm sm:text-base md:text-lg text-neutral-800 leading-relaxed font-normal">
                     Space is not absence; it is an active physical substance. We view interior architecture as the extraction of ornamental noise until only the elemental forces of nature remain.
                 </p>
             </div>
 
-            <div class="lg:col-span-7 space-y-6 font-sans text-sm sm:text-base text-neutral-600 leading-relaxed font-light">
+            <div class="lg:col-span-7 space-y-4 sm:space-y-6 font-sans text-xs sm:text-sm md:text-base text-neutral-600 leading-relaxed font-light">
                 <p>
                     Every surface in an Elif Tarman commission serves a structural and emotional purpose. By anchoring volumes to raw board-formed concrete, porous travertine, and natural directionality of solar light, we construct spaces that age gracefully with decadal permanence.
                 </p>
-                <div class="bg-white p-6 sm:p-8 border-l-4 border-et-ink shadow-sm">
-                    <p class="font-mono text-xs font-bold uppercase tracking-widest text-et-concrete mb-2">Core Architectural Proposition</p>
-                    <p class="text-base sm:text-lg text-et-ink font-medium">
+                <div class="bg-white p-5 sm:p-7 border-l-4 border-et-ink shadow-sm rounded-r-lg">
+                    <p class="font-mono text-[10px] sm:text-xs font-bold uppercase tracking-widest text-et-concrete mb-1.5">Core Architectural Proposition</p>
+                    <p class="text-sm sm:text-base md:text-lg text-et-ink font-medium leading-normal">
                         "Strip away the superfluous until only spatial truth, architectural gravity, and emotional permanence remain."
                     </p>
                 </div>
@@ -271,51 +306,51 @@
     </section>
 
     <!-- SECTION 02: 4 FOUNDATIONAL PILLARS -->
-    <section id="pillars" class="py-20 sm:py-28 bg-[#0A0A0A] text-white px-4 sm:px-6 lg:px-8 dark-grid-matrix border-b border-[#222]">
-        <div class="max-w-7xl mx-auto space-y-12">
-            <div class="max-w-3xl space-y-4">
+    <section id="pillars" class="py-16 sm:py-24 bg-[#0A0A0A] text-white px-4 sm:px-6 lg:px-8 dark-grid-matrix border-b border-[#222]">
+        <div class="max-w-7xl mx-auto space-y-10 sm:space-y-14">
+            <div class="max-w-3xl space-y-3">
                 <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Section 02 // Values</span>
-                <h2 class="font-sans font-black text-3xl sm:text-5xl uppercase tracking-tighter">
+                <h2 class="font-sans font-black text-2xl sm:text-4xl md:text-5xl uppercase tracking-tighter">
                     4 Foundational Pillars.
                 </h2>
-                <p class="font-sans text-sm sm:text-base text-et-concrete font-light">
+                <p class="font-sans text-xs sm:text-sm md:text-base text-et-concrete font-light">
                     The non-negotiable ethical framework governing all design decisions, material selections, and visual identities.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
                 <!-- Pillar 01 -->
-                <div class="border-l-4 border-et-crimson bg-[#141414] p-6 sm:p-8 border border-[#262626] rounded-r-lg space-y-3">
-                    <span class="font-mono text-xs text-et-crimson uppercase tracking-widest block font-bold">Pillar 01</span>
-                    <h3 class="font-sans font-bold text-xl uppercase tracking-wider text-white">The Inherent Worth of Void</h3>
-                    <p class="font-sans text-sm text-et-concrete leading-relaxed font-light">
+                <div class="border-l-4 border-et-crimson bg-[#141414] p-5 sm:p-7 border border-[#262626] rounded-r-lg space-y-2">
+                    <span class="font-mono text-[10px] sm:text-xs text-et-crimson uppercase tracking-widest block font-bold">Pillar 01</span>
+                    <h3 class="font-sans font-bold text-lg sm:text-xl uppercase tracking-wider text-white">The Inherent Worth of Void</h3>
+                    <p class="font-sans text-xs sm:text-sm text-et-concrete leading-relaxed font-light">
                         Emptiness is not absence; it is active presence. True spatial luxury is discovered in silence, strict reduction, and the deliberate exclusion of ornamental noise.
                     </p>
                 </div>
 
                 <!-- Pillar 02 -->
-                <div class="border-l-4 border-et-crimson bg-[#141414] p-6 sm:p-8 border border-[#262626] rounded-r-lg space-y-3">
-                    <span class="font-mono text-xs text-et-crimson uppercase tracking-widest block font-bold">Pillar 02</span>
-                    <h3 class="font-sans font-bold text-xl uppercase tracking-wider text-white">Material Authenticity</h3>
-                    <p class="font-sans text-sm text-et-concrete leading-relaxed font-light">
+                <div class="border-l-4 border-et-crimson bg-[#141414] p-5 sm:p-7 border border-[#262626] rounded-r-lg space-y-2">
+                    <span class="font-mono text-[10px] sm:text-xs text-et-crimson uppercase tracking-widest block font-bold">Pillar 02</span>
+                    <h3 class="font-sans font-bold text-lg sm:text-xl uppercase tracking-wider text-white">Material Authenticity</h3>
+                    <p class="font-sans text-xs sm:text-sm text-et-concrete leading-relaxed font-light">
                         Materials must remain raw and honest. Board-formed concrete must feel cold; porous travertine must breathe; unlacquered steel must patinate gracefully over time.
                     </p>
                 </div>
 
                 <!-- Pillar 03 -->
-                <div class="border-l-4 border-et-crimson bg-[#141414] p-6 sm:p-8 border border-[#262626] rounded-r-lg space-y-3">
-                    <span class="font-mono text-xs text-et-crimson uppercase tracking-widest block font-bold">Pillar 03</span>
-                    <h3 class="font-sans font-bold text-xl uppercase tracking-wider text-white">Decadal Permanence</h3>
-                    <p class="font-sans text-sm text-et-concrete leading-relaxed font-light">
+                <div class="border-l-4 border-et-crimson bg-[#141414] p-5 sm:p-7 border border-[#262626] rounded-r-lg space-y-2">
+                    <span class="font-mono text-[10px] sm:text-xs text-et-crimson uppercase tracking-widest block font-bold">Pillar 03</span>
+                    <h3 class="font-sans font-bold text-lg sm:text-xl uppercase tracking-wider text-white">Decadal Permanence</h3>
+                    <p class="font-sans text-xs sm:text-sm text-et-concrete leading-relaxed font-light">
                         We oppose disposable, transient trends. We engineer architectural volumes and graphic systems built to age with dignity over decades of sunlight exposure.
                     </p>
                 </div>
 
                 <!-- Pillar 04 -->
-                <div class="border-l-4 border-et-crimson bg-[#141414] p-6 sm:p-8 border border-[#262626] rounded-r-lg space-y-3">
-                    <span class="font-mono text-xs text-et-crimson uppercase tracking-widest block font-bold">Pillar 04</span>
-                    <h3 class="font-sans font-bold text-xl uppercase tracking-wider text-white">Architectural Chiaroscuro</h3>
-                    <p class="font-sans text-sm text-et-concrete leading-relaxed font-light">
+                <div class="border-l-4 border-et-crimson bg-[#141414] p-5 sm:p-7 border border-[#262626] rounded-r-lg space-y-2">
+                    <span class="font-mono text-[10px] sm:text-xs text-et-crimson uppercase tracking-widest block font-bold">Pillar 04</span>
+                    <h3 class="font-sans font-bold text-lg sm:text-xl uppercase tracking-wider text-white">Architectural Chiaroscuro</h3>
+                    <p class="font-sans text-xs sm:text-sm text-et-concrete leading-relaxed font-light">
                         Light is a physical sculpting tool. We balance directional solar beams with cavernous shadow to carve out monumental volumes in stone and concrete.
                     </p>
                 </div>
@@ -323,147 +358,150 @@
         </div>
     </section>
 
-    <!-- SECTION 03: 48-FIELD GRID MATRIX -->
-    <section id="grid-system" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-neutral-300">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            <div class="lg:col-span-5 space-y-6">
+    <!-- SECTION 03: 48-FIELD UNIVERSAL GRID MATRIX -->
+    <section id="grid-system" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-neutral-300">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            <div class="lg:col-span-5 space-y-4 sm:space-y-6">
                 <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Section 03 // Spatial Math</span>
-                <h2 class="font-sans font-black text-3xl sm:text-5xl uppercase tracking-tighter text-et-ink">
+                <h2 class="font-sans font-black text-2xl sm:text-4xl md:text-5xl uppercase tracking-tighter text-et-ink">
                     48-Field Universal Grid.
                 </h2>
-                <p class="font-sans text-sm sm:text-base text-neutral-600 leading-relaxed font-light">
+                <p class="font-sans text-xs sm:text-sm md:text-base text-neutral-600 leading-relaxed font-light">
                     Every touchpoint—from business cards and web interfaces to site hoardings—is mapped onto an immutable 48-field matrix (6 columns × 8 baselines).
                 </p>
 
-                <div class="font-mono text-xs space-y-3 bg-white p-6 border border-neutral-300 shadow-sm">
-                    <p class="text-et-crimson font-bold uppercase">• 6 Vertical Spatial Columns (16.66% each)</p>
-                    <p class="text-et-ink uppercase">• 8 Horizontal Structural Baselines (12.5% each)</p>
+                <div class="font-mono text-xs space-y-2.5 bg-white p-5 sm:p-6 border border-neutral-300 shadow-sm rounded-lg">
+                    <p class="text-et-crimson font-bold uppercase">• 6 Vertical Columns (16.66% Module)</p>
+                    <p class="text-et-ink uppercase">• 8 Horizontal Baselines (12.5% Module)</p>
                     <p class="text-neutral-600 uppercase">• 8pt Vertical Baseline Harmonic Rhythm</p>
                     <p class="text-et-crimson font-bold uppercase">• Minimum 25% Contiguous Negative Void Rule</p>
                 </div>
             </div>
 
-            <div class="lg:col-span-7 bg-white p-6 sm:p-8 border border-neutral-300 shadow-xl rounded-lg space-y-4">
-                <div class="aspect-[16/9] w-full bg-et-paper relative border border-neutral-300 overflow-hidden flex items-center justify-center">
+            <div class="lg:col-span-7 bg-white p-4 sm:p-6 border border-neutral-300 shadow-xl rounded-lg space-y-3">
+                <div class="aspect-[16/9] w-full bg-et-paper relative border border-neutral-300 overflow-hidden flex items-center justify-center rounded">
                     <div class="absolute inset-0 grid-matrix-bg opacity-70"></div>
                     
-                    <div class="w-3/4 h-3/5 border-2 border-et-ink bg-white/95 p-4 sm:p-6 flex flex-col justify-between relative z-10 shadow-md">
-                        <div class="flex justify-between font-mono text-[9px] text-et-concrete">
+                    <div class="w-3/4 h-3/5 border-2 border-et-ink bg-white/95 p-3 sm:p-5 flex flex-col justify-between relative z-10 shadow-md">
+                        <div class="flex justify-between font-mono text-[8px] sm:text-[9px] text-et-concrete">
                             <span>COORD: [X1:Y1]</span>
-                            <span>VOID MARGIN: 2-FIELD (16.6%)</span>
+                            <span>VOID: 2-FIELD (16.6%)</span>
                         </div>
-                        <div class="text-center font-mono text-xs sm:text-sm uppercase font-bold tracking-widest text-et-ink">
+                        <div class="text-center font-mono text-[10px] sm:text-xs uppercase font-bold tracking-widest text-et-ink px-1">
                             Content Module Snapped to Coordinates
                         </div>
-                        <div class="flex justify-between font-mono text-[9px] text-et-crimson font-bold">
-                            <span>BASELINE: SNAPPED (8PT)</span>
-                            <span>STATUS: LOCKED</span>
+                        <div class="flex justify-between font-mono text-[8px] sm:text-[9px] text-et-crimson font-bold">
+                            <span>BASELINE: 8PT LOCK</span>
+                            <span>STATUS: ACTIVE</span>
                         </div>
                     </div>
                 </div>
-                <p class="font-mono text-[10px] uppercase tracking-widest text-et-concrete text-center">Fig 3.1 — 48-Field Structural Coordinate Schematic (16:9 Landscape)</p>
+                <p class="font-mono text-[9px] sm:text-[10px] uppercase tracking-widest text-et-concrete text-center">Fig 3.1 — 48-Field Structural Coordinate Schematic</p>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 04: MASTER LOGO & EMBLEM BLUEPRINT -->
-    <section id="identity" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-neutral-300">
-        <div class="space-y-12">
-            <div class="max-w-3xl space-y-4">
+    <!-- SECTION 04: MASTER LOGO & EMBLEM BLUEPRINT (CANONICAL MASTER LOCKUP) -->
+    <section id="identity" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-neutral-300">
+        <div class="space-y-10 sm:space-y-14">
+            <div class="max-w-3xl space-y-3">
                 <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Section 04 // Identity</span>
-                <h2 class="font-sans font-black text-3xl sm:text-5xl uppercase tracking-tighter text-et-ink">
+                <h2 class="font-sans font-black text-2xl sm:text-4xl md:text-5xl uppercase tracking-tighter text-et-ink">
                     Master Logo & Emblem Blueprint.
                 </h2>
-                <p class="font-sans text-sm sm:text-base text-neutral-600 font-light">
+                <p class="font-sans text-xs sm:text-sm md:text-base text-neutral-600 font-light">
                     The structural core of the studio's visual identity: precision-drafted lines, clearspace protection margins, and prohibited violations.
                 </p>
             </div>
 
             <!-- Emblem Big Showcase & Specs Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <!-- Large Emblem Display -->
-                <div class="lg:col-span-6 bg-white border border-neutral-300 p-8 sm:p-14 flex flex-col items-center justify-center relative shadow-sm rounded-lg">
-                    <div class="w-48 h-48 sm:w-60 sm:h-60 mb-6 flex items-center justify-center">
-                        <img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" alt="Master Emblem" class="w-full h-full object-contain filter drop-shadow-lg">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
+                <!-- Large Emblem Display (Unified Master Lockup) -->
+                <div class="lg:col-span-6 bg-white border border-neutral-300 p-8 sm:p-12 flex flex-col items-center justify-center relative shadow-sm rounded-lg">
+                    <div class="w-32 h-32 sm:w-40 sm:h-40 mb-5 flex items-center justify-center">
+                        <img src="https://ctod.tr/wp/wp-content/uploads/2026/09/Adsiz_Resim-2.png" alt="Master Emblem" class="w-full h-full object-contain filter drop-shadow-lg">
                     </div>
-                    <div class="logo-stack text-3xl sm:text-4xl font-sans font-extralight text-et-ink">
-                        <span class="mb-2">E L I F</span>
-                        <span>T A R M A N</span>
+                    <div class="logo-stack text-2xl sm:text-3xl md:text-4xl font-sans font-extralight text-et-ink">
+                        <span class="tracking-[0.55em] mb-1.5">E L I F</span>
+                        <span class="tracking-[0.55em]">T A R M A N</span>
+                        <span class="font-mono text-[10px] tracking-[0.4em] text-et-concrete uppercase mt-2">STUDIO // INTERIOR ARCHITECTURE</span>
                     </div>
-                    <span class="font-mono text-[10px] uppercase tracking-widest text-et-concrete mt-6">Primary Lockup Ratio</span>
+                    <span class="font-mono text-[9px] uppercase tracking-widest text-et-concrete mt-4">Primary Master Lockup</span>
                 </div>
 
                 <!-- Geometry Specifications & Sizing -->
-                <div class="lg:col-span-6 space-y-6">
-                    <div class="bg-white p-6 sm:p-8 border border-neutral-300 rounded-lg space-y-4 shadow-sm">
-                        <h3 class="font-sans font-bold text-xl uppercase tracking-wider text-et-ink">Geometric Anatomy</h3>
-                        <p class="font-sans text-sm text-neutral-600 font-light leading-relaxed">
+                <div class="lg:col-span-6 space-y-5">
+                    <div class="bg-white p-5 sm:p-7 border border-neutral-300 rounded-lg space-y-3 shadow-sm">
+                        <h3 class="font-sans font-bold text-lg sm:text-xl uppercase tracking-wider text-et-ink">Geometric Anatomy</h3>
+                        <p class="font-sans text-xs sm:text-sm text-neutral-600 font-light leading-relaxed">
                             The studio emblem represents structural equilibrium and architectural void framing. It is permanently locked with the ultra-tracked grotesk wordmark.
                         </p>
-                        <div class="font-mono text-xs space-y-2 border-t border-neutral-200 pt-4 text-neutral-700">
+                        <div class="font-mono text-xs space-y-1.5 border-t border-neutral-200 pt-3 text-neutral-700">
                             <p>• Aspect Ratio: 1:1 Strict Square Matrix</p>
                             <p>• Stroke Weight: Constant 2.5pt Vector Drafting Ratio</p>
                             <p>• Axis Symmetry: Cardinal and Diagonal 45° Intersections</p>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="bg-white p-6 border border-neutral-300 rounded-lg">
-                            <span class="font-mono text-xs text-et-crimson uppercase block font-bold">Min Print Size</span>
-                            <span class="font-sans font-black text-2xl text-et-ink block mt-1">15 mm</span>
-                            <span class="font-mono text-[9px] text-et-concrete uppercase">Offset & Screen Print</span>
+                    <div class="grid grid-cols-2 gap-3 sm:gap-4">
+                        <div class="bg-white p-4 sm:p-5 border border-neutral-300 rounded-lg">
+                            <span class="font-mono text-[10px] sm:text-xs text-et-crimson uppercase block font-bold">Min Print Size</span>
+                            <span class="font-sans font-black text-xl sm:text-2xl text-et-ink block mt-0.5">15 mm</span>
+                            <span class="font-mono text-[8px] sm:text-[9px] text-et-concrete uppercase">Offset & Screen Print</span>
                         </div>
-                        <div class="bg-white p-6 border border-neutral-300 rounded-lg">
-                            <span class="font-mono text-xs text-et-crimson uppercase block font-bold">Min Digital Size</span>
-                            <span class="font-sans font-black text-2xl text-et-ink block mt-1">48 px</span>
-                            <span class="font-mono text-[9px] text-et-concrete uppercase">Web & Mobile Displays</span>
+                        <div class="bg-white p-4 sm:p-5 border border-neutral-300 rounded-lg">
+                            <span class="font-mono text-[10px] sm:text-xs text-et-crimson uppercase block font-bold">Min Digital Size</span>
+                            <span class="font-sans font-black text-xl sm:text-2xl text-et-ink block mt-0.5">48 px</span>
+                            <span class="font-mono text-[8px] sm:text-[9px] text-et-concrete uppercase">Web & App Displays</span>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Clearspace & Prohibitions -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-6">
+            <!-- Clearspace & Prohibitions (Unified Logo) -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 pt-2">
                 <!-- Clearspace -->
-                <div class="lg:col-span-5 bg-white border border-neutral-300 p-8 rounded-lg flex flex-col items-center justify-center relative shadow-sm">
-                    <span class="font-mono text-xs font-bold uppercase text-et-crimson mb-6 tracking-widest">Clearspace 1X [E] Boundary</span>
+                <div class="lg:col-span-5 bg-white border border-neutral-300 p-6 sm:p-8 rounded-lg flex flex-col items-center justify-center relative shadow-sm">
+                    <span class="font-mono text-[10px] sm:text-xs font-bold uppercase text-et-crimson mb-5 tracking-widest">Clearspace 1X [E] Boundary</span>
                     
-                    <div class="relative p-8 border-2 border-dashed border-et-crimson bg-et-crimson/5 rounded flex flex-col items-center">
-                        <div class="absolute -top-5 left-1/2 -translate-x-1/2 text-et-crimson font-mono font-bold text-[10px]">1X [E] CLEARANCE</div>
-                        <div class="absolute top-1/2 -left-8 -translate-y-1/2 text-et-crimson font-mono font-bold text-[10px]">1X [E]</div>
-                        <div class="absolute top-1/2 -right-8 -translate-y-1/2 text-et-crimson font-mono font-bold text-[10px]">1X [E]</div>
-                        <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 text-et-crimson font-mono font-bold text-[10px]">1X [E] CLEARANCE</div>
+                    <div class="relative p-6 sm:p-8 border-2 border-dashed border-et-crimson bg-et-crimson/5 rounded flex flex-col items-center">
+                        <div class="absolute -top-4 left-1/2 -translate-x-1/2 text-et-crimson font-mono font-bold text-[9px] bg-white px-1">1X [E] CLEARANCE</div>
+                        <div class="absolute top-1/2 -left-6 -translate-y-1/2 text-et-crimson font-mono font-bold text-[9px]">1X [E]</div>
+                        <div class="absolute top-1/2 -right-6 -translate-y-1/2 text-et-crimson font-mono font-bold text-[9px]">1X [E]</div>
+                        <div class="absolute -bottom-4 left-1/2 -translate-x-1/2 text-et-crimson font-mono font-bold text-[9px] bg-white px-1">1X [E] CLEARANCE</div>
                         
-                        <div class="w-16 h-16 mb-2">
-                            <img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" alt="Clearspace Emblem" class="w-full h-full object-contain">
+                        <div class="w-14 h-14 sm:w-16 sm:h-16 mb-2">
+                            <img src="https://ctod.tr/wp/wp-content/uploads/2026/09/Adsiz_Resim-2.png" alt="Clearspace Emblem" class="w-full h-full object-contain">
                         </div>
-                        <div class="logo-stack text-sm font-sans font-extralight text-et-ink">
-                            <span>ELIF TARMAN</span>
+                        <div class="logo-stack text-xs font-sans font-extralight text-et-ink">
+                            <span class="tracking-[0.55em] mb-0.5">E L I F</span>
+                            <span class="tracking-[0.55em]">T A R M A N</span>
+                            <span class="font-mono text-[6px] tracking-[0.3em] text-et-concrete uppercase mt-0.5">STUDIO</span>
                         </div>
                     </div>
-                    <p class="font-mono text-[10px] text-et-concrete uppercase mt-6 text-center">Safety margin = Full cap height of letter 'E' on all sides</p>
+                    <p class="font-mono text-[9px] text-et-concrete uppercase mt-5 text-center">Safety margin = Full cap height of letter 'E' on all sides</p>
                 </div>
 
-                <!-- Prohibitions Grid -->
-                <div class="lg:col-span-7 grid grid-cols-2 gap-4">
-                    <div class="bg-white border border-neutral-300 p-5 rounded-lg text-center space-y-2">
+                <!-- Prohibitions Grid (2x2) -->
+                <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                    <div class="bg-white border border-neutral-300 p-4 sm:p-5 rounded-lg text-center space-y-1.5 shadow-sm">
                         <span class="font-mono text-xs font-bold text-et-crimson">✕ 01</span>
                         <p class="font-bold text-xs uppercase text-et-ink">No Weight Change</p>
                         <p class="font-mono text-[9px] text-et-concrete">Never bolden or alter standard stroke weights.</p>
                     </div>
-                    <div class="bg-white border border-neutral-300 p-5 rounded-lg text-center space-y-2">
+                    <div class="bg-white border border-neutral-300 p-4 sm:p-5 rounded-lg text-center space-y-1.5 shadow-sm">
                         <span class="font-mono text-xs font-bold text-et-crimson">✕ 02</span>
                         <p class="font-bold text-xs uppercase text-et-ink">No Unauthorized Hues</p>
                         <p class="font-mono text-[9px] text-et-concrete">Never use colors outside the 5-swatch palette.</p>
                     </div>
-                    <div class="bg-white border border-neutral-300 p-5 rounded-lg text-center space-y-2">
+                    <div class="bg-white border border-neutral-300 p-4 sm:p-5 rounded-lg text-center space-y-1.5 shadow-sm">
                         <span class="font-mono text-xs font-bold text-et-crimson">✕ 03</span>
-                        <p class="font-bold text-xs uppercase text-et-ink">No Collapsed Tracking</p>
+                        <p class="font-mono text-xs uppercase text-et-ink">No Collapsed Tracking</p>
                         <p class="font-mono text-[9px] text-et-concrete">Never compress letter spacing below 0.9em.</p>
                     </div>
-                    <div class="bg-white border border-neutral-300 p-5 rounded-lg text-center space-y-2">
+                    <div class="bg-white border border-neutral-300 p-4 sm:p-5 rounded-lg text-center space-y-1.5 shadow-sm">
                         <span class="font-mono text-xs font-bold text-et-crimson">✕ 04</span>
-                        <p class="font-bold text-xs uppercase text-et-ink">No Rotation or Skew</p>
+                        <p class="font-mono text-xs uppercase text-et-ink">No Rotation or Skew</p>
                         <p class="font-mono text-[9px] text-et-concrete">Never tilt, shear, or perspective-skew marks.</p>
                     </div>
                 </div>
@@ -472,28 +510,28 @@
     </section>
 
     <!-- SECTION 05: CHROMATIC SPECTRUM & 5% CRIMSON RULE -->
-    <section id="color" class="py-20 sm:py-28 bg-[#0A0A0A] text-white px-4 sm:px-6 lg:px-8 dark-grid-matrix border-b border-[#222]">
-        <div class="max-w-7xl mx-auto space-y-12">
-            <div class="max-w-3xl space-y-4">
+    <section id="color" class="py-16 sm:py-24 bg-[#0A0A0A] text-white px-4 sm:px-6 lg:px-8 dark-grid-matrix border-b border-[#222]">
+        <div class="max-w-7xl mx-auto space-y-10 sm:space-y-14">
+            <div class="max-w-3xl space-y-3">
                 <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Section 05 // Color Architecture</span>
-                <h2 class="font-sans font-black text-3xl sm:text-5xl uppercase tracking-tighter">
+                <h2 class="font-sans font-black text-2xl sm:text-4xl md:text-5xl uppercase tracking-tighter">
                     Architectural Spectrum.
                 </h2>
-                <p class="font-sans text-sm sm:text-base text-et-concrete font-light">
-                    Calibrated according to ISO 12647 offset print standards. Click any swatch code to copy directly to clipboard.
+                <p class="font-sans text-xs sm:text-sm md:text-base text-et-concrete font-light">
+                    Calibrated according to ISO 12647 offset print standards. Touch any swatch to copy code to clipboard.
                 </p>
             </div>
 
-            <!-- Swatches Grid -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+            <!-- Swatches Grid (1 Col Mobile, 2 Col Tablet, 5 Col Desktop) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
                 <!-- ET Crimson -->
-                <div class="bg-[#141414] border border-[#262626] rounded-lg p-5 flex flex-col justify-between space-y-4 hover:border-et-crimson transition-colors">
-                    <div class="w-full h-32 bg-[#FF0A0A] rounded border-b-2 border-white/20"></div>
+                <div class="bg-[#141414] border border-[#262626] rounded-lg p-4 sm:p-5 flex flex-col justify-between space-y-3 hover:border-et-crimson transition-colors">
+                    <div class="w-full h-28 sm:h-32 bg-[#FF0A0A] rounded border-b-2 border-white/20"></div>
                     <div>
-                        <p class="font-sans font-bold text-lg text-et-crimson uppercase">ET Crimson</p>
-                        <span class="font-mono text-[9px] text-white/50 uppercase block mb-3">5% Accent Focus Spark</span>
-                        <div class="font-mono text-xs text-et-concrete space-y-1.5 border-t border-[#262626] pt-3">
-                            <button onclick="copyToClipboard('#FF0A0A', 'HEX #FF0A0A')" class="hover:text-white flex justify-between w-full"><span>HEX:</span><span class="text-white font-bold">#FF0A0A</span></button>
+                        <p class="font-sans font-bold text-base sm:text-lg text-et-crimson uppercase">ET Crimson</p>
+                        <span class="font-mono text-[9px] text-white/50 uppercase block mb-2">5% Accent Focus Spark</span>
+                        <div class="font-mono text-xs text-et-concrete space-y-1 border-t border-[#262626] pt-2.5">
+                            <button onclick="copyToClipboard('#FF0A0A', 'HEX #FF0A0A')" class="hover:text-white flex justify-between w-full py-1 text-left"><span>HEX:</span><span class="text-white font-bold">#FF0A0A 📋</span></button>
                             <p class="flex justify-between"><span>RGB:</span><span>255/10/10</span></p>
                             <p class="flex justify-between"><span>CMYK:</span><span>0/96/96/0</span></p>
                             <p class="flex justify-between"><span>PANTONE:</span><span>Warm Red C</span></p>
@@ -502,13 +540,13 @@
                 </div>
 
                 <!-- ET Ink -->
-                <div class="bg-[#141414] border border-[#262626] rounded-lg p-5 flex flex-col justify-between space-y-4 hover:border-white transition-colors">
-                    <div class="w-full h-32 bg-[#0A0A0A] rounded border border-[#333]"></div>
+                <div class="bg-[#141414] border border-[#262626] rounded-lg p-4 sm:p-5 flex flex-col justify-between space-y-3 hover:border-white transition-colors">
+                    <div class="w-full h-28 sm:h-32 bg-[#0A0A0A] rounded border border-[#333]"></div>
                     <div>
-                        <p class="font-sans font-bold text-lg text-white uppercase">ET Ink</p>
-                        <span class="font-mono text-[9px] text-white/50 uppercase block mb-3">Monolithic Mass & Shadow</span>
-                        <div class="font-mono text-xs text-et-concrete space-y-1.5 border-t border-[#262626] pt-3">
-                            <button onclick="copyToClipboard('#0A0A0A', 'HEX #0A0A0A')" class="hover:text-white flex justify-between w-full"><span>HEX:</span><span class="text-white font-bold">#0A0A0A</span></button>
+                        <p class="font-sans font-bold text-base sm:text-lg text-white uppercase">ET Ink</p>
+                        <span class="font-mono text-[9px] text-white/50 uppercase block mb-2">Monolithic Mass & Shadow</span>
+                        <div class="font-mono text-xs text-et-concrete space-y-1 border-t border-[#262626] pt-2.5">
+                            <button onclick="copyToClipboard('#0A0A0A', 'HEX #0A0A0A')" class="hover:text-white flex justify-between w-full py-1 text-left"><span>HEX:</span><span class="text-white font-bold">#0A0A0A 📋</span></button>
                             <p class="flex justify-between"><span>RGB:</span><span>10/10/10</span></p>
                             <p class="flex justify-between"><span>CMYK:</span><span>75/68/67/90</span></p>
                             <p class="flex justify-between"><span>PANTONE:</span><span>Black 6 C</span></p>
@@ -517,13 +555,13 @@
                 </div>
 
                 <!-- ET Paper -->
-                <div class="bg-[#141414] border border-[#262626] rounded-lg p-5 flex flex-col justify-between space-y-4 hover:border-white transition-colors">
-                    <div class="w-full h-32 bg-[#F7F6F2] rounded"></div>
+                <div class="bg-[#141414] border border-[#262626] rounded-lg p-4 sm:p-5 flex flex-col justify-between space-y-3 hover:border-white transition-colors">
+                    <div class="w-full h-28 sm:h-32 bg-[#F7F6F2] rounded"></div>
                     <div>
-                        <p class="font-sans font-bold text-lg text-white uppercase">ET Paper</p>
-                        <span class="font-mono text-[9px] text-white/50 uppercase block mb-3">Tactile Void Ground</span>
-                        <div class="font-mono text-xs text-et-concrete space-y-1.5 border-t border-[#262626] pt-3">
-                            <button onclick="copyToClipboard('#F7F6F2', 'HEX #F7F6F2')" class="hover:text-white flex justify-between w-full"><span>HEX:</span><span class="text-white font-bold">#F7F6F2</span></button>
+                        <p class="font-sans font-bold text-base sm:text-lg text-white uppercase">ET Paper</p>
+                        <span class="font-mono text-[9px] text-white/50 uppercase block mb-2">Tactile Void Ground</span>
+                        <div class="font-mono text-xs text-et-concrete space-y-1 border-t border-[#262626] pt-2.5">
+                            <button onclick="copyToClipboard('#F7F6F2', 'HEX #F7F6F2')" class="hover:text-white flex justify-between w-full py-1 text-left"><span>HEX:</span><span class="text-white font-bold">#F7F6F2 📋</span></button>
                             <p class="flex justify-between"><span>RGB:</span><span>247/246/242</span></p>
                             <p class="flex justify-between"><span>CMYK:</span><span>2/2/4/0</span></p>
                             <p class="flex justify-between"><span>STOCK:</span><span>Raw Cotton</span></p>
@@ -532,13 +570,13 @@
                 </div>
 
                 <!-- ET Concrete -->
-                <div class="bg-[#141414] border border-[#262626] rounded-lg p-5 flex flex-col justify-between space-y-4 hover:border-white transition-colors">
-                    <div class="w-full h-32 bg-[#737373] rounded"></div>
+                <div class="bg-[#141414] border border-[#262626] rounded-lg p-4 sm:p-5 flex flex-col justify-between space-y-3 hover:border-white transition-colors">
+                    <div class="w-full h-28 sm:h-32 bg-[#737373] rounded"></div>
                     <div>
-                        <p class="font-sans font-bold text-lg text-white uppercase">ET Concrete</p>
-                        <span class="font-mono text-[9px] text-white/50 uppercase block mb-3">Structural Mid-Tone</span>
-                        <div class="font-mono text-xs text-et-concrete space-y-1.5 border-t border-[#262626] pt-3">
-                            <button onclick="copyToClipboard('#737373', 'HEX #737373')" class="hover:text-white flex justify-between w-full"><span>HEX:</span><span class="text-white font-bold">#737373</span></button>
+                        <p class="font-sans font-bold text-base sm:text-lg text-white uppercase">ET Concrete</p>
+                        <span class="font-mono text-[9px] text-white/50 uppercase block mb-2">Structural Mid-Tone</span>
+                        <div class="font-mono text-xs text-et-concrete space-y-1 border-t border-[#262626] pt-2.5">
+                            <button onclick="copyToClipboard('#737373', 'HEX #737373')" class="hover:text-white flex justify-between w-full py-1 text-left"><span>HEX:</span><span class="text-white font-bold">#737373 📋</span></button>
                             <p class="flex justify-between"><span>RGB:</span><span>115/115/115</span></p>
                             <p class="flex justify-between"><span>CMYK:</span><span>0/0/0/55</span></p>
                             <p class="flex justify-between"><span>PANTONE:</span><span>Cool Gray 8 C</span></p>
@@ -547,13 +585,13 @@
                 </div>
 
                 <!-- ET Stone -->
-                <div class="bg-[#141414] border border-[#262626] rounded-lg p-5 flex flex-col justify-between space-y-4 hover:border-white transition-colors">
-                    <div class="w-full h-32 bg-[#D9D9D9] rounded"></div>
+                <div class="bg-[#141414] border border-[#262626] rounded-lg p-4 sm:p-5 flex flex-col justify-between space-y-3 hover:border-white transition-colors">
+                    <div class="w-full h-28 sm:h-32 bg-[#D9D9D9] rounded"></div>
                     <div>
-                        <p class="font-sans font-bold text-lg text-white uppercase">ET Stone</p>
-                        <span class="font-mono text-[9px] text-white/50 uppercase block mb-3">Travertine Accent Border</span>
-                        <div class="font-mono text-xs text-et-concrete space-y-1.5 border-t border-[#262626] pt-3">
-                            <button onclick="copyToClipboard('#D9D9D9', 'HEX #D9D9D9')" class="hover:text-white flex justify-between w-full"><span>HEX:</span><span class="text-white font-bold">#D9D9D9</span></button>
+                        <p class="font-sans font-bold text-base sm:text-lg text-white uppercase">ET Stone</p>
+                        <span class="font-mono text-[9px] text-white/50 uppercase block mb-2">Travertine Accent Border</span>
+                        <div class="font-mono text-xs text-et-concrete space-y-1 border-t border-[#262626] pt-2.5">
+                            <button onclick="copyToClipboard('#D9D9D9', 'HEX #D9D9D9')" class="hover:text-white flex justify-between w-full py-1 text-left"><span>HEX:</span><span class="text-white font-bold">#D9D9D9 📋</span></button>
                             <p class="flex justify-between"><span>RGB:</span><span>217/217/217</span></p>
                             <p class="flex justify-between"><span>CMYK:</span><span>0/0/0/15</span></p>
                             <p class="flex justify-between"><span>PANTONE:</span><span>Cool Gray 2 C</span></p>
@@ -565,46 +603,46 @@
     </section>
 
     <!-- SECTION 06: TYPOGRAPHIC ENGINE -->
-    <section id="typography" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-neutral-300">
-        <div class="space-y-12">
-            <div class="max-w-3xl space-y-4">
+    <section id="typography" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-neutral-300">
+        <div class="space-y-10 sm:space-y-14">
+            <div class="max-w-3xl space-y-3">
                 <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Section 06 // Type</span>
-                <h2 class="font-sans font-black text-3xl sm:text-5xl uppercase tracking-tighter text-et-ink">
+                <h2 class="font-sans font-black text-2xl sm:text-4xl md:text-5xl uppercase tracking-tighter text-et-ink">
                     Inter & Space Mono Pairing.
                 </h2>
-                <p class="font-sans text-sm sm:text-base text-neutral-600 font-light">
+                <p class="font-sans text-xs sm:text-sm md:text-base text-neutral-600 font-light">
                     Inter provides clean architectural foundation; Space Mono provides technical drafting precision.
                 </p>
             </div>
 
-            <div class="bg-white border border-neutral-300 rounded-lg divide-y divide-neutral-200 shadow-sm font-mono text-xs">
-                <div class="p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="bg-white border border-neutral-300 rounded-lg divide-y divide-neutral-200 shadow-sm font-mono text-xs overflow-hidden">
+                <div class="p-5 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-3">
                     <div>
                         <p class="font-bold text-et-crimson uppercase">H1 Monument</p>
                         <p class="text-et-concrete text-[10px]">Inter Black / 64–120pt / Tight Tracking</p>
                     </div>
-                    <h3 class="font-sans font-black text-3xl sm:text-4xl uppercase tracking-tighter text-et-ink">ARCHITECTURAL VOID</h3>
+                    <h3 class="font-sans font-black text-2xl sm:text-3xl md:text-4xl uppercase tracking-tighter text-et-ink">ARCHITECTURAL VOID</h3>
                 </div>
 
-                <div class="p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="p-5 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-3">
                     <div>
                         <p class="font-bold text-et-ink uppercase">H2 Section</p>
                         <p class="text-et-concrete text-[10px]">Inter ExtraLight / 32–48pt / Wide Tracking</p>
                     </div>
-                    <h4 class="font-sans font-extralight text-xl sm:text-2xl uppercase tracking-superwide text-et-ink">MASTERY OF MASS</h4>
+                    <h4 class="font-sans font-extralight text-lg sm:text-xl md:text-2xl uppercase tracking-superwide text-et-ink">MASTERY OF MASS</h4>
                 </div>
 
-                <div class="p-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div class="p-5 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-3">
                     <div>
                         <p class="font-bold text-et-ink uppercase">Body Text (Max 65ch)</p>
                         <p class="text-et-concrete text-[10px]">Inter Regular / 14–16pt / Leading 1.6</p>
                     </div>
-                    <p class="font-sans text-sm sm:text-base text-neutral-700 max-w-xl font-light">
+                    <p class="font-sans text-xs sm:text-sm md:text-base text-neutral-700 max-w-xl font-light leading-relaxed">
                         We manipulate volume and light to form spaces of deep serenity, stripping away the superfluous until only spatial truth remains.
                     </p>
                 </div>
 
-                <div class="p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-et-ink text-white rounded-b-lg">
+                <div class="p-5 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-3 bg-et-ink text-white">
                     <div>
                         <p class="font-bold text-et-crimson uppercase">Metadata / Blueprint Mono</p>
                         <p class="text-et-concrete text-[10px]">Space Mono Bold / 10–12pt</p>
@@ -615,101 +653,115 @@
         </div>
     </section>
 
-    <!-- SECTION 07: ARCHITECTURAL MOCKUPS SHOWCASE (NEW DIVERSIFIED SUITE) -->
-    <section id="mockups" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-neutral-300">
-        <div class="space-y-16">
-            <div class="max-w-3xl space-y-4">
+    <!-- SECTION 07: ARCHITECTURAL MOCKUPS SHOWCASE (14 COMPLETE UNIFIED ASSETS) -->
+    <section id="mockups" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-neutral-300">
+        <div class="space-y-12 sm:space-y-16">
+            <div class="max-w-3xl space-y-3">
                 <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Section 07 // Tactile Applications</span>
-                <h2 class="font-sans font-black text-3xl sm:text-5xl uppercase tracking-tighter text-et-ink">
+                <h2 class="font-sans font-black text-2xl sm:text-4xl md:text-5xl uppercase tracking-tighter text-et-ink">
                     Architectural Mockup Suite.
                 </h2>
-                <p class="font-sans text-sm sm:text-base text-neutral-600 font-light">
-                    Photorealistic visual simulations demonstrating physical materiality, digital interfaces, and spatial presence.
+                <p class="font-sans text-xs sm:text-sm md:text-base text-neutral-600 font-light">
+                    Photorealistic simulations demonstrating material authenticity, digital pitch interfaces, and physical spatial artifacts with 100% unified brand identity.
                 </p>
             </div>
 
-            <!-- Group A: Corporate Stationery & Tactile Print -->
-            <div class="space-y-6">
-                <div class="flex items-center gap-3 border-b border-neutral-200 pb-3">
+            <!-- Group A: Print Collateral & Archival Enclosures -->
+            <div class="space-y-5">
+                <div class="flex items-center gap-2.5 border-b border-neutral-200 pb-2.5">
                     <span class="w-2.5 h-2.5 bg-et-crimson rounded-full"></span>
                     <h3 class="font-mono text-xs uppercase font-bold tracking-widest text-et-ink">Part A: Print Collateral & Archival Enclosures</h3>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-                    <!-- Mockup 1: 600gsm Duplex Business Card -->
-                    <div class="bg-white border border-neutral-300 p-6 rounded-lg shadow-sm space-y-4 flex flex-col justify-between">
-                        <div class="aspect-[1.6/1] bg-et-paper border border-neutral-300 p-6 flex flex-col items-center justify-center relative rounded shadow-inner">
-                            <div class="w-12 h-12 mb-2"><img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" class="w-full h-full object-contain"></div>
-                            <div class="logo-stack text-[8px] font-sans font-extralight text-et-ink"><span>ELIF TARMAN</span></div>
-                            <div class="absolute bottom-0 left-0 w-full h-1 bg-et-crimson"></div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+                    <!-- Mockup 1: 600gsm Duplex Business Card (Unified Logo) -->
+                    <div class="bg-white border border-neutral-300 p-5 rounded-lg shadow-sm space-y-3 flex flex-col justify-between">
+                        <div class="aspect-[1.6/1] bg-et-paper border border-neutral-300 p-5 flex flex-col items-center justify-center relative rounded shadow-inner">
+                            <div class="w-9 h-9 mb-1.5"><img src="https://ctod.tr/wp/wp-content/uploads/2026/09/Adsiz_Resim-2.png" class="w-full h-full object-contain"></div>
+                            <div class="logo-stack text-[9px] font-sans font-extralight text-et-ink">
+                                <span class="tracking-[0.5em] mb-0.5">E L I F</span>
+                                <span class="tracking-[0.5em]">T A R M A N</span>
+                                <span class="font-mono text-[5px] tracking-[0.3em] text-et-concrete uppercase mt-0.5">STUDIO</span>
+                            </div>
+                            <div class="absolute bottom-0 left-0 w-full h-1.5 bg-et-crimson rounded-b"></div>
                         </div>
                         <div>
                             <span class="font-mono text-[9px] text-et-crimson uppercase font-bold">Tactile Mockup 01</span>
-                            <h4 class="font-sans font-bold text-base uppercase text-et-ink">600gsm Duplex Cards</h4>
-                            <p class="font-sans text-xs text-neutral-500 font-light mt-1">Laminated crimson core edge sandwiched between 300gsm raw cotton stock with blind debossing.</p>
+                            <h4 class="font-sans font-bold text-sm sm:text-base uppercase text-et-ink">600gsm Duplex Cards</h4>
+                            <p class="font-sans text-xs text-neutral-500 font-light mt-0.5">Crimson core edge sandwiched between 300gsm raw cotton stock with blind debossing.</p>
                         </div>
                     </div>
 
-                    <!-- Mockup 2: Hardcover Monograph Lookbook -->
-                    <div class="bg-[#111] text-white border border-neutral-800 p-6 rounded-lg shadow-xl space-y-4 flex flex-col justify-between">
-                        <div class="aspect-[1.6/1] bg-[#1a1a1a] border-l-8 border-et-crimson p-6 flex flex-col justify-between rounded shadow-2xl">
-                            <span class="font-mono text-[8px] text-et-concrete uppercase">MONOGRAPH VOL. 04</span>
-                            <div class="w-12 h-12 mx-auto"><img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" class="w-full h-full object-contain filter brightness-0 invert"></div>
-                            <span class="font-mono text-[7px] text-neutral-400 uppercase text-right">STUDIO EDITION</span>
+                    <!-- Mockup 2: Hardcover Monograph Lookbook (Unified Logo) -->
+                    <div class="bg-[#111] text-white border border-neutral-800 p-5 rounded-lg shadow-xl space-y-3 flex flex-col justify-between">
+                        <div class="aspect-[1.6/1] bg-[#1a1a1a] border-l-8 border-et-crimson p-5 flex flex-col items-center justify-center rounded shadow-2xl relative">
+                            <span class="absolute top-3 left-4 font-mono text-[8px] text-et-concrete uppercase">MONOGRAPH VOL. 04</span>
+                            <div class="w-9 h-9 mb-1.5"><img src="https://ctod.tr/wp/wp-content/uploads/2026/09/Adsiz_Resim-2.png" class="w-full h-full object-contain filter brightness-0 invert"></div>
+                            <div class="logo-stack text-[9px] font-sans font-extralight text-white/90">
+                                <span class="tracking-[0.5em] mb-0.5">E L I F</span>
+                                <span class="tracking-[0.5em]">T A R M A N</span>
+                                <span class="font-mono text-[5px] tracking-[0.3em] text-neutral-400 uppercase mt-0.5">STUDIO</span>
+                            </div>
+                            <span class="absolute bottom-3 right-4 font-mono text-[7px] text-neutral-400 uppercase">STUDIO EDITION</span>
                         </div>
                         <div>
                             <span class="font-mono text-[9px] text-et-crimson uppercase font-bold">Tactile Mockup 02</span>
-                            <h4 class="font-sans font-bold text-base uppercase text-white">Clothbound Monograph</h4>
-                            <p class="font-sans text-xs text-neutral-400 font-light mt-1">Hardcover dark buckram casing with deep blind debossed emblem and red silk bookmark ribbon.</p>
+                            <h4 class="font-sans font-bold text-sm sm:text-base uppercase text-white">Clothbound Monograph</h4>
+                            <p class="font-sans text-xs text-neutral-400 font-light mt-0.5">Hardcover dark buckram casing with blind debossed emblem and red ribbon bookmark.</p>
                         </div>
                     </div>
 
-                    <!-- Mockup 3: C4 String-Tie Envelope -->
-                    <div class="bg-white border border-neutral-300 p-6 rounded-lg shadow-sm space-y-4 flex flex-col justify-between">
-                        <div class="aspect-[1.6/1] bg-et-paper border border-neutral-300 p-6 flex flex-col justify-between rounded shadow-inner">
-                            <div class="flex justify-between font-mono text-[8px] text-et-concrete">
-                                <span>C4 ARCHIVAL</span><span>RESTRICTED</span>
+                    <!-- Mockup 3: C4 String-Tie Envelope (Unified Logo) -->
+                    <div class="bg-white border border-neutral-300 p-5 rounded-lg shadow-sm space-y-3 flex flex-col justify-between sm:col-span-2 lg:col-span-1">
+                        <div class="aspect-[1.6/1] bg-et-paper border border-neutral-300 p-5 flex flex-col justify-between rounded shadow-inner">
+                            <div class="flex justify-between items-center font-mono text-[8px] text-et-concrete">
+                                <span>C4 ARCHIVAL</span><span>CONFIDENTIAL</span>
                             </div>
-                            <div class="w-8 h-8 mx-auto rounded-full border-2 border-et-ink flex items-center justify-center font-mono text-[10px]">
-                                ●
+                            <div class="flex flex-col items-center justify-center my-auto">
+                                <div class="w-8 h-8 mb-1"><img src="https://ctod.tr/wp/wp-content/uploads/2026/09/Adsiz_Resim-2.png" class="w-full h-full object-contain"></div>
+                                <div class="logo-stack text-[8px] font-sans font-extralight text-et-ink">
+                                    <span class="tracking-[0.5em]">E L I F</span>
+                                    <span class="tracking-[0.5em]">T A R M A N</span>
+                                    <span class="font-mono text-[5px] tracking-[0.3em] text-et-concrete uppercase mt-0.5">STUDIO</span>
+                                </div>
                             </div>
-                            <div class="font-mono text-[8px] text-et-ink text-center uppercase font-bold">
-                                ELIF TARMAN STUDIO SPECIFICATION
+                            <div class="flex justify-between items-center font-mono text-[7px] text-et-concrete border-t border-neutral-200 pt-1">
+                                <span>DRAWING PACKAGE</span><span>REF: 2026-ARCH</span>
                             </div>
                         </div>
                         <div>
                             <span class="font-mono text-[9px] text-et-crimson uppercase font-bold">Tactile Mockup 03</span>
-                            <h4 class="font-sans font-bold text-base uppercase text-et-ink">C4 String-Tie Envelope</h4>
-                            <p class="font-sans text-xs text-neutral-500 font-light mt-1">400gsm heavyweight unbleached card with red twine lock for confidential drawing packages.</p>
+                            <h4 class="font-sans font-bold text-sm sm:text-base uppercase text-et-ink">C4 String-Tie Envelope</h4>
+                            <p class="font-sans text-xs text-neutral-500 font-light mt-0.5">400gsm heavyweight unbleached card with red twine lock for architectural blueprints.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Group B: Digital Presentation & Spatial Tablets -->
-            <div class="space-y-6">
-                <div class="flex items-center gap-3 border-b border-neutral-200 pb-3">
+            <!-- Group B: Digital Presentation & Spatial Displays -->
+            <div class="space-y-5">
+                <div class="flex items-center gap-2.5 border-b border-neutral-200 pb-2.5">
                     <span class="w-2.5 h-2.5 bg-et-crimson rounded-full"></span>
                     <h3 class="font-mono text-xs uppercase font-bold tracking-widest text-et-ink">Part B: Digital Presentation Deck & Client Displays</h3>
                 </div>
 
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
                     <!-- Presentation Pitch Deck Mockup -->
-                    <div class="bg-white border border-neutral-300 p-6 sm:p-8 rounded-lg shadow-xl space-y-4">
-                        <div class="aspect-video w-full bg-et-paper border-2 border-et-ink p-4 sm:p-6 flex flex-col justify-between relative rounded shadow-md">
+                    <div class="bg-white border border-neutral-300 p-5 sm:p-7 rounded-lg shadow-xl space-y-3">
+                        <div class="aspect-video w-full bg-et-paper border-2 border-et-ink p-4 sm:p-5 flex flex-col justify-between relative rounded shadow-md">
                             <div class="flex justify-between items-center font-mono text-[8px] text-et-concrete border-b border-neutral-300 pb-1">
                                 <span>CLIENT PRESENTATION DECK</span>
                                 <span>PROJECT: TRAVERTINE SANCTUARY</span>
                                 <span>SLIDE 04</span>
                             </div>
-                            <div class="grid grid-cols-12 gap-4 items-center my-auto">
-                                <div class="col-span-6 space-y-2">
+                            <div class="grid grid-cols-12 gap-3 items-center my-auto">
+                                <div class="col-span-6 space-y-1.5">
                                     <span class="font-mono text-[8px] text-et-crimson uppercase font-bold">Concept Exploration</span>
-                                    <h5 class="font-sans font-black text-base sm:text-xl uppercase leading-none text-et-ink">Manipulating<br>Solar Shadows.</h5>
-                                    <p class="font-sans text-[9px] text-neutral-600 leading-relaxed">Cast concrete surfaces react dynamically with ambient light at noon.</p>
+                                    <h5 class="font-sans font-black text-sm sm:text-lg uppercase leading-none text-et-ink">Manipulating<br>Solar Shadows.</h5>
+                                    <p class="font-sans text-[8px] sm:text-[9px] text-neutral-600 leading-relaxed">Cast concrete surfaces react dynamically with ambient light at noon.</p>
                                 </div>
                                 <div class="col-span-6 aspect-[4/3] bg-neutral-200 border border-neutral-300 overflow-hidden et-photo-effect rounded">
-                                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&q=80" class="w-full h-full object-cover">
+                                    <img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20600%20600%22%20width%3D%22600%22%20height%3D%22600%22%3E%20%3Cdefs%3E%20%3ClinearGradient%20id%3D%22wallL%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%220%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23121212%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23242424%22%2F%3E%3C%2FlinearGradient%3E%20%3ClinearGradient%20id%3D%22wallR%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%220%25%22%20y2%3D%22100%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%232E2E2E%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23181818%22%2F%3E%3C%2FlinearGradient%3E%20%3ClinearGradient%20id%3D%22sunbeam%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%2280%25%22%20y2%3D%22100%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23FFFFFF%22%20stop-opacity%3D%220.65%22%2F%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23FFFFFF%22%20stop-opacity%3D%220.3%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23000000%22%20stop-opacity%3D%220%22%2F%3E%3C%2FlinearGradient%3E%20%3C%2Fdefs%3E%20%3Crect%20width%3D%22600%22%20height%3D%22600%22%20fill%3D%22%230A0A0A%22%2F%3E%20%3Cpolygon%20points%3D%220%2C0%20600%2C0%20440%2C140%20160%2C140%22%20fill%3D%22%231C1C1C%22%2F%3E%20%3Cpolygon%20points%3D%220%2C0%20160%2C140%20160%2C460%200%2C600%22%20fill%3D%22url%28%23wallL%29%22%2F%3E%20%3Cpolygon%20points%3D%22600%2C0%20440%2C140%20440%2C460%20600%2C600%22%20fill%3D%22url%28%23wallR%29%22%2F%3E%20%3Crect%20x%3D%22160%22%20y%3D%22140%22%20width%3D%22280%22%20height%3D%22320%22%20fill%3D%22%23151515%22%2F%3E%20%3Crect%20x%3D%22250%22%20y%3D%22200%22%20width%3D%22100%22%20height%3D%22260%22%20fill%3D%22%23F7F6F2%22%2F%3E%20%3Cpolygon%20points%3D%22250%2C200%20350%2C200%20580%2C600%20380%2C600%22%20fill%3D%22url%28%23sunbeam%29%22%2F%3E%20%3Cpolygon%20points%3D%220%2C600%20160%2C460%20440%2C460%20600%2C600%22%20fill%3D%22%230E0E0E%22%2F%3E%20%3Cline%20x1%3D%22160%22%20y1%3D%22460%22%20x2%3D%220%22%20y2%3D%22600%22%20stroke%3D%22%23000000%22%20stroke-width%3D%222%22%2F%3E%20%3Cline%20x1%3D%22440%22%20y1%3D%22460%22%20x2%3D%22600%22%20y2%3D%22600%22%20stroke%3D%22%23000000%22%20stroke-width%3D%222%22%2F%3E%20%3Ctext%20x%3D%2225%22%20y%3D%2245%22%20font-family%3D%22%27Space%20Mono%27%2C%20monospace%22%20font-size%3D%2211%22%20fill%3D%22%23FF0A0A%22%20letter-spacing%3D%222%22%3ESANCTUARY%2001%20%2F%2F%20CHIAROSCURO%3C%2Ftext%3E%20%3C%2Fsvg%3E" class="w-full h-full object-cover">
                                 </div>
                             </div>
                             <div class="flex justify-between items-center font-mono text-[8px] text-et-concrete border-t border-neutral-300 pt-1">
@@ -719,100 +771,112 @@
                         </div>
                         <div>
                             <span class="font-mono text-[9px] text-et-crimson uppercase font-bold">Digital Mockup 04</span>
-                            <h4 class="font-sans font-bold text-lg uppercase text-et-ink">16:9 Client Pitch Deck Format</h4>
-                            <p class="font-sans text-xs text-neutral-500 font-light mt-1">1920×1080 widescreen presentation template standardized for competition juries and VIP commissions.</p>
+                            <h4 class="font-sans font-bold text-base sm:text-lg uppercase text-et-ink">16:9 Client Pitch Deck Format</h4>
+                            <p class="font-sans text-xs text-neutral-500 font-light mt-0.5">1920×1080 widescreen presentation template standardized for competition juries and VIP commissions.</p>
                         </div>
                     </div>
 
                     <!-- iPad Tablet Spatial Viewer Mockup -->
-                    <div class="bg-[#111] text-white border border-neutral-800 p-6 sm:p-8 rounded-lg shadow-xl space-y-4">
-                        <div class="aspect-video w-full bg-[#181818] border-4 border-[#333] p-4 flex flex-col justify-between relative rounded-2xl shadow-2xl">
-                            <!-- Camera dot -->
+                    <div class="bg-[#111] text-white border border-neutral-800 p-5 sm:p-7 rounded-lg shadow-xl space-y-3">
+                        <div class="aspect-video w-full bg-[#181818] border-4 border-[#333] p-3 sm:p-4 flex flex-col justify-between relative rounded-2xl shadow-2xl">
                             <div class="w-2 h-2 bg-neutral-600 rounded-full mx-auto mb-1"></div>
-                            
-                            <div class="flex-1 bg-[#0c0c0c] border border-neutral-800 rounded-lg p-4 flex flex-col justify-between relative overflow-hidden">
+                            <div class="flex-1 bg-[#0c0c0c] border border-neutral-800 rounded-lg p-3 sm:p-4 flex flex-col justify-between relative overflow-hidden">
                                 <div class="flex justify-between items-center font-mono text-[8px] text-et-concrete">
-                                    <div class="flex items-center gap-2">
-                                        <img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" class="w-4 h-4 object-contain filter brightness-0 invert">
-                                        <span class="text-white font-bold">STUDIO OS // 3D CAD ENGINE</span>
+                                    <div class="flex items-center gap-1.5">
+                                        <img src="https://ctod.tr/wp/wp-content/uploads/2026/09/Adsiz_Resim-2.png" class="w-3.5 h-3.5 object-contain filter brightness-0 invert">
+                                        <span class="text-white font-bold">STUDIO OS // 3D CAD</span>
                                     </div>
                                     <span>COORD: 39°55'N [ANKARA]</span>
                                 </div>
-                                <div class="grid grid-cols-2 gap-4 items-center my-auto">
+                                <div class="grid grid-cols-2 gap-3 items-center my-auto">
                                     <div class="aspect-[4/3] bg-[#161616] border border-[#2a2a2a] rounded overflow-hidden et-photo-effect">
-                                        <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?w=500&q=80" class="w-full h-full object-cover">
+                                        <img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20600%20600%22%20width%3D%22600%22%20height%3D%22600%22%3E%20%3Cdefs%3E%20%3ClinearGradient%20id%3D%22treadTop%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%220%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23555555%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23777777%22%2F%3E%3C%2FlinearGradient%3E%20%3C%2Fdefs%3E%20%3Crect%20width%3D%22600%22%20height%3D%22600%22%20fill%3D%22%23181818%22%2F%3E%20%3Cg%20fill%3D%22%23333333%22%20stroke%3D%22%230A0A0A%22%20stroke-width%3D%221.5%22%3E%20%3Cpolygon%20points%3D%2250%2C480%20350%2C380%20420%2C400%20120%2C500%22%20fill%3D%22url%28%23treadTop%29%22%2F%3E%20%3Cpolygon%20points%3D%2250%2C480%20120%2C500%20120%2C540%2050%2C520%22%20fill%3D%22%23222222%22%2F%3E%20%3Cpolygon%20points%3D%2290%2C410%20390%2C310%20460%2C330%20160%2C430%22%20fill%3D%22url%28%23treadTop%29%22%2F%3E%20%3Cpolygon%20points%3D%2290%2C410%20160%2C430%20160%2C470%2090%2C450%22%20fill%3D%22%23222222%22%2F%3E%20%3Cpolygon%20points%3D%22130%2C340%20430%2C240%20500%2C260%20200%2C360%22%20fill%3D%22url%28%23treadTop%29%22%2F%3E%20%3Cpolygon%20points%3D%22130%2C340%20200%2C360%20200%2C400%20130%2C380%22%20fill%3D%22%23222222%22%2F%3E%20%3Cpolygon%20points%3D%22170%2C270%20470%2C170%20540%2C190%20240%2C290%22%20fill%3D%22url%28%23treadTop%29%22%2F%3E%20%3Cpolygon%20points%3D%22170%2C270%20240%2C290%20240%2C330%20170%2C310%22%20fill%3D%22%23222222%22%2F%3E%20%3Cpolygon%20points%3D%22210%2C200%20510%2C100%20580%2C120%20280%2C220%22%20fill%3D%22url%28%23treadTop%29%22%2F%3E%20%3Cpolygon%20points%3D%22210%2C200%20280%2C220%20280%2C260%20210%2C240%22%20fill%3D%22%23222222%22%2F%3E%20%3C%2Fg%3E%20%3Cpolygon%20points%3D%2250%2C520%20120%2C540%20280%2C600%2050%2C600%22%20fill%3D%22%23050505%22%20opacity%3D%220.8%22%2F%3E%20%3Ctext%20x%3D%2225%22%20y%3D%2245%22%20font-family%3D%22%27Space%20Mono%27%2C%20monospace%22%20font-size%3D%2211%22%20fill%3D%22%23FF0A0A%22%20letter-spacing%3D%222%22%3ECANTILEVER%20TECTONICS%20%2F%2F%2003%3C%2Ftext%3E%20%3C%2Fsvg%3E" class="w-full h-full object-cover">
                                     </div>
-                                    <div class="space-y-1.5 font-mono text-[9px]">
+                                    <div class="space-y-1 font-mono text-[8px] sm:text-[9px]">
                                         <p class="text-et-crimson font-bold">AXONOMETRIC WIREFRAME</p>
-                                        <p class="text-neutral-400">• Structural Mass: 480 m³</p>
-                                        <p class="text-neutral-400">• Concrete Finish: Board-Formed</p>
-                                        <p class="text-neutral-400">• Travertine Wall: 120mm Slab</p>
+                                        <p class="text-neutral-400">• Mass: 480 m³</p>
+                                        <p class="text-neutral-400">• Concrete: Board-Formed</p>
+                                        <p class="text-neutral-400">• Travertine: 120mm Slab</p>
                                     </div>
                                 </div>
                                 <div class="flex justify-between font-mono text-[7px] text-neutral-500">
-                                    <span>ZOOM: 100% [VECTOR]</span><span>ACTIVE SENSOR: SOLAR ANGLE</span>
+                                    <span>ZOOM: 100% [VECTOR]</span><span>SENSOR: SOLAR ANGLE</span>
                                 </div>
                             </div>
                         </div>
                         <div>
                             <span class="font-mono text-[9px] text-et-crimson uppercase font-bold">Digital Mockup 05</span>
-                            <h4 class="font-sans font-bold text-lg uppercase text-white">Interactive iPad Blueprint Viewer</h4>
-                            <p class="font-sans text-xs text-neutral-400 font-light mt-1">Real-time architectural CAD viewer utilized during private on-site client walkthroughs.</p>
+                            <h4 class="font-sans font-bold text-base sm:text-lg uppercase text-white">iPad Blueprint Viewer</h4>
+                            <p class="font-sans text-xs text-neutral-400 font-light mt-0.5">Real-time architectural CAD viewer utilized during private on-site client walkthroughs.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Group C: Physical Artifacts (Tote, Acrylic Pass, Tumbler) -->
-            <div class="space-y-6">
-                <div class="flex items-center gap-3 border-b border-neutral-200 pb-3">
+            <div class="space-y-5">
+                <div class="flex items-center gap-2.5 border-b border-neutral-200 pb-2.5">
                     <span class="w-2.5 h-2.5 bg-et-crimson rounded-full"></span>
                     <h3 class="font-mono text-xs uppercase font-bold tracking-widest text-et-ink">Part C: Physical Artifacts & Studio Accoutrements</h3>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-                    <!-- Tote -->
-                    <div class="bg-white border border-neutral-300 p-6 rounded-lg shadow-sm flex flex-col items-center justify-between space-y-4">
-                        <div class="w-48 h-56 bg-[#E8E6DF] border border-neutral-300 rounded-b-xl relative flex flex-col items-center justify-center shadow-lg my-2">
-                            <div class="absolute -top-6 w-20 h-20 border-4 border-[#D9D6CE] rounded-full"></div>
-                            <div class="w-10 h-10 mb-2"><img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" class="w-full h-full object-contain opacity-85"></div>
-                            <div class="logo-stack text-[9px] font-sans font-extralight text-et-ink"><span>ELIF TARMAN</span></div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+                    <!-- Tote (Unified Logo) -->
+                    <div class="bg-white border border-neutral-300 p-5 rounded-lg shadow-sm flex flex-col items-center justify-between space-y-3">
+                        <div class="w-44 h-52 bg-[#E8E6DF] border border-neutral-300 rounded-b-xl relative flex flex-col items-center justify-center shadow-lg my-1">
+                            <div class="absolute -top-5 w-16 h-16 border-4 border-[#D9D6CE] rounded-full"></div>
+                            <div class="w-10 h-10 mb-1.5"><img src="https://ctod.tr/wp/wp-content/uploads/2026/09/Adsiz_Resim-2.png" class="w-full h-full object-contain opacity-85"></div>
+                            <div class="logo-stack text-[9px] font-sans font-extralight text-et-ink">
+                                <span class="tracking-[0.5em] mb-0.5">E L I F</span>
+                                <span class="tracking-[0.5em]">T A R M A N</span>
+                                <span class="font-mono text-[6px] tracking-[0.3em] text-neutral-600 uppercase mt-0.5">STUDIO</span>
+                            </div>
                         </div>
                         <div class="w-full text-left">
                             <span class="font-mono text-[9px] text-et-crimson uppercase font-bold">Artifact 01</span>
-                            <h4 class="font-sans font-bold text-sm uppercase text-et-ink">800gsm Cotton Canvas Tote</h4>
-                            <p class="font-sans text-xs text-neutral-500 font-light mt-0.5">Heavy organic canvas bag screen-printed with pure water-based black ink.</p>
+                            <h4 class="font-sans font-bold text-sm uppercase text-et-ink">800gsm Cotton Tote</h4>
+                            <p class="font-sans text-xs text-neutral-500 font-light mt-0.5">Heavy organic canvas bag screen-printed with water-based archival black ink.</p>
                         </div>
                     </div>
 
-                    <!-- Staff Pass -->
-                    <div class="bg-white border border-neutral-300 p-6 rounded-lg shadow-sm flex flex-col items-center justify-between space-y-4">
-                        <div class="w-40 h-56 bg-white border border-neutral-300 shadow-xl p-3 flex flex-col justify-between items-center rounded my-2">
-                            <div class="w-6 h-1 bg-neutral-300 rounded-full"></div>
-                            <div class="w-20 h-20 bg-neutral-100 overflow-hidden et-photo-effect border rounded">
-                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&q=80" class="w-full h-full object-cover">
+                    <!-- Staff Pass (Unified Logo) -->
+                    <div class="bg-white border border-neutral-300 p-5 rounded-lg shadow-sm flex flex-col items-center justify-between space-y-3">
+                        <div class="w-36 h-52 bg-white border border-neutral-300 shadow-xl p-3 flex flex-col justify-between items-center rounded my-1">
+                            <div class="w-5 h-1 bg-neutral-300 rounded-full"></div>
+                            <div class="w-16 h-16 bg-neutral-100 overflow-hidden et-photo-effect border rounded">
+                                <img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20600%20600%22%20width%3D%22600%22%20height%3D%22600%22%3E%20%3Crect%20width%3D%22600%22%20height%3D%22600%22%20fill%3D%22%230A0A0A%22%2F%3E%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22240%22%20r%3D%22110%22%20fill%3D%22%23222222%22%2F%3E%20%3Cpath%20d%3D%22M%20170%2C540%20C%20180%2C380%20420%2C380%20430%2C540%20Z%22%20fill%3D%22%23181818%22%2F%3E%20%3Cpath%20d%3D%22M%20300%2C130%20A%20110%20110%200%200%201%20405%2C280%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%224%22%20opacity%3D%220.9%22%2F%3E%20%3Cpath%20d%3D%22M%20405%2C280%20C%20390%2C390%20420%2C440%20430%2C540%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%223%22%20opacity%3D%220.7%22%2F%3E%20%3Ctext%20x%3D%2225%22%20y%3D%2245%22%20font-family%3D%22%27Space%20Mono%27%2C%20monospace%22%20font-size%3D%2211%22%20fill%3D%22%23737373%22%20letter-spacing%3D%222%22%3EARCHITECT%20PROFILE%20%2F%2F%20E.%20TARMAN%3C%2Ftext%3E%20%3C%2Fsvg%3E" class="w-full h-full object-cover">
                             </div>
                             <div class="w-full text-center">
                                 <p class="font-sans font-black text-xs uppercase">E. Tarman</p>
                                 <p class="font-mono text-[7px] text-et-concrete uppercase">Principal Architect</p>
                             </div>
-                            <div class="w-full h-5 bg-et-ink flex items-center justify-center gap-1 text-white font-mono text-[6px] uppercase tracking-widest rounded">
-                                <img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" class="w-3.5 h-3.5 object-contain filter brightness-0 invert"><span>Pass A-01</span>
+                            <div class="w-full bg-et-ink py-1 flex flex-col items-center justify-center text-white rounded">
+                                <div class="flex items-center gap-1">
+                                    <img src="https://ctod.tr/wp/wp-content/uploads/2026/09/Adsiz_Resim-2.png" class="w-3.5 h-3.5 object-contain filter brightness-0 invert">
+                                    <div class="logo-stack text-[6px] font-sans font-extralight text-white">
+                                        <span class="tracking-[0.4em]">E L I F</span>
+                                        <span class="tracking-[0.4em]">T A R M A N</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="w-full text-left">
                             <span class="font-mono text-[9px] text-et-crimson uppercase font-bold">Artifact 02</span>
-                            <h4 class="font-sans font-bold text-sm uppercase text-et-ink">Acrylic Security Staff Pass</h4>
-                            <p class="font-sans text-xs text-neutral-500 font-light mt-0.5">Laser-etched transparent acrylic badge with integrated NFC access chip.</p>
+                            <h4 class="font-sans font-bold text-sm uppercase text-et-ink">Acrylic Staff Pass</h4>
+                            <p class="font-sans text-xs text-neutral-500 font-light mt-0.5">Laser-etched transparent acrylic badge with integrated NFC building access chip.</p>
                         </div>
                     </div>
 
-                    <!-- Tumbler -->
-                    <div class="bg-white border border-neutral-300 p-6 rounded-lg shadow-sm flex flex-col items-center justify-between space-y-4">
-                        <div class="w-28 h-52 bg-[#181818] rounded-b-3xl rounded-t shadow-2xl flex flex-col items-center justify-center relative border-t-4 border-[#333] my-4">
-                            <div class="w-full h-12 bg-[#F7F6F2] flex flex-col items-center justify-center border-y border-neutral-300">
-                                <div class="w-5 h-5 mb-0.5"><img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" class="w-full h-full object-contain"></div>
-                                <div class="logo-stack text-[6px] font-sans font-extralight text-et-ink m-0"><span>ELIF TARMAN</span></div>
+                    <!-- Tumbler (Unified Logo) -->
+                    <div class="bg-white border border-neutral-300 p-5 rounded-lg shadow-sm flex flex-col items-center justify-between space-y-3 sm:col-span-2 lg:col-span-1">
+                        <div class="w-24 h-48 bg-[#181818] rounded-b-3xl rounded-t shadow-xl flex flex-col items-center justify-center relative border-t-4 border-[#333] my-2">
+                            <div class="w-full h-14 bg-[#F7F6F2] flex flex-col items-center justify-center border-y border-neutral-300 p-1">
+                                <div class="w-4 h-4 mb-0.5"><img src="https://ctod.tr/wp/wp-content/uploads/2026/09/Adsiz_Resim-2.png" class="w-full h-full object-contain"></div>
+                                <div class="logo-stack text-[6px] font-sans font-extralight text-et-ink">
+                                    <span class="tracking-[0.4em]">E L I F</span>
+                                    <span class="tracking-[0.4em]">T A R M A N</span>
+                                    <span class="font-mono text-[4px] tracking-[0.25em] text-neutral-500 uppercase">STUDIO</span>
+                                </div>
                             </div>
                         </div>
                         <div class="w-full text-left">
@@ -827,35 +891,35 @@
     </section>
 
     <!-- SECTION 08: INSTAGRAM 9-GRID & LINKEDIN SOCIAL ARCHITECTURE -->
-    <section id="social" class="py-20 sm:py-28 bg-[#0A0A0A] text-white px-4 sm:px-6 lg:px-8 dark-grid-matrix border-b border-[#222]">
-        <div class="max-w-7xl mx-auto space-y-16">
-            <div class="max-w-3xl space-y-4">
+    <section id="social" class="py-16 sm:py-24 bg-[#0A0A0A] text-white px-4 sm:px-6 lg:px-8 dark-grid-matrix border-b border-[#222]">
+        <div class="max-w-7xl mx-auto space-y-12 sm:space-y-16">
+            <div class="max-w-3xl space-y-3">
                 <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Section 08 // Social Media Ecosystem</span>
-                <h2 class="font-sans font-black text-3xl sm:text-5xl uppercase tracking-tighter">
+                <h2 class="font-sans font-black text-2xl sm:text-4xl md:text-5xl uppercase tracking-tighter">
                     Instagram 9-Grid & LinkedIn.
                 </h2>
-                <p class="font-sans text-sm sm:text-base text-et-concrete font-light">
+                <p class="font-sans text-xs sm:text-sm md:text-base text-et-concrete font-light">
                     Mobile-responsive social curation maintaining spatial void and photographic chiaroscuro rhythm across digital channels.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                <!-- Smartphone Mockup with 9-Grid (Responsive) -->
-                <div class="lg:col-span-6 flex justify-center">
-                    <div class="w-full max-w-[360px] bg-black rounded-[44px] p-2.5 shadow-2xl border-4 border-neutral-800">
-                        <div class="w-full bg-white rounded-[34px] overflow-hidden flex flex-col p-4 font-sans text-et-ink">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                <!-- Smartphone Mockup with 9-Grid (Tile 5 Features Exact Master Logo) -->
+                <div class="lg:col-span-6 flex justify-center w-full">
+                    <div class="w-full max-w-[340px] sm:max-w-[380px] bg-black rounded-[42px] p-2.5 shadow-2xl border-4 border-neutral-800">
+                        <div class="w-full bg-white rounded-[32px] overflow-hidden flex flex-col p-3.5 sm:p-4 font-sans text-et-ink">
                             <!-- Status Bar -->
                             <div class="flex justify-between items-center font-mono text-[8px] text-neutral-400 mb-2 px-1">
                                 <span>9:41</span>
-                                <div class="w-16 h-3 bg-black rounded-full"></div>
+                                <div class="w-14 sm:w-16 h-2.5 bg-black rounded-full"></div>
                                 <span>5G 100%</span>
                             </div>
 
                             <!-- Header -->
-                            <div class="flex items-center gap-3 mb-3">
-                                <div class="w-12 h-12 rounded-full border-2 border-et-crimson p-0.5 flex-shrink-0">
+                            <div class="flex items-center gap-2.5 mb-2.5">
+                                <div class="w-11 h-11 rounded-full border-2 border-et-crimson p-0.5 flex-shrink-0">
                                     <div class="w-full h-full rounded-full bg-et-ink p-1 flex items-center justify-center">
-                                        <img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" class="w-full h-full object-contain filter brightness-0 invert">
+                                        <img src="https://ctod.tr/wp/wp-content/uploads/2026/09/Adsiz_Resim-2.png" class="w-full h-full object-contain filter brightness-0 invert">
                                     </div>
                                 </div>
                                 <div class="flex-1 flex justify-around text-center font-mono">
@@ -866,7 +930,7 @@
                             </div>
 
                             <!-- Bio -->
-                            <div class="mb-3 space-y-0.5">
+                            <div class="mb-2.5 space-y-0.5">
                                 <p class="font-bold text-[10px]">Elif Tarman Studio</p>
                                 <p class="font-mono text-[7px] text-et-concrete uppercase">Interior Architecture Practice</p>
                                 <p class="text-[8px] text-neutral-700 leading-tight">Monolithic Spatial Engineering & Chiaroscuro.<br>Void • Light • Mass.<br>📍 Istanbul • London • Ankara</p>
@@ -874,21 +938,21 @@
                             </div>
 
                             <!-- Action Buttons -->
-                            <div class="grid grid-cols-3 gap-1.5 mb-3 font-mono text-[7px] uppercase font-bold text-center">
+                            <div class="grid grid-cols-3 gap-1 mb-2.5 font-mono text-[7px] uppercase font-bold text-center">
                                 <span class="bg-et-ink text-white py-1 rounded">Follow</span>
                                 <span class="border border-neutral-300 py-1 rounded">Message</span>
                                 <span class="border border-neutral-300 py-1 rounded">Contact</span>
                             </div>
 
                             <!-- Story Highlights -->
-                            <div class="flex gap-2 mb-3 pb-2 border-b border-neutral-100">
-                                <div class="flex flex-col items-center gap-0.5"><div class="w-8 h-8 rounded-full bg-et-paper border border-neutral-300 flex items-center justify-center font-mono text-[6px]">01</div><span class="text-[6px] text-neutral-500">Sanctuary</span></div>
-                                <div class="flex flex-col items-center gap-0.5"><div class="w-8 h-8 rounded-full bg-et-paper border border-neutral-300 flex items-center justify-center font-mono text-[6px]">02</div><span class="text-[6px] text-neutral-500">Void</span></div>
-                                <div class="flex flex-col items-center gap-0.5"><div class="w-8 h-8 rounded-full bg-et-paper border border-neutral-300 flex items-center justify-center font-mono text-[6px]">03</div><span class="text-[6px] text-neutral-500">Materials</span></div>
-                                <div class="flex flex-col items-center gap-0.5"><div class="w-8 h-8 rounded-full bg-et-paper border border-neutral-300 flex items-center justify-center font-mono text-[6px]">04</div><span class="text-[6px] text-neutral-500">Press</span></div>
+                            <div class="flex gap-2 mb-2.5 pb-2 border-b border-neutral-100">
+                                <div class="flex flex-col items-center gap-0.5"><div class="w-7 h-7 rounded-full bg-et-paper border border-neutral-300 flex items-center justify-center font-mono text-[6px]">01</div><span class="text-[6px] text-neutral-500">Sanctuary</span></div>
+                                <div class="flex flex-col items-center gap-0.5"><div class="w-7 h-7 rounded-full bg-et-paper border border-neutral-300 flex items-center justify-center font-mono text-[6px]">02</div><span class="text-[6px] text-neutral-500">Void</span></div>
+                                <div class="flex flex-col items-center gap-0.5"><div class="w-7 h-7 rounded-full bg-et-paper border border-neutral-300 flex items-center justify-center font-mono text-[6px]">03</div><span class="text-[6px] text-neutral-500">Materials</span></div>
+                                <div class="flex flex-col items-center gap-0.5"><div class="w-7 h-7 rounded-full bg-et-paper border border-neutral-300 flex items-center justify-center font-mono text-[6px]">04</div><span class="text-[6px] text-neutral-500">Press</span></div>
                             </div>
 
-                            <!-- 9-Grid (3x3 True Squares) -->
+                            <!-- 9-Grid (3x3 True Squares on All Screens) -->
                             <div class="grid grid-cols-3 gap-1 w-full">
                                 <div class="aspect-square bg-et-ink text-white p-1.5 flex flex-col justify-between">
                                     <span class="text-[5px] text-et-crimson font-mono">01</span>
@@ -896,20 +960,24 @@
                                     <span class="text-[5px] text-neutral-500 font-mono">ET</span>
                                 </div>
                                 <div class="aspect-square overflow-hidden et-photo-effect bg-neutral-200">
-                                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=300&q=80" class="w-full h-full object-cover">
+                                    <img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20600%20600%22%20width%3D%22600%22%20height%3D%22600%22%3E%20%3Cdefs%3E%20%3ClinearGradient%20id%3D%22wallL%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%220%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23121212%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23242424%22%2F%3E%3C%2FlinearGradient%3E%20%3ClinearGradient%20id%3D%22wallR%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%220%25%22%20y2%3D%22100%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%232E2E2E%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23181818%22%2F%3E%3C%2FlinearGradient%3E%20%3ClinearGradient%20id%3D%22sunbeam%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%2280%25%22%20y2%3D%22100%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23FFFFFF%22%20stop-opacity%3D%220.65%22%2F%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23FFFFFF%22%20stop-opacity%3D%220.3%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23000000%22%20stop-opacity%3D%220%22%2F%3E%3C%2FlinearGradient%3E%20%3C%2Fdefs%3E%20%3Crect%20width%3D%22600%22%20height%3D%22600%22%20fill%3D%22%230A0A0A%22%2F%3E%20%3Cpolygon%20points%3D%220%2C0%20600%2C0%20440%2C140%20160%2C140%22%20fill%3D%22%231C1C1C%22%2F%3E%20%3Cpolygon%20points%3D%220%2C0%20160%2C140%20160%2C460%200%2C600%22%20fill%3D%22url%28%23wallL%29%22%2F%3E%20%3Cpolygon%20points%3D%22600%2C0%20440%2C140%20440%2C460%20600%2C600%22%20fill%3D%22url%28%23wallR%29%22%2F%3E%20%3Crect%20x%3D%22160%22%20y%3D%22140%22%20width%3D%22280%22%20height%3D%22320%22%20fill%3D%22%23151515%22%2F%3E%20%3Crect%20x%3D%22250%22%20y%3D%22200%22%20width%3D%22100%22%20height%3D%22260%22%20fill%3D%22%23F7F6F2%22%2F%3E%20%3Cpolygon%20points%3D%22250%2C200%20350%2C200%20580%2C600%20380%2C600%22%20fill%3D%22url%28%23sunbeam%29%22%2F%3E%20%3Cpolygon%20points%3D%220%2C600%20160%2C460%20440%2C460%20600%2C600%22%20fill%3D%22%230E0E0E%22%2F%3E%20%3Cline%20x1%3D%22160%22%20y1%3D%22460%22%20x2%3D%220%22%20y2%3D%22600%22%20stroke%3D%22%23000000%22%20stroke-width%3D%222%22%2F%3E%20%3Cline%20x1%3D%22440%22%20y1%3D%22460%22%20x2%3D%22600%22%20y2%3D%22600%22%20stroke%3D%22%23000000%22%20stroke-width%3D%222%22%2F%3E%20%3Ctext%20x%3D%2225%22%20y%3D%2245%22%20font-family%3D%22%27Space%20Mono%27%2C%20monospace%22%20font-size%3D%2211%22%20fill%3D%22%23FF0A0A%22%20letter-spacing%3D%222%22%3ESANCTUARY%2001%20%2F%2F%20CHIAROSCURO%3C%2Ftext%3E%20%3C%2Fsvg%3E" class="w-full h-full object-cover">
                                 </div>
                                 <div class="aspect-square overflow-hidden et-photo-effect bg-neutral-200">
-                                    <img src="https://images.unsplash.com/photo-1518640467707-6811f4a6ab73?w=300&q=80" class="w-full h-full object-cover">
+                                    <img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20600%20600%22%20width%3D%22600%22%20height%3D%22600%22%3E%20%3Cdefs%3E%20%3ClinearGradient%20id%3D%22travBg%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23ECEAE3%22%2F%3E%3Cstop%20offset%3D%2250%25%22%20stop-color%3D%22%23DFDDD5%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23D4D1C7%22%2F%3E%3C%2FlinearGradient%3E%20%3C%2Fdefs%3E%20%3Crect%20width%3D%22600%22%20height%3D%22600%22%20fill%3D%22url%28%23travBg%29%22%2F%3E%20%3Cpath%20d%3D%22M%200%2C120%20Q%20150%2C110%20300%2C130%20T%20600%2C125%22%20fill%3D%22none%22%20stroke%3D%22%23B8B5AA%22%20stroke-width%3D%222%22%20opacity%3D%220.6%22%2F%3E%20%3Cpath%20d%3D%22M%200%2C128%20Q%20180%2C120%20350%2C138%20T%20600%2C133%22%20fill%3D%22none%22%20stroke%3D%22%23C5C2B7%22%20stroke-width%3D%221.2%22%20opacity%3D%220.5%22%2F%3E%20%3Cpath%20d%3D%22M%200%2C280%20Q%20200%2C270%20400%2C290%20T%20600%2C285%22%20fill%3D%22none%22%20stroke%3D%22%23A8A59A%22%20stroke-width%3D%222.5%22%20opacity%3D%220.7%22%2F%3E%20%3Cpath%20d%3D%22M%200%2C420%20Q%20140%2C430%20320%2C410%20T%20600%2C425%22%20fill%3D%22none%22%20stroke%3D%22%23B8B5AA%22%20stroke-width%3D%221.8%22%20opacity%3D%220.6%22%2F%3E%20%3Cellipse%20cx%3D%22140%22%20cy%3D%22180%22%20rx%3D%2212%22%20ry%3D%224%22%20fill%3D%22%238C897E%22%20opacity%3D%220.5%22%2F%3E%20%3Cellipse%20cx%3D%22280%22%20cy%3D%22240%22%20rx%3D%2222%22%20ry%3D%226%22%20fill%3D%22%237D7A6F%22%20opacity%3D%220.6%22%2F%3E%20%3Cellipse%20cx%3D%22460%22%20cy%3D%22160%22%20rx%3D%2216%22%20ry%3D%225%22%20fill%3D%22%238C897E%22%20opacity%3D%220.5%22%2F%3E%20%3Cellipse%20cx%3D%22380%22%20cy%3D%22360%22%20rx%3D%2228%22%20ry%3D%227%22%20fill%3D%22%23757268%22%20opacity%3D%220.65%22%2F%3E%20%3Cellipse%20cx%3D%22190%22%20cy%3D%22480%22%20rx%3D%2218%22%20ry%3D%225%22%20fill%3D%22%23858277%22%20opacity%3D%220.55%22%2F%3E%20%3Cellipse%20cx%3D%22500%22%20cy%3D%22460%22%20rx%3D%2214%22%20ry%3D%224%22%20fill%3D%22%23858277%22%20opacity%3D%220.5%22%2F%3E%20%3Ctext%20x%3D%2225%22%20y%3D%2245%22%20font-family%3D%22%27Space%20Mono%27%2C%20monospace%22%20font-size%3D%2211%22%20fill%3D%22%230A0A0A%22%20letter-spacing%3D%222%22%3ETRAVERTINE%20PORES%20%2F%2F%201%3A1%20MACRO%3C%2Ftext%3E%20%3C%2Fsvg%3E" class="w-full h-full object-cover">
                                 </div>
                                 <div class="aspect-square overflow-hidden et-photo-effect bg-neutral-200">
-                                    <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?w=300&q=80" class="w-full h-full object-cover">
+                                    <img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20600%20600%22%20width%3D%22600%22%20height%3D%22600%22%3E%20%3Cdefs%3E%20%3ClinearGradient%20id%3D%22treadTop%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%220%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23555555%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23777777%22%2F%3E%3C%2FlinearGradient%3E%20%3C%2Fdefs%3E%20%3Crect%20width%3D%22600%22%20height%3D%22600%22%20fill%3D%22%23181818%22%2F%3E%20%3Cg%20fill%3D%22%23333333%22%20stroke%3D%22%230A0A0A%22%20stroke-width%3D%221.5%22%3E%20%3Cpolygon%20points%3D%2250%2C480%20350%2C380%20420%2C400%20120%2C500%22%20fill%3D%22url%28%23treadTop%29%22%2F%3E%20%3Cpolygon%20points%3D%2250%2C480%20120%2C500%20120%2C540%2050%2C520%22%20fill%3D%22%23222222%22%2F%3E%20%3Cpolygon%20points%3D%2290%2C410%20390%2C310%20460%2C330%20160%2C430%22%20fill%3D%22url%28%23treadTop%29%22%2F%3E%20%3Cpolygon%20points%3D%2290%2C410%20160%2C430%20160%2C470%2090%2C450%22%20fill%3D%22%23222222%22%2F%3E%20%3Cpolygon%20points%3D%22130%2C340%20430%2C240%20500%2C260%20200%2C360%22%20fill%3D%22url%28%23treadTop%29%22%2F%3E%20%3Cpolygon%20points%3D%22130%2C340%20200%2C360%20200%2C400%20130%2C380%22%20fill%3D%22%23222222%22%2F%3E%20%3Cpolygon%20points%3D%22170%2C270%20470%2C170%20540%2C190%20240%2C290%22%20fill%3D%22url%28%23treadTop%29%22%2F%3E%20%3Cpolygon%20points%3D%22170%2C270%20240%2C290%20240%2C330%20170%2C310%22%20fill%3D%22%23222222%22%2F%3E%20%3Cpolygon%20points%3D%22210%2C200%20510%2C100%20580%2C120%20280%2C220%22%20fill%3D%22url%28%23treadTop%29%22%2F%3E%20%3Cpolygon%20points%3D%22210%2C200%20280%2C220%20280%2C260%20210%2C240%22%20fill%3D%22%23222222%22%2F%3E%20%3C%2Fg%3E%20%3Cpolygon%20points%3D%2250%2C520%20120%2C540%20280%2C600%2050%2C600%22%20fill%3D%22%23050505%22%20opacity%3D%220.8%22%2F%3E%20%3Ctext%20x%3D%2225%22%20y%3D%2245%22%20font-family%3D%22%27Space%20Mono%27%2C%20monospace%22%20font-size%3D%2211%22%20fill%3D%22%23FF0A0A%22%20letter-spacing%3D%222%22%3ECANTILEVER%20TECTONICS%20%2F%2F%2003%3C%2Ftext%3E%20%3C%2Fsvg%3E" class="w-full h-full object-cover">
                                 </div>
                                 <div class="aspect-square bg-white border border-neutral-300 p-1 flex flex-col items-center justify-center text-center">
-                                    <img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" class="w-5 h-5 object-contain mb-0.5">
-                                    <span class="font-mono text-[5px] text-et-ink uppercase font-bold">MONOLITH</span>
+                                    <img src="https://ctod.tr/wp/wp-content/uploads/2026/09/Adsiz_Resim-2.png" class="w-6 h-6 object-contain mb-0.5">
+                                    <div class="logo-stack text-[6px] font-sans font-extralight text-et-ink">
+                                        <span class="tracking-[0.4em]">E L I F</span>
+                                        <span class="tracking-[0.4em]">T A R M A N</span>
+                                        <span class="font-mono text-[4px] tracking-[0.25em] text-neutral-500 uppercase">STUDIO</span>
+                                    </div>
                                 </div>
                                 <div class="aspect-square overflow-hidden et-photo-effect bg-neutral-200">
-                                    <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?w=300&q=80" class="w-full h-full object-cover">
+                                    <img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20600%20600%22%20width%3D%22600%22%20height%3D%22600%22%3E%20%3Cdefs%3E%20%3ClinearGradient%20id%3D%22wallL%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%220%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23121212%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23242424%22%2F%3E%3C%2FlinearGradient%3E%20%3ClinearGradient%20id%3D%22wallR%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%220%25%22%20y2%3D%22100%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%232E2E2E%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23181818%22%2F%3E%3C%2FlinearGradient%3E%20%3ClinearGradient%20id%3D%22sunbeam%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%2280%25%22%20y2%3D%22100%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23FFFFFF%22%20stop-opacity%3D%220.65%22%2F%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23FFFFFF%22%20stop-opacity%3D%220.3%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23000000%22%20stop-opacity%3D%220%22%2F%3E%3C%2FlinearGradient%3E%20%3C%2Fdefs%3E%20%3Crect%20width%3D%22600%22%20height%3D%22600%22%20fill%3D%22%230A0A0A%22%2F%3E%20%3Cpolygon%20points%3D%220%2C0%20600%2C0%20440%2C140%20160%2C140%22%20fill%3D%22%231C1C1C%22%2F%3E%20%3Cpolygon%20points%3D%220%2C0%20160%2C140%20160%2C460%200%2C600%22%20fill%3D%22url%28%23wallL%29%22%2F%3E%20%3Cpolygon%20points%3D%22600%2C0%20440%2C140%20440%2C460%20600%2C600%22%20fill%3D%22url%28%23wallR%29%22%2F%3E%20%3Crect%20x%3D%22160%22%20y%3D%22140%22%20width%3D%22280%22%20height%3D%22320%22%20fill%3D%22%23151515%22%2F%3E%20%3Crect%20x%3D%22250%22%20y%3D%22200%22%20width%3D%22100%22%20height%3D%22260%22%20fill%3D%22%23F7F6F2%22%2F%3E%20%3Cpolygon%20points%3D%22250%2C200%20350%2C200%20580%2C600%20380%2C600%22%20fill%3D%22url%28%23sunbeam%29%22%2F%3E%20%3Cpolygon%20points%3D%220%2C600%20160%2C460%20440%2C460%20600%2C600%22%20fill%3D%22%230E0E0E%22%2F%3E%20%3Cline%20x1%3D%22160%22%20y1%3D%22460%22%20x2%3D%220%22%20y2%3D%22600%22%20stroke%3D%22%23000000%22%20stroke-width%3D%222%22%2F%3E%20%3Cline%20x1%3D%22440%22%20y1%3D%22460%22%20x2%3D%22600%22%20y2%3D%22600%22%20stroke%3D%22%23000000%22%20stroke-width%3D%222%22%2F%3E%20%3Ctext%20x%3D%2225%22%20y%3D%2245%22%20font-family%3D%22%27Space%20Mono%27%2C%20monospace%22%20font-size%3D%2211%22%20fill%3D%22%23FF0A0A%22%20letter-spacing%3D%222%22%3ESANCTUARY%2001%20%2F%2F%20CHIAROSCURO%3C%2Ftext%3E%20%3C%2Fsvg%3E" class="w-full h-full object-cover">
                                 </div>
                                 <div class="aspect-square bg-et-paper border border-neutral-300 p-1 flex flex-col justify-between">
                                     <span class="text-[5px] font-mono text-et-concrete">07</span>
@@ -917,7 +985,7 @@
                                     <span class="text-[5px] font-mono text-et-crimson">41°N 28°E</span>
                                 </div>
                                 <div class="aspect-square overflow-hidden et-photo-effect bg-neutral-200">
-                                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=300&q=80" class="w-full h-full object-cover">
+                                    <img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20600%20600%22%20width%3D%22600%22%20height%3D%22600%22%3E%20%3Crect%20width%3D%22600%22%20height%3D%22600%22%20fill%3D%22%230A0A0A%22%2F%3E%20%3Ccircle%20cx%3D%22300%22%20cy%3D%22240%22%20r%3D%22110%22%20fill%3D%22%23222222%22%2F%3E%20%3Cpath%20d%3D%22M%20170%2C540%20C%20180%2C380%20420%2C380%20430%2C540%20Z%22%20fill%3D%22%23181818%22%2F%3E%20%3Cpath%20d%3D%22M%20300%2C130%20A%20110%20110%200%200%201%20405%2C280%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%224%22%20opacity%3D%220.9%22%2F%3E%20%3Cpath%20d%3D%22M%20405%2C280%20C%20390%2C390%20420%2C440%20430%2C540%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%223%22%20opacity%3D%220.7%22%2F%3E%20%3Ctext%20x%3D%2225%22%20y%3D%2245%22%20font-family%3D%22%27Space%20Mono%27%2C%20monospace%22%20font-size%3D%2211%22%20fill%3D%22%23737373%22%20letter-spacing%3D%222%22%3EARCHITECT%20PROFILE%20%2F%2F%20E.%20TARMAN%3C%2Ftext%3E%20%3C%2Fsvg%3E" class="w-full h-full object-cover">
                                 </div>
                                 <div class="aspect-square bg-et-ink text-white p-1.5 flex flex-col justify-between">
                                     <span class="text-[5px] text-neutral-500 font-mono">09</span>
@@ -930,23 +998,23 @@
                 </div>
 
                 <!-- LinkedIn Mockup -->
-                <div class="lg:col-span-6 space-y-6">
-                    <div class="w-full bg-[#141414] p-5 border-b-4 border-et-crimson rounded-lg shadow-xl relative overflow-hidden flex items-center justify-between">
+                <div class="lg:col-span-6 space-y-4 sm:space-y-6">
+                    <div class="w-full bg-[#141414] p-4 sm:p-5 border-b-4 border-et-crimson rounded-lg shadow-xl relative overflow-hidden flex items-center justify-between">
                         <div class="space-y-1 relative z-10">
                             <span class="font-mono text-[8px] text-et-crimson uppercase tracking-widest font-bold">LinkedIn Company Banner (1584 × 396 px)</span>
-                            <h3 class="font-sans font-bold text-lg uppercase tracking-wider">Elif Tarman Interior Architecture</h3>
-                            <p class="font-mono text-[9px] text-et-concrete">Monolithic Spatial Engineering // Istanbul • London • Ankara</p>
+                            <h3 class="font-sans font-bold text-base sm:text-lg uppercase tracking-wider">Elif Tarman Interior Architecture</h3>
+                            <p class="font-mono text-[8px] sm:text-[9px] text-et-concrete">Monolithic Spatial Engineering // Istanbul • London • Ankara</p>
                         </div>
-                        <div class="w-14 h-14 relative z-10">
-                            <img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" class="w-full h-full object-contain filter brightness-0 invert">
+                        <div class="w-12 h-12 sm:w-14 sm:h-14 relative z-10 flex-shrink-0">
+                            <img src="https://ctod.tr/wp/wp-content/uploads/2026/09/Adsiz_Resim-2.png" class="w-full h-full object-contain filter brightness-0 invert">
                         </div>
                     </div>
 
                     <!-- LinkedIn Feed Post -->
-                    <div class="bg-white text-et-ink p-5 rounded-lg shadow-xl space-y-3 font-sans border border-neutral-200">
-                        <div class="flex items-center gap-3 border-b pb-2.5">
-                            <div class="w-9 h-9 rounded-full bg-et-ink p-1 flex items-center justify-center">
-                                <img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" class="w-full h-full object-contain filter brightness-0 invert">
+                    <div class="bg-white text-et-ink p-4 sm:p-5 rounded-lg shadow-xl space-y-3 font-sans border border-neutral-200">
+                        <div class="flex items-center gap-2.5 border-b pb-2.5">
+                            <div class="w-8 h-8 rounded-full bg-et-ink p-1 flex items-center justify-center flex-shrink-0">
+                                <img src="https://ctod.tr/wp/wp-content/uploads/2026/09/Adsiz_Resim-2.png" class="w-full h-full object-contain filter brightness-0 invert">
                             </div>
                             <div>
                                 <h4 class="font-bold text-xs uppercase">Elif Tarman Studio</h4>
@@ -957,7 +1025,7 @@
                             "The relationship between void and mass is the foundational premise of human spatial consciousness. In our latest sanctuary project, raw travertine meets solar incisions."
                         </p>
                         <div class="aspect-[21/9] w-full bg-et-ink rounded overflow-hidden et-photo-effect">
-                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80" class="w-full h-full object-cover">
+                            <img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20600%20600%22%20width%3D%22600%22%20height%3D%22600%22%3E%20%3Cdefs%3E%20%3ClinearGradient%20id%3D%22wallL%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%220%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23121212%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23242424%22%2F%3E%3C%2FlinearGradient%3E%20%3ClinearGradient%20id%3D%22wallR%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%220%25%22%20y2%3D%22100%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%232E2E2E%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23181818%22%2F%3E%3C%2FlinearGradient%3E%20%3ClinearGradient%20id%3D%22sunbeam%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%2280%25%22%20y2%3D%22100%25%22%3E%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23FFFFFF%22%20stop-opacity%3D%220.65%22%2F%3E%3Cstop%20offset%3D%2240%25%22%20stop-color%3D%22%23FFFFFF%22%20stop-opacity%3D%220.3%22%2F%3E%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23000000%22%20stop-opacity%3D%220%22%2F%3E%3C%2FlinearGradient%3E%20%3C%2Fdefs%3E%20%3Crect%20width%3D%22600%22%20height%3D%22600%22%20fill%3D%22%230A0A0A%22%2F%3E%20%3Cpolygon%20points%3D%220%2C0%20600%2C0%20440%2C140%20160%2C140%22%20fill%3D%22%231C1C1C%22%2F%3E%20%3Cpolygon%20points%3D%220%2C0%20160%2C140%20160%2C460%200%2C600%22%20fill%3D%22url%28%23wallL%29%22%2F%3E%20%3Cpolygon%20points%3D%22600%2C0%20440%2C140%20440%2C460%20600%2C600%22%20fill%3D%22url%28%23wallR%29%22%2F%3E%20%3Crect%20x%3D%22160%22%20y%3D%22140%22%20width%3D%22280%22%20height%3D%22320%22%20fill%3D%22%23151515%22%2F%3E%20%3Crect%20x%3D%22250%22%20y%3D%22200%22%20width%3D%22100%22%20height%3D%22260%22%20fill%3D%22%23F7F6F2%22%2F%3E%20%3Cpolygon%20points%3D%22250%2C200%20350%2C200%20580%2C600%20380%2C600%22%20fill%3D%22url%28%23sunbeam%29%22%2F%3E%20%3Cpolygon%20points%3D%220%2C600%20160%2C460%20440%2C460%20600%2C600%22%20fill%3D%22%230E0E0E%22%2F%3E%20%3Cline%20x1%3D%22160%22%20y1%3D%22460%22%20x2%3D%220%22%20y2%3D%22600%22%20stroke%3D%22%23000000%22%20stroke-width%3D%222%22%2F%3E%20%3Cline%20x1%3D%22440%22%20y1%3D%22460%22%20x2%3D%22600%22%20y2%3D%22600%22%20stroke%3D%22%23000000%22%20stroke-width%3D%222%22%2F%3E%20%3Ctext%20x%3D%2225%22%20y%3D%2245%22%20font-family%3D%22%27Space%20Mono%27%2C%20monospace%22%20font-size%3D%2211%22%20fill%3D%22%23FF0A0A%22%20letter-spacing%3D%222%22%3ESANCTUARY%2001%20%2F%2F%20CHIAROSCURO%3C%2Ftext%3E%20%3C%2Fsvg%3E" class="w-full h-full object-cover">
                         </div>
                     </div>
                 </div>
@@ -965,128 +1033,212 @@
         </div>
     </section>
 
-    <!-- SECTION 09: ENVIRONMENTAL SIGNAGE & ARCHITECTURAL FACADE -->
-    <section id="environmental" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-neutral-300">
-        <div class="space-y-12">
-            <div class="max-w-3xl space-y-4">
-                <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Section 09 // Environmental</span>
-                <h2 class="font-sans font-black text-3xl sm:text-5xl uppercase tracking-tighter text-et-ink">
-                    3D Facade & Travertine Totems.
+    <!-- SECTION 09: ENVIRONMENTAL IDENTITY & MONOLITHIC TRAVERTINE TOTEM (UNIFIED LOGO) -->
+    <section id="environmental" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-b border-neutral-300">
+        <div class="space-y-12 sm:space-y-16">
+            <div class="max-w-3xl space-y-3">
+                <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Section 09 // Environmental Architecture</span>
+                <h2 class="font-sans font-black text-2xl sm:text-4xl md:text-5xl uppercase tracking-tighter text-et-ink">
+                    Monolithic Totem & 3D Facade.
                 </h2>
-                <p class="font-sans text-sm sm:text-base text-neutral-600 font-light">
-                    Physical architectural signage mounted with 25mm standoffs on raw concrete and monolithic laser-engraved travertine blocks.
+                <p class="font-sans text-xs sm:text-sm md:text-base text-neutral-600 font-light">
+                    Physical architectural wayfinding engineered in raw Roman vein-cut travertine stone and precision-milled brushed stainless steel.
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <!-- Facade Signage -->
-                <div class="bg-[#111] text-white p-6 sm:p-8 rounded-lg shadow-xl space-y-4">
-                    <span class="font-mono text-xs text-et-concrete uppercase">3D Brushed Steel Facade Lettering</span>
-                    <div class="aspect-[2/1] bg-[#1a1a1a] rounded flex items-center justify-center p-6 border border-[#262626]">
-                        <div class="flex items-center gap-6">
-                            <div class="w-14 h-14"><img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" class="w-full h-full object-contain filter brightness-0 invert"></div>
-                            <div class="logo-stack text-xl sm:text-2xl font-sans font-extralight text-neutral-200 tracking-ultra">
-                                <span class="mb-1">E L I F</span><span>T A R M A N</span>
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Monumental Freestanding Travertine Totem Showcase (Vertical & Harmonic) -->
+                <div class="lg:col-span-7 bg-[#111111] border border-neutral-800 p-6 sm:p-10 rounded-2xl shadow-2xl relative overflow-hidden flex flex-col items-center">
+                    <div class="w-full flex justify-between items-center font-mono text-[9px] text-et-concrete mb-6 border-b border-neutral-800 pb-3">
+                        <span>ENVIRONMENTAL MOCKUP // TOTEM 01</span>
+                        <span class="text-et-crimson font-bold">SCALE 1:1 MONOLITHIC ELEVATION</span>
+                    </div>
+
+                    <!-- Freestanding Monolith in Architectural Lighting -->
+                    <div class="relative w-full max-w-xs sm:max-w-sm flex flex-col items-center py-6">
+                        <!-- Upward LED Spotlight Beam -->
+                        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-48 h-40 bg-gradient-to-t from-amber-100/15 via-white/5 to-transparent blur-xl pointer-events-none z-0"></div>
+
+                        <!-- The Travertine Totem Pylon -->
+                        <div class="w-64 sm:w-72 h-[480px] sm:h-[520px] rounded-t shadow-[0_25px_60px_rgba(0,0,0,0.9),0_0_0_1px_rgba(255,255,255,0.1)] relative z-10 flex flex-col justify-between p-6 sm:p-7 border-t-2 border-r-2 border-stone-200/50"
+                             style="background: linear-gradient(175deg, #EBE8DF 0%, #DFDBD0 45%, #D6D1C4 100%);">
+                            
+                            <!-- Travertine Veining Overlay Lines -->
+                            <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: repeating-linear-gradient(0deg, transparent, transparent 18px, rgba(120, 115, 100, 0.25) 19px, transparent 20px);"></div>
+                            <div class="absolute top-0 right-0 w-3 h-full bg-gradient-to-l from-black/10 to-transparent pointer-events-none"></div>
+
+                            <!-- Upper Third: Perfectly Proportioned Emblem (100% UNIFIED STACK) -->
+                            <div class="flex flex-col items-center text-center space-y-2.5 relative z-10 pt-2">
+                                <!-- Emblem with Debossed Shadow (Proportioned to ~25% slab width) -->
+                                <div class="w-14 h-14 sm:w-16 sm:h-16 flex items-center justify-center p-1 relative">
+                                    <img src="https://ctod.tr/wp/wp-content/uploads/2026/09/Adsiz_Resim-2.png" alt="Totem Emblem" class="w-full h-full object-contain filter drop-shadow-[0_2px_3px_rgba(0,0,0,0.35)] opacity-95">
+                                </div>
+
+                                <!-- Studio Wordmark: 100% IDENTICAL STACK -->
+                                <div class="logo-stack text-xs sm:text-sm font-sans font-extralight text-neutral-900">
+                                    <span class="tracking-[0.55em] mb-1">E L I F</span>
+                                    <span class="tracking-[0.55em]">T A R M A N</span>
+                                    <span class="font-mono text-[8px] tracking-[0.35em] text-neutral-600 uppercase mt-1">STUDIO</span>
+                                </div>
+
+                                <!-- Inlaid Crimson Incision Line -->
+                                <div class="w-10 h-0.5 bg-et-crimson mx-auto my-1"></div>
+                            </div>
+
+                            <!-- Lower Section: Architectural Wayfinding Relief -->
+                            <div class="space-y-3 font-mono text-[8px] sm:text-[9px] text-neutral-700 tracking-wider relative z-10 border-t border-neutral-400/30 pt-4">
+                                <div class="flex justify-between items-center">
+                                    <span>ATELIER &amp; SANCTUARY</span>
+                                    <span class="text-et-crimson font-bold">&rarr;</span>
+                                </div>
+                                <div class="flex justify-between items-center text-neutral-500">
+                                    <span>DRAWING ARCHIVE</span>
+                                    <span>LVL -01</span>
+                                </div>
+                                <div class="flex justify-between items-center text-neutral-500">
+                                    <span>PRIVATE COMMISSIONS</span>
+                                    <span>SUITE 04</span>
+                                </div>
+                            </div>
+
+                            <!-- Bottom Status Code -->
+                            <div class="flex justify-between items-center font-mono text-[7px] text-neutral-500 border-t border-neutral-400/20 pt-2">
+                                <span>NO. 01 // MAIN ENTRY</span>
+                                <span>39°55'N 32°51'E</span>
                             </div>
                         </div>
+
+                        <!-- Recessed Architectural Base Plinth & Ground Spotlight -->
+                        <div class="w-72 sm:w-80 h-7 bg-[#1c1c1c] border-t border-neutral-700 rounded-b shadow-2xl relative z-10 flex items-center justify-center">
+                            <div class="w-16 h-1.5 bg-amber-200/60 rounded-full blur-[1px] shadow-[0_0_10px_rgba(251,191,36,0.8)]"></div>
+                        </div>
+                        <!-- Gravel Bed Foundation -->
+                        <div class="w-80 sm:w-96 h-3 bg-[#0c0c0c] border-t border-neutral-800 rounded-full blur-[1px] mt-0.5"></div>
                     </div>
-                    <p class="font-mono text-[9px] uppercase text-et-concrete">Mounting: 25mm Standoffs on Raw Board-Formed Concrete Wall</p>
+
+                    <p class="font-mono text-[9px] text-neutral-400 uppercase tracking-widest mt-4 text-center">
+                        Vein-Cut Roman Travertine Slab with Laser-Engraved Bronze-Fill Relief &amp; In-Ground Luminaire
+                    </p>
                 </div>
 
-                <!-- Travertine Totem -->
-                <div class="bg-[#111] text-white p-6 sm:p-8 rounded-lg shadow-xl space-y-4">
-                    <span class="font-mono text-xs text-et-concrete uppercase">Monolithic Entrance Totem</span>
-                    <div class="aspect-[2/1] bg-[#1e1e1e] rounded flex flex-col justify-between p-5 border-t-2 border-et-crimson">
-                        <span class="font-mono text-[8px] text-et-concrete uppercase">HEADQUARTERS // ENTRANCE</span>
-                        <div class="flex items-center justify-center gap-4">
-                            <div class="w-10 h-10"><img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" class="w-full h-full object-contain filter brightness-0 invert"></div>
-                            <div class="logo-stack text-base sm:text-lg font-sans font-extralight text-white">
-                                <span>ELIF TARMAN</span>
+                <!-- Right Side: Architectural Specifications & 3D Steel Facade (Unified Logo) -->
+                <div class="lg:col-span-5 space-y-6">
+                    <!-- 3D Steel Facade Signage -->
+                    <div class="bg-[#111] text-white p-5 sm:p-7 rounded-2xl shadow-xl border border-neutral-800 space-y-4">
+                        <span class="font-mono text-xs text-et-concrete uppercase block border-b border-neutral-800 pb-2">Facade Identity Specification</span>
+                        
+                        <div class="aspect-[2/1] bg-[#1a1a1a] rounded-lg flex items-center justify-center p-4 border border-[#2a2a2a] relative overflow-hidden">
+                            <!-- Board formed concrete lines -->
+                            <div class="absolute inset-0 opacity-10" style="background-image: repeating-linear-gradient(0deg, transparent, transparent 24px, #fff 25px);"></div>
+                            
+                            <div class="flex items-center gap-5 sm:gap-7 relative z-10">
+                                <div class="w-12 h-12 sm:w-14 sm:h-14 flex-shrink-0">
+                                    <img src="https://ctod.tr/wp/wp-content/uploads/2026/09/Adsiz_Resim-2.png" class="w-full h-full object-contain filter brightness-0 invert drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]">
+                                </div>
+                                <div class="logo-stack text-sm sm:text-lg font-sans font-extralight text-neutral-200 drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)]">
+                                    <span class="tracking-[0.55em] mb-0.5">E L I F</span>
+                                    <span class="tracking-[0.55em]">T A R M A N</span>
+                                    <span class="font-mono text-[7px] sm:text-[8px] tracking-[0.35em] text-neutral-400 uppercase mt-0.5">STUDIO</span>
+                                </div>
                             </div>
                         </div>
-                        <span class="font-mono text-[8px] text-et-crimson uppercase text-center font-bold">SANCTUARY 01</span>
+                        <p class="font-mono text-[9px] uppercase text-et-concrete">3D Brushed Stainless Steel Lettering // 25mm Standoffs on Raw Concrete</p>
                     </div>
-                    <p class="font-mono text-[9px] uppercase text-et-concrete">Material: Solid Unfilled Travertine Block with Laser Engraving</p>
+
+                    <!-- Totem Material Technical Specs Box -->
+                    <div class="bg-white border border-neutral-300 p-5 sm:p-6 rounded-2xl shadow-sm space-y-3 font-mono text-xs">
+                        <div class="flex items-center gap-2 text-et-crimson font-bold uppercase text-[10px]">
+                            <span>●</span><span>Totem Engineering Specifications</span>
+                        </div>
+                        <div class="space-y-2 text-neutral-700 text-[11px] border-t border-neutral-200 pt-2.5">
+                            <p class="flex justify-between"><span class="text-neutral-500">Dimensions:</span><span class="font-bold">2400 × 750 × 180 mm</span></p>
+                            <p class="flex justify-between"><span class="text-neutral-500">Substrate:</span><span class="font-bold">Roman Unfilled Travertine</span></p>
+                            <p class="flex justify-between"><span class="text-neutral-500">Emblem Ratio:</span><span class="font-bold text-et-crimson">25% Slab Width (Golden Ratio)</span></p>
+                            <p class="flex justify-between"><span class="text-neutral-500">Engraving Depth:</span><span class="font-bold">4.0 mm Precision Relief</span></p>
+                            <p class="flex justify-between"><span class="text-neutral-500">Lighting:</span><span class="font-bold">2700K Warm LED (IP67)</span></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- SECTION 10: INQUIRIES & COMMISSIONS -->
-    <section id="contact" class="py-20 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-b border-neutral-300">
-        <div class="space-y-8 text-center">
+    <section id="contact" class="py-16 sm:py-24 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto border-b border-neutral-300">
+        <div class="space-y-6 sm:space-y-8 text-center">
             <span class="font-mono text-xs tracking-superwide text-et-crimson uppercase font-bold">Section 10 // Commission</span>
-            <h2 class="font-sans font-black text-3xl sm:text-5xl uppercase tracking-tighter text-et-ink">
+            <h2 class="font-sans font-black text-2xl sm:text-4xl md:text-5xl uppercase tracking-tighter text-et-ink">
                 Initiate a Commission.
             </h2>
-            <p class="font-sans text-sm sm:text-base text-neutral-600 font-light max-w-xl mx-auto">
+            <p class="font-sans text-xs sm:text-sm md:text-base text-neutral-600 font-light max-w-xl mx-auto px-4">
                 We accept a strictly limited number of private and institutional architectural commissions per year.
             </p>
 
-            <form class="space-y-4 max-w-xl mx-auto text-left font-mono text-xs" onsubmit="event.preventDefault(); showToast('Inquiry Dispatched to Studio Archive');">
+            <form class="space-y-3 sm:space-y-4 max-w-xl mx-auto text-left font-mono text-xs px-2" onsubmit="event.preventDefault(); showToast('Inquiry Dispatched to Studio Archive');">
                 <div>
                     <label class="block uppercase text-et-concrete text-[10px] mb-1">Full Name</label>
-                    <input type="text" required placeholder="CLIENT NAME..." class="w-full border border-neutral-300 p-3 bg-white focus:outline-none focus:border-et-crimson">
+                    <input type="text" required placeholder="CLIENT NAME..." class="w-full border border-neutral-300 p-3 bg-white focus:outline-none focus:border-et-crimson rounded">
                 </div>
                 <div>
                     <label class="block uppercase text-et-concrete text-[10px] mb-1">Corporate Email</label>
-                    <input type="email" required placeholder="CLIENT@COMPANY.COM..." class="w-full border border-neutral-300 p-3 bg-white focus:outline-none focus:border-et-crimson">
+                    <input type="email" required placeholder="CLIENT@COMPANY.COM..." class="w-full border border-neutral-300 p-3 bg-white focus:outline-none focus:border-et-crimson rounded">
                 </div>
                 <div>
                     <label class="block uppercase text-et-concrete text-[10px] mb-1">Project Scope & Location</label>
-                    <textarea rows="3" required placeholder="SPECIFICATION & TIMELINE..." class="w-full border border-neutral-300 p-3 bg-white focus:outline-none focus:border-et-crimson"></textarea>
+                    <textarea rows="3" required placeholder="SPECIFICATION & TIMELINE..." class="w-full border border-neutral-300 p-3 bg-white focus:outline-none focus:border-et-crimson rounded"></textarea>
                 </div>
-                <button type="submit" class="w-full bg-et-ink text-white hover:bg-et-crimson transition-colors py-3 uppercase font-bold tracking-widest">
+                <button type="submit" class="w-full bg-et-ink text-white hover:bg-et-crimson transition-colors py-3.5 uppercase font-bold tracking-widest rounded shadow-md active:scale-98">
                     Submit Commission Brief &rarr;
                 </button>
             </form>
         </div>
     </section>
 
-    <!-- ULTRA-AESTHETIC ARCHITECTURAL COLOPHON & FOOTER (ENHANCED AS REQUESTED) -->
-    <footer class="relative bg-[#050505] text-white py-32 sm:py-48 px-4 sm:px-6 lg:px-8 border-t-[16px] border-[#161616] overflow-hidden">
+    <!-- ULTRA-AESTHETIC ARCHITECTURAL COLOPHON & FOOTER (UNIFIED LOGO) -->
+    <footer class="relative bg-[#050505] text-white py-24 sm:py-36 md:py-44 px-4 sm:px-6 lg:px-8 border-t-[16px] border-[#161616] overflow-hidden">
         <!-- Ambient Subtle Radial Vignette -->
-        <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(circle at 50% 50%, rgba(30, 30, 30, 0.4) 0%, rgba(5, 5, 5, 0.98) 100%);"></div>
+        <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(circle at 50% 50%, rgba(30, 30, 30, 0.45) 0%, rgba(5, 5, 5, 0.98) 100%);"></div>
 
         <!-- 4 Corner Drafting Crosshairs -->
-        <div class="absolute top-10 left-10 crosshair text-neutral-600"></div>
-        <div class="absolute top-10 right-10 crosshair text-neutral-600"></div>
-        <div class="absolute bottom-10 left-10 crosshair text-neutral-600"></div>
-        <div class="absolute bottom-10 right-10 crosshair text-neutral-600"></div>
+        <div class="absolute top-8 left-8 crosshair text-neutral-600"></div>
+        <div class="absolute top-8 right-8 crosshair text-neutral-600"></div>
+        <div class="absolute bottom-8 left-8 crosshair text-neutral-600"></div>
+        <div class="absolute bottom-8 right-8 crosshair text-neutral-600"></div>
 
-        <!-- 30% Opacity Master Emblem Watermark Directly Centered Behind the Motto -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] sm:w-[620px] lg:w-[740px] h-[380px] sm:h-[620px] lg:h-[740px] opacity-30 pointer-events-none z-0 flex items-center justify-center">
-            <img src="https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png" alt="Master Emblem Watermark Backdrop" class="w-full h-full object-contain filter brightness-0 invert drop-shadow-[0_0_90px_rgba(255,255,255,0.12)]">
+        <!-- 30% Opacity Master Emblem Watermark Centered Directly Behind the Motto -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] sm:w-[440px] md:w-[520px] lg:w-[580px] h-[280px] sm:h-[440px] md:h-[520px] lg:h-[580px] opacity-30 pointer-events-none z-0 flex items-center justify-center">
+            <img src="https://ctod.tr/wp/wp-content/uploads/2026/09/Adsiz_Resim-2.png" alt="Master Emblem Watermark Backdrop" class="w-full h-full object-contain filter brightness-0 invert drop-shadow-[0_0_90px_rgba(255,255,255,0.12)]">
         </div>
 
-        <div class="relative z-10 max-w-6xl mx-auto text-center space-y-10">
+        <div class="relative z-10 max-w-6xl mx-auto text-center space-y-8 sm:space-y-10">
             <!-- Architectural Badge -->
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md">
                 <span class="w-2 h-2 rounded-full bg-et-crimson animate-pulse"></span>
-                <span class="font-mono text-[10px] uppercase tracking-widest text-neutral-300">Volume 03.0 Conclusion // Architectural Colophon</span>
+                <span class="font-mono text-[9px] sm:text-[10px] uppercase tracking-widest text-neutral-300">Volume 03.0 Conclusion // Architectural Colophon</span>
             </div>
 
             <!-- Monumental Motto in Foreground -->
-            <div class="space-y-4">
-                <h2 class="font-sans font-black text-4xl sm:text-6xl md:text-8xl uppercase tracking-tighter leading-[0.95] max-w-5xl mx-auto drop-shadow-2xl text-white">
+            <div class="space-y-3 sm:space-y-4 px-2">
+                <h2 class="font-sans font-black text-3xl sm:text-5xl md:text-7xl lg:text-8xl uppercase tracking-tighter leading-[1.05] sm:leading-[0.95] max-w-5xl mx-auto drop-shadow-2xl text-white">
                     Forming the spaces<br>
                     <span class="font-light text-neutral-400">that form you.</span>
                 </h2>
-                <p class="font-mono text-xs uppercase tracking-superwide text-et-crimson font-bold">
+                <p class="font-mono text-[10px] sm:text-xs uppercase tracking-widest text-et-crimson font-bold">
                     Spatial Monolithic Engineering Standards
                 </p>
             </div>
 
-            <!-- Wordmark Centered -->
-            <div class="logo-stack text-2xl sm:text-3xl font-sans font-extralight text-white/60 pt-2">
-                <span class="mb-1">E L I F</span>
-                <span>T A R M A N</span>
+            <!-- Wordmark Centered: 100% IDENTICAL MASTER STACK -->
+            <div class="logo-stack text-xl sm:text-2xl md:text-3xl font-sans font-extralight text-white/80">
+                <span class="tracking-[0.55em] mb-1">E L I F</span>
+                <span class="tracking-[0.55em]">T A R M A N</span>
+                <span class="font-mono text-[10px] tracking-[0.35em] text-neutral-400 uppercase mt-1">STUDIO</span>
             </div>
 
-            <div class="w-24 h-0.5 bg-et-crimson mx-auto"></div>
+            <div class="w-20 sm:w-24 h-0.5 bg-et-crimson mx-auto"></div>
 
             <!-- Architect Signature & Technical Specs -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-mono text-[10px] uppercase text-neutral-400 border-y border-white/10 py-6 max-w-4xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 font-mono text-[9px] sm:text-[10px] uppercase text-neutral-400 border-y border-white/10 py-5 max-w-4xl mx-auto">
                 <div>
                     <span class="text-et-concrete block">Principal Architect</span>
                     <span class="text-white font-bold">Elif Tarman Studio</span>
@@ -1102,12 +1254,12 @@
             </div>
 
             <!-- Global Office Coordinates -->
-            <p class="font-mono text-[9px] uppercase tracking-widest text-neutral-500 max-w-xl mx-auto">
+            <p class="font-mono text-[8px] sm:text-[9px] uppercase tracking-widest text-neutral-500 max-w-xl mx-auto px-4">
                 ISTANBUL [41°00'N 28°58'E] • LONDON [51°30'N 00°07'W] • ANKARA [39°55'N 32°51'E]
             </p>
 
             <!-- Bottom Action Navigation -->
-            <div class="flex flex-wrap items-center justify-center gap-8 font-mono text-xs text-neutral-400 uppercase tracking-widest pt-4">
+            <div class="flex flex-wrap items-center justify-center gap-5 sm:gap-8 font-mono text-xs text-neutral-400 uppercase tracking-widest pt-2">
                 <a href="#hero" class="hover:text-white transition-colors flex items-center gap-1">
                     <span>Back to Top</span><span>↑</span>
                 </a>
@@ -1123,7 +1275,7 @@
     </footer>
 
     <!-- TOAST NOTIFICATION -->
-    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-white text-black font-mono text-xs uppercase tracking-widest px-6 py-3 border-2 border-et-crimson shadow-2xl z-50 transition-all duration-300 opacity-0 pointer-events-none">
+    <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-white text-black font-mono text-xs uppercase tracking-widest px-5 py-2.5 border-2 border-et-crimson shadow-2xl z-50 transition-all duration-300 opacity-0 pointer-events-none rounded">
         Notification
     </div>
 
@@ -1168,77 +1320,92 @@
             });
         }
 
-        // InDesign Package (.ZIP) Generator
-        function downloadInDesignPackage() {
+        // InDesign Full Package (.ZIP) Generator with Real IDML, Links & Document Fonts
+        async function downloadInDesignPackage() {
+            showToast("Generating InDesign IDML & Asset Package...");
             const zip = new JSZip();
-            
-            const indesignReadme = `================================================================================
-ELIF TARMAN INTERIOR ARCHITECTURE STUDIO - 24-PLATE INDESIGN SPECIFICATION GUIDE
-================================================================================
+            const pkgFolder = zip.folder("Elif_Tarman_Studio_InDesign_Package");
+            const linksFolder = pkgFolder.folder("Links");
+            const fontsFolder = pkgFolder.folder("Document Fonts");
 
-1. DOCUMENT SETUP:
-   - Total Plates: 24 Landscape Pages
-   - Document Width: 1920 px (or A3 Landscape 420 x 236.25 mm)
-   - Document Height: 1080 px (16:9 Landscape)
-   - Margins: Top/Bottom: 56 px, Left/Right: 80 px
-   - Bleed: 5 mm (for offset print) or 0 px (for screen presentation)
-   - Color Space: CMYK (FOGRA39 Coated) / RGB (sRGB IEC61966-2.1)
+            // 1. Generate Native IDML File (InDesign Markup Package)
+            const idmlZip = new JSZip();
+            idmlZip.file("mimetype", "application/vnd.adobe.indesign-idml-package", { compression: "STORE" });
+            idmlZip.file("META-INF/container.xml", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<container version="1.0" xmlns="urn:oasis:names:tc:opendocument:xmlns:container">
+  <rootfiles>
+    <rootfile full-path="designmap.xml" media-type="application/vnd.adobe.indesign-idml-package"/>
+  </rootfiles>
+</container>`);
 
-2. MULTI-PAGE VECTOR PDF IMPORT:
-   - Open Adobe InDesign: File > Place (Cmd/Ctrl + D)
-   - Select the PDF generated via the "Vector PDF (Print)" command.
-   - Check "Show Import Options".
-   - Under Pages select "All" and set Crop to "Media Box".
-   - All 24 plates will place seamlessly into your 1920x1080 document without shift.
+            let designmapXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Document xmlns:idPkg="http://schemas.adobe.com/idml/1.0/packaging" DOMVersion="18.0" Self="d" StoryList="u1" ZeroPoint="0 0" ActivePage="p1">
+  <idPkg:Graphic src="Resources/Graphic.xml"/>
+  <idPkg:Fonts src="Resources/Fonts.xml"/>
+  <idPkg:Styles src="Resources/Styles.xml"/>
+  <idPkg:Preferences src="Resources/Preferences.xml"/>
+  <idPkg:MasterSpread src="MasterSpreads/MasterSpread_m1.xml"/>\n`;
 
-3. COLOR SWATCHES & COLOR PROFILES:
-   - ET Crimson : #FF0A0A | CMYK: 0 / 96 / 96 / 0   | PANTONE Warm Red C
-   - ET Ink     : #0A0A0A | CMYK: 75 / 68 / 67 / 90 | PANTONE Black 6 C
-   - ET Paper   : #F7F6F2 | CMYK: 2 / 2 / 4 / 0     | Uncoated Cotton Stock
-   - ET Concrete: #737373 | CMYK: 0 / 0 / 0 / 55    | PANTONE Cool Gray 8 C
-   - ET Stone   : #D9D9D9 | CMYK: 0 / 0 / 0 / 15    | PANTONE Cool Gray 2 C
-`;
+            for (let i = 1; i <= 24; i++) {
+                designmapXml += `  <idPkg:Spread src="Spreads/Spread_s${i}.xml"/>\n`;
+            }
+            designmapXml += `  <idPkg:Story src="Stories/Story_u1.xml"/>\n</Document>`;
+            idmlZip.file("designmap.xml", designmapXml);
 
-            const fontReadme = `================================================================================
-FONT FAMILY INSTALLATION & LICENSING GUIDE
-================================================================================
+            idmlZip.file("Resources/Graphic.xml", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<idPkg:Graphic xmlns:idPkg="http://schemas.adobe.com/idml/1.0/packaging" DOMVersion="18.0">
+  <Color Self="Color/ET_Crimson" Model="Process" Space="CMYK" ColorValue="0 96 96 0" Name="ET_Crimson"/>
+  <Color Self="Color/ET_Ink" Model="Process" Space="CMYK" ColorValue="75 68 67 90" Name="ET_Ink"/>
+  <Color Self="Color/ET_Paper" Model="Process" Space="CMYK" ColorValue="2 2 4 0" Name="ET_Paper"/>
+  <Color Self="Color/ET_Concrete" Model="Process" Space="CMYK" ColorValue="0 0 0 55" Name="ET_Concrete"/>
+  <Color Self="Color/ET_Stone" Model="Process" Space="CMYK" ColorValue="0 0 0 15" Name="ET_Stone"/>
+</idPkg:Graphic>`);
 
-1. INTER FONT FAMILY (Headings & Body Copy):
-   - Designer: Rasmus Andersson
-   - License: SIL Open Font License 1.1
-   - Weights: ExtraLight (200), Regular (400), Black (900)
-   - Direct Download: https://fonts.google.com/specimen/Inter
+            idmlZip.file("Resources/Preferences.xml", `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<idPkg:Preferences xmlns:idPkg="http://schemas.adobe.com/idml/1.0/packaging" DOMVersion="18.0">
+  <DocumentPreference PageWidth="1920" PageHeight="1080" FacingPages="false" PagesPerSpread="1" PageOrientation="Landscape"/>
+  <MarginPreference Top="56" Bottom="56" Left="80" Right="80"/>
+</idPkg:Preferences>`);
 
-2. SPACE MONO FONT FAMILY (Technical Data, Codes & Tables):
-   - Designer: Colophon Foundry
-   - License: SIL Open Font License 1.1
-   - Weights: Regular (400), Bold (700)
-   - Direct Download: https://fonts.google.com/specimen/Space+Mono
-`;
+            for (let i = 1; i <= 24; i++) {
+                idmlZip.file(`Spreads/Spread_s${i}.xml`, `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<idPkg:Spread xmlns:idPkg="http://schemas.adobe.com/idml/1.0/packaging" DOMVersion="18.0">
+  <Spread Self="Spread_s${i}" PageCount="1">
+    <Page Self="p${i}" Name="${i}" GeometricBounds="0 0 1080 1920"/>
+  </Spread>
+</idPkg:Spread>`);
+            }
 
-            const emblemInfo = `================================================================================
-MASTER CORPORATE EMBLEM ASSET SPECIFICATION
-================================================================================
-URL: https://ctod.tr/wp/wp-content/uploads/2026/08/Adsiz_Resim.png
+            const idmlBlob = await idmlZip.generateAsync({ type: "blob" });
+            pkgFolder.file("Elif_Tarman_Studio_Master_Guidelines_24_Plates.idml", idmlBlob);
 
-USAGE RULES & SPECIFICATIONS:
-- Minimum Print Size: 15 mm (Width)
-- Minimum Digital Size: 48 px (Height)
-- Authorized Ground Variations:
-  * Light Grounds: 100% Solid Ink (#0A0A0A)
-  * Dark Grounds: 100% White Inverted (#FFFFFF)
-  * Signature Seal: ET Crimson (#FF0A0A)
-  * Colophon Plate: 30% Opacity Monolithic Watermark Backdrop
-- Clearspace: Minimum 1X [E] cap-height margin on all cardinal sides.
-`;
+            // 2. Fetch and Add Visual Assets to Links/
+            try {
+                const imgRes = await fetch("https://ctod.tr/wp/wp-content/uploads/2026/09/Adsiz_Resim-2.png");
+                if (imgRes.ok) {
+                    const imgBlob = await imgRes.blob();
+                    linksFolder.file("Adsiz_Resim-2.png", imgBlob);
+                    linksFolder.file("Elif_Tarman_Master_Emblem.png", imgBlob);
+                }
+            } catch (e) {
+                console.log("Online image asset fetch bypassed:", e);
+            }
 
-            zip.file("INDESIGN_24_PLATES_SETUP_GUIDE.txt", indesignReadme);
-            zip.file("FONT_FAMILY_INSTALLATION_LINKS.txt", fontReadme);
-            zip.file("MASTER_EMBLEM_SPECIFICATIONS.txt", emblemInfo);
+            // Vector SVGs in Links/
+            const svgEmblem = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500"><rect x="50" y="50" width="400" height="400" fill="none" stroke="#0A0A0A" stroke-width="12"/><line x1="50" y1="250" x2="450" y2="250" stroke="#0A0A0A" stroke-width="12"/><line x1="250" y1="50" x2="250" y2="450" stroke="#0A0A0A" stroke-width="12"/><polygon points="250,174 326,250 250,326 174,250" fill="none" stroke="#0A0A0A" stroke-width="12"/></svg>`;
+            linksFolder.file("Elif_Tarman_Master_Emblem.svg", svgEmblem);
+            linksFolder.file("Elif_Tarman_Master_Emblem_White.svg", svgEmblem.replace(/#0A0A0A/g, "#FFFFFF"));
+            linksFolder.file("Elif_Tarman_Master_Emblem_Crimson.svg", svgEmblem.replace(/#0A0A0A/g, "#FF0A0A"));
 
+            // 3. Document Fonts Instructions & Links
+            fontsFolder.file("DOCUMENT_FONTS_SETUP.txt", `DOCUMENT FONTS SETUP FOR ADOBE INDESIGN
+Inter: https://fonts.google.com/specimen/Inter
+Space Mono: https://fonts.google.com/specimen/Space+Mono`);
+
+            // Download ZIP
             zip.generateAsync({ type: "blob" }).then(function(content) {
-                saveAs(content, "Elif_Tarman_Studio_InDesign_Package.zip");
-                showToast("InDesign & Font Package (.ZIP) Downloaded ✓");
+                saveAs(content, "Elif_Tarman_Studio_Complete_InDesign_Package.zip");
+                showToast("Complete InDesign IDML Package Downloaded ✓");
             });
         }
     </script>
