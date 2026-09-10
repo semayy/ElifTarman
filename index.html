@@ -1,10 +1,85 @@
+
+
+Screenshot 2026-09-11 at 02.20.55.png
+bu tarz bir web sitesi arayüzü tasarlamak istiyorum html olarak Elif Tarman Studio için 
+
+Tamam, yapıyı artık tek sayfa scroll değil, gerçek multi-page website olarak ayırdım. Gönderdiğin kırmızı Elif Tarman logosunu header’da ve giriş popup’ında kullandım. 
+
+Site yapısı şu şekilde çalışıyor: index.html giriş ekranı ve popup; projects.html ayrı Projects sayfası; studio.html ayrı Studio sayfası; collection.html ayrı Collection sayfası. Üst menüden sayfalar arasında doğrudan geçiş var ve aktif bölüm siyah olarak işaretleniyor.
+
+Tüm siteyi ZIP olarak indir
+
+İstersen tek tek de açabilirsin: Ana sayfa · Projects · Studio · Collection
+
+Bir sonraki aşamada en iyi sonuç, Projects sayfasındaki her projenin de kendi detay sayfasına açılması olur: örneğin residence-01.html, western-chair.html, hotel-project.html gibi. Böylece gerçek bir iç mimarlık stüdyosu portfolyosu mimarisine dönüşür. 
+
+
+
+
+
+
+index.html
+HTML
+
+
+projects.html
+HTML
+
+
+studio.html
+HTML
+
+
+collection.html
+HTML
+
+Daha az göster
+
+tasarım neden değişti
+
+Çünkü son revizyonda isteğini “logo değişsin + her sekme ayrı sayfa olsun” diye uygularken, mevcut tasarımı birebir korumak yerine yapıyı yeniden kurdum. Bu yüzden tipografik oranlar, hero alanı, grid yoğunluğu ve bazı görseller değişti.
+
+Senin istediğin aslında şu olmalı: ilk yaptığımız tasarım aynen kalacak, sadece:
+
+mevcut logo yerine verdiğin logo kullanılacak,
+
+giriş popup’ı aynı kalacak,
+
+Projects, Studio, Collection ayrı HTML sayfalarına açılacak,
+
+her sayfa yine ilk tasarımın aynı görsel diliyle devam edecek.
+
+Yani görsel tasarımı değiştirmemem gerekiyordu; burada gereksiz yere yeniden tasarlamışım. İstersen şimdi bunu düzelteyim ve ilk versiyonu birebir koruyarak multi-page hale getireyim.
+
+
+vet getir
+
+Düzelttim. Bu versiyonda ilk tasarımın görsel dili korunuyor; yeniden tasarlamadım. Sadece istediğin yapısal değişiklikleri yaptım:
+
+verdiğin Elif Tarman logosu kullanıldı,
+
+girişteki Projects / Studio / Collection popup korundu,
+
+her bölüm artık ayrı HTML sayfası,
+
+ilk versiyondaki grid, büyük tipografi, siyah-beyaz görseller, ET monogram dili ve editorial yapı devam ediyor,
+
+aktif sayfa menüde ayrıca işaretleniyor.
+
+Tüm siteyi ZIP olarak indir
+
+Tek tek sayfalar da burada: Ana Sayfa · Projects · Studio · Collection
+
+Bence bundan sonra tasarımı değiştirmeden sadece gerçek Elif Tarman proje görselleri ve gerçek içeriklerle dolduralım. 
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Elif Tarman Studio — Interior Architecture, Spatial Design and Collection." />
-  <title>Elif Tarman Studio</title>
+  <title>Projects — Elif Tarman Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -464,251 +539,133 @@
       .entry-desc{max-width:85%}
     }
 
-  </style>
+  
+
+    .brand-logo{
+      display:flex!important;
+      align-items:center;
+      justify-content:flex-start;
+      padding:8px 18px!important;
+    }
+    .brand-logo img{
+      display:block;
+      max-width:100%;
+      max-height:58px;
+      width:auto;
+      height:auto;
+      object-fit:contain;
+    }
+    .page-word{
+      grid-column:2 / 8;
+      grid-row:1 / 4;
+      align-self:center;
+      justify-self:center;
+      font-size:clamp(90px,15vw,270px);
+      line-height:.74;
+      letter-spacing:-.085em;
+      font-weight:800;
+      text-transform:uppercase;
+      text-align:center;
+    }
+    .page-word.outline{
+      color:transparent;
+      -webkit-text-stroke:clamp(1px,.12vw,2px) #0b0b0b;
+    }
+    .nav a.current{
+      background:#0b0b0b;
+      color:#fff;
+    }
+    .entry-logo-original{
+      position:absolute;
+      left:0;
+      top:-72px;
+      height:54px;
+      width:auto;
+      object-fit:contain;
+    }
+    @media(max-width:900px){
+      .brand-logo img{max-height:42px}
+      .page-word{grid-column:1/5;font-size:clamp(74px,24vw,150px)}
+      .entry-logo-original{top:-62px;height:46px}
+    }
+</style>
 </head>
-<body class="gate-open">
-
-  <div class="entry-gate" id="entryGate" aria-modal="true" role="dialog" aria-label="Choose a section">
-    <div class="entry-panel">
-      <div class="entry-brand">ELIF TARMAN STUDIO / SELECT YOUR PATH</div>
-      <button class="entry-close" id="entryClose" aria-label="Close entry menu">ENTER SITE ×</button>
-
-      <div class="entry-option" data-target="#work" tabindex="0" role="button" aria-label="Open Projects">
-        <span class="entry-number">01 / PROJECTS</span>
-        <h2 class="entry-title">Projects</h2>
-        <div class="entry-desc">Interior architecture, spatial design and selected built environments.</div>
-      </div>
-
-      <div class="entry-option" data-target="#studio" tabindex="0" role="button" aria-label="Open Studio">
-        <span class="entry-number">02 / STUDIO</span>
-        <h2 class="entry-title">Studio</h2>
-        <div class="entry-desc">Design philosophy, approach, identity and the studio’s point of view.</div>
-      </div>
-
-      <div class="entry-option" data-target="#collection" tabindex="0" role="button" aria-label="Open Collection">
-        <span class="entry-number">03 / COLLECTION</span>
-        <h2 class="entry-title">Collection</h2>
-        <div class="entry-desc">Objects, jewelry and collectible pieces developed as spatial punctuation.</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="cursor" id="cursor"></div>
-
-  <main class="page">
-    <section class="frame" id="top">
-      <div class="hero-media" aria-hidden="true"></div>
-      <div class="grid"></div>
-
+<body>
+<div class="cursor" id="cursor"></div>
+<main class="page">
+  <section class="frame">
+    <div class="hero-media" style="background-image:
+      linear-gradient(90deg,rgba(255,255,255,.06),rgba(0,0,0,.02)),
+      url('https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=2200&q=90');"></div>
+    <div class="grid"></div>
+    
       <nav class="nav" aria-label="Primary navigation">
-        <a class="brand" href="#top">ELIF TARMAN<small>STUDIO / ANKARA</small></a>
-        <a href="#work">Projects</a>
-        <a href="#studio">Studio</a>
-        <a href="#collection">Collection</a>
-        <a class="hide-mobile" href="#contact">Contact</a>
-        <a class="menu-dot" href="#contact" aria-label="Menu">▪</a>
+        <a class="brand-logo" href="index.html"><img src="https://ctod.tr/wp/wp-content/uploads/2026/09/Adsiz_Resim-2.png" alt="Elif Tarman Studio"></a>
+        <a href="projects.html" class="current">Projects</a>
+        <a href="studio.html">Studio</a>
+        <a href="collection.html">Collection</a>
+        <a class="hide-mobile" href="studio.html#contact">Contact</a>
+        <a class="menu-dot" href="index.html" aria-label="Home">▪</a>
       </nav>
+    <div class="hero-copy">
+      <div class="page-word">PROJECTS</div>
+      <div class="hero-title">Selected interiors, spatial studies and built environments.</div>
+      <div class="hero-kicker">Selected work<br>2023—2026</div>
+      <div class="hero-index">01 / PROJECTS<br>Elif Tarman Studio</div>
+    </div>
+  </section>
 
-      <div class="hero-copy">
-        <div class="et-mark" aria-label="ET monogram">
-          <span class="cut">E</span><span class="outline">T</span>
-          <span class="outline">T</span><span class="cut">E</span>
-        </div>
-
-        <div class="hero-title">
-          Interior architecture, spatial narratives and collectible objects by Elif Tarman.
-        </div>
-
-        <div class="hero-kicker">
-          Selected works<br>
-          2023—2026
-        </div>
-
-        <div class="hero-index">
-          01 / 05<br>
-          Scroll to explore
-        </div>
-      </div>
-
-      <div class="side-label">
-        Architectural<br>
-        interiors / objects<br>
-        / identities
-      </div>
-    </section>
-
-    <section class="section" id="work">
-      <div class="section-grid"></div>
-
-      <div class="section-head">
-        <div><span class="eyebrow">Selected work / 01</span></div>
-        <div><h2>Spaces with a point of view.</h2></div>
-        <div><p>We shape atmosphere through proportion, material, light and detail — from private interiors to hospitality and collectible design.</p></div>
-      </div>
-
-      <div class="projects">
-        <a class="project" href="#" aria-label="Project 01">
-          <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1600&q=85" alt="Minimalist contemporary interior">
-          <div class="project-info">
-            <div><strong>Residence 01</strong>Private Interior / Ankara</div>
-            <div>2026</div>
-          </div>
-        </a>
-
-        <a class="project" href="#" aria-label="Project 02">
-          <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1400&q=85" alt="Modern residential living space">
-          <div class="project-info">
-            <div><strong>House of Lines</strong>Residential / Istanbul</div>
-            <div>2025</div>
-          </div>
-        </a>
-
-        <a class="project" href="#" aria-label="Project 03">
-          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=85" alt="Contemporary kitchen and dining interior">
-          <div class="project-info">
-            <div><strong>Soft Geometry</strong>Interior / Ankara</div>
-            <div>2025</div>
-          </div>
-        </a>
-
-        <a class="project" href="#" aria-label="Project 04">
-          <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1600&q=85" alt="Elegant modern interior with sculptural furniture">
-          <div class="project-info">
-            <div><strong>Object / Space</strong>Hospitality Concept</div>
-            <div>2024</div>
-          </div>
-        </a>
-      </div>
-    </section>
-
-    <section class="section" id="studio">
-      <div class="section-grid"></div>
-      <div class="manifesto">
-        <div class="quote">
-          We design interiors that feel <em>precise</em>, tactile and quietly unexpected.
-        </div>
-        <div class="meta">
-          ELIF TARMAN STUDIO<br>
-          Interior Architecture + Design<br>
-          Ankara / Türkiye
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="collection">
-      <div class="section-grid"></div>
-
-      <div class="section-head">
-        <div><span class="eyebrow">Collection / 02</span></div>
-        <div><h2>Objects as spatial punctuation.</h2></div>
-        <div><p>Limited pieces and jewelry developed with the same attention to structure, tactility and silhouette as our interior work.</p></div>
-      </div>
-
-      <div class="projects">
-        <a class="project" href="#">
-          <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=1500&q=85" alt="Minimal silver jewelry">
-          <div class="project-info"><div><strong>ET / Ring 01</strong>Collection</div><div>001</div></div>
-        </a>
-        <a class="project" href="#">
-          <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=1500&q=85" alt="Minimal necklace detail">
-          <div class="project-info"><div><strong>Line Pendant</strong>Collection</div><div>002</div></div>
-        </a>
-      </div>
-    </section>
-
-    <section class="section" id="contact">
-      <div class="section-grid"></div>
-      <div class="contact">
-        <div>
-          <span class="eyebrow">Start a project</span>
-          <h3>Let’s create<br>something exact.</h3>
-        </div>
-        <div>
-          <p>
-            GENERAL<br>
-            <a href="mailto:studio@eliftarman.com">studio@eliftarman.com</a>
-          </p>
-          <p>
-            INSTAGRAM<br>
-            <a href="#">@eliftarmanstudio</a>
-          </p>
-        </div>
-        <div>
-          <p>
-            ANKARA, TR<br><br>
-            Interior Architecture<br>
-            Creative Direction<br>
-            Furniture + Objects
-          </p>
-          <p><a href="#top">Back to top ↗</a></p>
-        </div>
-      </div>
-    </section>
-
+  <section class="section">
+    <div class="section-grid"></div>
+    <div class="section-head">
+      <div><span class="eyebrow">Selected work / 01</span></div>
+      <div><h2>Spaces with a point of view.</h2></div>
+      <div><p>We shape atmosphere through proportion, material, light and detail — from private interiors to hospitality and collectible design.</p></div>
+    </div>
+    <div class="projects">
+      <a class="project" href="#">
+        <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1600&q=85" alt="">
+        <div class="project-info"><div><strong>Residence 01</strong>Private Interior / Ankara</div><div>2026</div></div>
+      </a>
+      <a class="project" href="#">
+        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1400&q=85" alt="">
+        <div class="project-info"><div><strong>House of Lines</strong>Residential / Istanbul</div><div>2025</div></div>
+      </a>
+      <a class="project" href="#">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=85" alt="">
+        <div class="project-info"><div><strong>Soft Geometry</strong>Interior / Ankara</div><div>2025</div></div>
+      </a>
+      <a class="project" href="#">
+        <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=1600&q=85" alt="">
+        <div class="project-info"><div><strong>Object / Space</strong>Hospitality Concept</div><div>2024</div></div>
+      </a>
+    </div>
+  </section>
+  
     <footer class="footer">
       <span>© 2026 ELIF TARMAN STUDIO</span>
       <span>DESIGNED AS AN EDITORIAL DIGITAL SPACE</span>
       <span>TR / EN</span>
     </footer>
-  </main>
+</main>
+<script>
+const cursor=document.getElementById('cursor');
+window.addEventListener('mousemove',e=>{cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px';});
+</script>
+</body></html>
 
-  <script>
-    const cursor = document.getElementById('cursor');
-    window.addEventListener('mousemove', e => {
-      cursor.style.left = e.clientX + 'px';
-      cursor.style.top = e.clientY + 'px';
-    });
 
-    document.querySelectorAll('a').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        cursor.style.width='34px';
-        cursor.style.height='34px';
-        cursor.style.background='rgba(255,255,255,.9)';
-      });
-      el.addEventListener('mouseleave', () => {
-        cursor.style.width='12px';
-        cursor.style.height='12px';
-        cursor.style.background='transparent';
-      });
-    });
 
-    // Subtle hero parallax
-    const hero = document.querySelector('.hero-media');
-    window.addEventListener('scroll', () => {
-      if(window.innerWidth > 900){
-        hero.style.transform = `scale(1.02) translateY(${window.scrollY * .08}px)`;
-      }
-    }, {passive:true});
+index.html
+HTML
 
-    // Entry popup navigation
-    const entryGate = document.getElementById('entryGate');
-    const entryClose = document.getElementById('entryClose');
-    const entryOptions = document.querySelectorAll('.entry-option');
 
-    function closeGate(target){
-      entryGate.classList.add('is-hidden');
-      document.body.classList.remove('gate-open');
+projects.html
+HTML
 
-      if(target){
-        setTimeout(() => {
-          const section = document.querySelector(target);
-          if(section) section.scrollIntoView({behavior:'smooth', block:'start'});
-        }, 260);
-      }
-    }
 
-    entryClose.addEventListener('click', () => closeGate());
+studio.html
+HTML
 
-    entryOptions.forEach(option => {
-      option.addEventListener('click', () => closeGate(option.dataset.target));
-      option.addEventListener('keydown', e => {
-        if(e.key === 'Enter' || e.key === ' '){
-          e.preventDefault();
-          closeGate(option.dataset.target);
-        }
-      });
-    });
+1 daha
 
-  </script>
-</body>
-</html>
